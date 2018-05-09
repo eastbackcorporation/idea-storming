@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: idea-storming_production
-  username: idea-storming
-  password: <%= ENV['IDEA-STORMING_DATABASE_PASSWORD'] %>
+  username: <%= ENV['IDEA_STORMING_DATABASE_USER'] %>
+  password: <%= ENV['IDEA_STORMING_DATABASE_PASSWORD'] %>
+  socket:   "/cloudsql/<%= ENV['IDEA_STORMING_DATABASE_SOCKET'] %>"

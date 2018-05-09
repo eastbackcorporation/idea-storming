@@ -1,0 +1,12 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+
+env_variables:
+  SECRET_KEY_BASE: 7b3277ffde77448ad987ae9b6efd14e21c4667f3ec2ff1322b5e2d49b0a8c429517763b58ec143d111f9a2c41503a9849baebbf0d0e4c2c51a7b777102e88cc9
+  IDEA_STORMING_DATABASE_USER: "rails_user"
+  IDEA_STORMING_DATABASE_PASSWORD: "rails_password#!"
+  IDEA_STORMING_DATABASE_SOCKET: "idea-storming01:asia-east1:instance1"
+
+beta_settings:
+  cloud_sql_instances: "idea-storming01:asia-east1:instance1"
