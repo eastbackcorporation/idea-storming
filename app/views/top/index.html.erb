@@ -1,0 +1,14 @@
+
+
+
+
+<% if user_signed_in? %>
+  <%= current_user&.nick_name %>
+  <hr/>
+  <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to t("devise.shared.links.sign_in"), new_session_path(User) %><br />
+  <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User) %><br />
+
+<% end %>
+
