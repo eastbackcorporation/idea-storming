@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'top#index'
-
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :themes, only: %i[index show new create edit update]
+  
+  root to: 'top#index'
 end

@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザ
+      theme: テーマ
     attributes:
       user:
         nick_name: "ニックネーム"
@@ -20,3 +21,8 @@ ja:
         sign_in_count:
         unconfirmed_email:
         unlock_token: "ロック解除用のトークン"
+      theme:
+        title: タイトル
+        description: 説明
+        owner: 作成者
+        

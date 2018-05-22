@@ -55,7 +55,7 @@ group :development, :test do
 
   gem 'autodoc'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', require: false
+  gem 'factory_bot_rails', require: false
   gem 'json_spec'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
