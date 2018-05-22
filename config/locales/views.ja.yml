@@ -1,0 +1,12 @@
+ja:
+  themes:
+    new:
+      title: テーマの登録
+    edit:
+      title: テーマの編集
+    show:
+      title: テーマの内容
+    create:
+      success: テーマを登録しました。
+    update:
+      success: テーマを更新しました。
