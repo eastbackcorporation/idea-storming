@@ -3,6 +3,12 @@
 <h1><%= t('.title') %></h1>
 
 <p>
+  <strong><%= Theme.human_attribute_name :category %>:</strong>
+  <%= @theme.category.title %>
+</p>
+
+
+<p>
   <strong><%= Theme.human_attribute_name :title %>:</strong>
   <%= @theme.title %>
 </p>

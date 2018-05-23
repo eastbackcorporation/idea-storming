@@ -29,7 +29,8 @@ RSpec.describe ThemesController, type: :controller do
   # Theme. As you add validations to Theme, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {title: "Test Tile", description: "Test description"}
+    category = FactoryBot.create(:category)
+    {title: "Test Tile", description: "Test description", category: category.id}
   }
 
   let(:invalid_attributes) {
@@ -46,7 +47,7 @@ RSpec.describe ThemesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      theme = FactoryBot.create_list(:theme,10, owner: FactoryBot.create(:user))
+      theme = FactoryBot.create_list(:theme, 10, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
       get :index, params: {}
       expect(response).to be_successful
     end
@@ -54,7 +55,7 @@ RSpec.describe ThemesController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      theme = FactoryBot.create(:theme, owner: FactoryBot.create(:user))
+      theme = FactoryBot.create(:theme, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
       get :show, params: {id: theme.to_param}
       expect(response).to be_successful
     end
@@ -70,7 +71,7 @@ RSpec.describe ThemesController, type: :controller do
   describe "GET #edit" do
     context 'Owner' do
       it "returns a success response" do
-        theme = FactoryBot.create(:theme, owner: user)
+        theme = FactoryBot.create(:theme, owner: user, category: FactoryBot.create(:category))
         get :edit, params: {id: theme.to_param}
         expect(response).to be_successful
       end
@@ -78,7 +79,7 @@ RSpec.describe ThemesController, type: :controller do
 
     context 'Not Owner' do
       it "redirect_to root" do
-        theme = FactoryBot.create(:theme, owner: FactoryBot.create(:user))
+        theme = FactoryBot.create(:theme, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
         get :edit, params: {id: theme.to_param}
         expect(response).to redirect_to root_path
       end
@@ -110,11 +111,12 @@ RSpec.describe ThemesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        {title: "New Title", description: "New description"}
+        category = FactoryBot.create(:category)
+        {title: "New Title", description: "New description", category: category.id}
       }
 
       it "updates the requested theme" do
-        theme = FactoryBot.create(:theme, owner: user)
+        theme = FactoryBot.create(:theme, owner: user, category: FactoryBot.create(:category))
         put :update, params: {id: theme.to_param, theme: new_attributes}
         theme.reload
         expect(theme.title).to eq "New Title"
@@ -122,7 +124,7 @@ RSpec.describe ThemesController, type: :controller do
       end
 
       it "redirects to the theme" do
-        theme = FactoryBot.create(:theme, owner: user)
+        theme = FactoryBot.create(:theme, owner: user, category: FactoryBot.create(:category))
         put :update, params: {id: theme.to_param, theme: valid_attributes}
         expect(response).to redirect_to(theme)
       end
@@ -130,7 +132,7 @@ RSpec.describe ThemesController, type: :controller do
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        theme = FactoryBot.create(:theme, owner: user)
+        theme = FactoryBot.create(:theme, owner: user, category: FactoryBot.create(:category))
         put :update, params: {id: theme.to_param, theme: invalid_attributes}
         expect(response).to be_successful
       end

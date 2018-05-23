@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザ
       theme: テーマ
+      category: カテゴリ
     attributes:
       user:
         nick_name: "ニックネーム"
@@ -25,4 +26,8 @@ ja:
         title: タイトル
         description: 説明
         owner: 作成者
-        
+        category: カテゴリ
+      category:
+        title: カテゴリ
+        description: 説明
+        disp_order: 並び順

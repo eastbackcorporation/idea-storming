@@ -4,7 +4,7 @@ class CreateThemes < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.text :description
       t.bigint :owner_id, null: false
-
+      t.references :category, index: true
       t.timestamps
     end
 

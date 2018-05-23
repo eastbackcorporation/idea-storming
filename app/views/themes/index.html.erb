@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th><%= Theme.human_attribute_name :category %></th>
       <th><%= Theme.human_attribute_name :title %></th>
       <th><%= Theme.human_attribute_name :description %></th>
       <th><%= Theme.human_attribute_name :owner %></th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @themes.each do |theme| %>
       <tr>
+        <td><%= theme.category.title %></td>
         <td><%= theme.title %></td>
         <td><%= theme.description %></td>
         <td><%= theme.owner.nick_name %></td>
