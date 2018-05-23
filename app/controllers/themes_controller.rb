@@ -27,6 +27,7 @@ class ThemesController < ApplicationController
   # POST /themes.json
   def create
     @theme = Theme.new(theme_params)
+    @theme.category = Category.find_by(id: params[:theme][:category])
     @theme.owner = current_user
 
     respond_to do |format|
@@ -44,7 +45,9 @@ class ThemesController < ApplicationController
   # PATCH/PUT /themes/1.json
   def update
     respond_to do |format|
-      if @theme.update(theme_params)
+      @theme.assign_attributes(theme_params)
+      @theme.category = Category.find_by(id: params[:theme][:category])
+      if @theme.save
         format.html { redirect_to @theme, notice: t('.success') }
         format.json { render :show, status: :ok, location: @theme }
       else

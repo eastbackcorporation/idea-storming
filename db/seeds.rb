@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.find_or_initialize_by(nick_name: 'demo_user')
+user.email = "demo@example.com"
+user.password = 'password'
+user.password_confirmation = 'password'
+user.save
+
+
+(1..10).each do |i|
+  Category.find_or_create_by(title: "Category#{i}") do |category|
+    category.description = "Description#{i}"
+    category.disp_order = i
+  end
+end

@@ -31,9 +31,5 @@ RSpec.describe ThemesController, type: :routing do
       expect(:patch => "/themes/1").to route_to("themes#update", :id => "1")
     end
 
-    it "routes to #destroy" do
-      expect(:delete => "/themes/1").to route_to("themes#destroy", :id => "1")
-    end
-
   end
 end

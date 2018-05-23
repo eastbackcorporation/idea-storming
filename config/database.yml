@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: <%= ENV['IDEA_STORMING_DEVELOPMENT_DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
 
 development:
@@ -51,4 +51,4 @@ production:
   <<: *default
   database: idea-storming_production
   username: idea-storming
-  password: <%= ENV['IDEA-STORMING_DATABASE_PASSWORD'] %>
+  password: <%= ENV['IDEA_STORMING_PRODUCTION_DATABASE_PASSWORD'] %>
