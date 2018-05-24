@@ -68,6 +68,7 @@ group :development, :test do
   gem 'guard-rubocop'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'brakeman', :require => false
 end
 
 group :test do
