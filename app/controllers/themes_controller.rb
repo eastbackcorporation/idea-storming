@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ThemesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_theme, only: [:show, :edit, :update]
-  before_action :check_owner, only: [:edit, :update]
+  before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :set_theme, only: %i[show edit update]
+  before_action :check_owner, only: %i[edit update]
 
   # GET /themes
   # GET /themes.json
@@ -11,8 +13,7 @@ class ThemesController < ApplicationController
 
   # GET /themes/1
   # GET /themes/1.json
-  def show
-  end
+  def show; end
 
   # GET /themes/new
   def new
@@ -20,8 +21,7 @@ class ThemesController < ApplicationController
   end
 
   # GET /themes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /themes
   # POST /themes.json
@@ -58,18 +58,19 @@ class ThemesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_theme
-      @theme = Theme.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def theme_params
-      params.require(:theme).permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_theme
+    @theme = Theme.find(params[:id])
+  end
 
-    # Check current user is thema owner.
-    def check_owner
-     redirect_to :root unless @theme.owner?(current_user)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def theme_params
+    params.require(:theme).permit(:title, :description)
+  end
+
+  # Check current user is thema owner.
+  def check_owner
+    redirect_to :root unless @theme.owner?(current_user)
+  end
 end
