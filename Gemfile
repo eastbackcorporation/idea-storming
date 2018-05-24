@@ -64,6 +64,13 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-shell'
+  gem 'guard-rubocop'
+  gem 'pry-rails'
+  gem 'dotenv-rails'
+  gem 'brakeman', :require => false
 end
 
 group :test do
