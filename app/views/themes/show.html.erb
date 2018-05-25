@@ -1,27 +1,65 @@
-<p id="notice"><%= notice %></p>
+<% if notice.present? %>
+  <div class="alert alert-primary" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
 
 <h1><%= t('.title') %></h1>
 
-<p>
-  <strong><%= Theme.human_attribute_name :category %>:</strong>
-  <%= @theme.category.title %>
-</p>
+<div class="card">
+  <div class="card-header">
+    <strong><%= Theme.model_name.human %>: <%= @theme.title %></strong>
+    
+    <span class="float-right">
+      <%= Theme.human_attribute_name :owner %>: <%= @theme.owner.nick_name %>
+    </span>
+  </div>
+  <div class="card-body">
+    <small class="pl-2"><%= Theme.human_attribute_name :category %>: <%= @theme.category.title %></small>
+    <p class="p-2">
+      <%= simple_format @theme.description %>
+    </p>
+  </div>
+</div>
+<hr/>
 
+<div class="card">
+  <div class="card-header">
+    <strong><%= Idea.model_name.human %></strong>
+  </div>
+  <div class="card-body">
+    <% if @idea&.errors&.any? %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="pb-0 mb-0">
+          <% @idea.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <%= nested_ideas @theme.ideas.arrange(:order => :created_at) %>
 
-<p>
-  <strong><%= Theme.human_attribute_name :title %>:</strong>
-  <%= @theme.title %>
-</p>
+    <div class="border  rounded　mt-4">
+      <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-root"} do %>
+        <%= t('.regist_idea') %>
+      <% end %>
 
-<p>
-  <strong><%= Theme.human_attribute_name :description %>:</strong>
-  <%= @theme.description %>
-</p>
+      <%= tag.div id: "idea-form-root", class: "collapse p-4"  do %>
+        <%= form_with model: Idea.new, url: theme_ideas_path(theme_id: @theme.id), local: true do |f|%>
+          <%= render "themes/ideas/form", form: f %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong><%= Theme.human_attribute_name :owner %>:</strong>
-  <%= @theme.owner.nick_name %>
-</p>
+<hr/>
 
-<%= link_to t("helpers.links.edit"), edit_theme_path(@theme) %> |
-<%= link_to t("helpers.links.back"), themes_path %>
+<div class="actions pb-4">
+  <%= link_to t("helpers.links.edit"), edit_theme_path(@theme) %> |
+  <%= link_to t("helpers.links.back"), themes_path %>
+</div>

@@ -32,7 +32,7 @@ class ThemesController < ApplicationController
 
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to @theme, notice: t('.success') }
+        format.html { redirect_to themes_path, notice: t('.success') }
         format.json { render :show, status: :created, location: @theme }
       else
         format.html { render :new }

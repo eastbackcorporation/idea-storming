@@ -40,3 +40,18 @@
 @import "bootstrap/carousel";
 @import "bootstrap/utilities";
 @import "bootstrap/print";
+
+
+.tree-in {
+  float: left;
+  border-color: $gray-400;
+  border-style: none none solid solid;
+  border-width: 2px;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  height: 12px;
+  width: 10px;
+  text-indent: -999999px;
+  left: -12px;
+}
