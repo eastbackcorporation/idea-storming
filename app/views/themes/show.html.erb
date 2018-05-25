@@ -41,7 +41,7 @@
         </button>
       </div>
     <% end %>
-    <%= nested_ideas @theme.ideas.arrange(:order => :created_at) %>
+    <%= nested_ideas @theme.ideas.includes(:creator).arrange(:order => :created_at) %>
 
     <div class="border  rounded　mt-4">
       <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-root"} do %>
