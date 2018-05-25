@@ -15,8 +15,19 @@ user.password_confirmation = 'password'
 user.save
 
 (1..10).each do |i|
-  Category.find_or_create_by(title: "Category#{i}") do |category|
-    category.description = "Description#{i}"
-    category.disp_order = i
+  category = Category.find_or_initialize_by(title: "Category#{i}") do |c|
+    c.description = "Description#{i}"
+    c.disp_order = i
+  end
+
+  next unless category.new_record?
+  category.save
+
+  3.times do |ii|
+    category.children.create(
+      title: (category.title * 2) + ii.to_s,
+      description: (category.description * 2) + ii.to_s,
+      disp_order: category.disp_order
+    )
   end
 end

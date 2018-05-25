@@ -31,7 +31,7 @@ RSpec.describe ThemesController, type: :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) do
     category = FactoryBot.create(:category)
-    { title: 'Test Tile', description: 'Test description', category: category.id }
+    { title: 'Test Tile', description: 'Test description', category_id: category.id }
   end
 
   let(:invalid_attributes) do
@@ -117,7 +117,7 @@ RSpec.describe ThemesController, type: :controller do
     context 'with valid params' do
       let(:new_attributes) do
         category = FactoryBot.create(:category)
-        { title: 'New Title', description: 'New description', category: category.id }
+        { title: 'New Title', description: 'New description', category_id: category.id }
       end
 
       it 'updates the requested theme' do
