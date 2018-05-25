@@ -161,6 +161,8 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
+    rack-mini-profiler (1.0.0)
+      rack (>= 1.2.0)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
@@ -312,6 +314,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   pry-rails
   puma (~> 3.11)
+  rack-mini-profiler
   rails (~> 5.2.0)
   rails-controller-testing
   rspec-rails

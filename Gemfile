@@ -47,6 +47,7 @@ group :development do
 
   gem 'annotate'
   gem 'bullet'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :test do
