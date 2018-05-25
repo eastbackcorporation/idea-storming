@@ -39,6 +39,6 @@ Rails.application.routes.draw do
   resources :themes, only: %i[index show new create edit update] do
     resources :ideas, only: %i[create], module: 'themes'
   end
-  
+
   root to: 'top#index'
 end

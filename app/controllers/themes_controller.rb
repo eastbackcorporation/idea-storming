@@ -3,6 +3,7 @@
 class ThemesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_theme, only: %i[show edit update]
+  before_action :set_categories, only: %i[new create edit update]
   before_action :check_owner, only: %i[edit update]
 
   # GET /themes
@@ -27,7 +28,7 @@ class ThemesController < ApplicationController
   # POST /themes.json
   def create
     @theme = Theme.new(theme_params)
-    @theme.category = Category.find_by(id: params[:theme][:category])
+    @theme.category = Category.find_by(id: params[:theme][:category_id])
     @theme.owner = current_user
 
     respond_to do |format|
@@ -46,7 +47,7 @@ class ThemesController < ApplicationController
   def update
     respond_to do |format|
       @theme.assign_attributes(theme_params)
-      @theme.category = Category.find_by(id: params[:theme][:category])
+      @theme.category = Category.find_by(id: params[:theme][:category_id])
       if @theme.save
         format.html { redirect_to @theme, notice: t('.success') }
         format.json { render :show, status: :ok, location: @theme }
@@ -62,6 +63,10 @@ class ThemesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_theme
     @theme = Theme.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

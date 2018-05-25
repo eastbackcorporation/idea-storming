@@ -6,9 +6,11 @@ class CreateCategories < ActiveRecord::Migration[5.2]
       t.string  :title, null: false
       t.text    :description
       t.integer :disp_order
+      t.string  :ancestry
       t.timestamps
     end
 
+    add_index :categories, :ancestry
     add_index :categories, :disp_order
   end
 end

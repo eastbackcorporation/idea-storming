@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 2018_05_22_070415) do
     t.string "title", null: false
     t.text "description"
     t.integer "disp_order"
+    t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
     t.index ["disp_order"], name: "index_categories_on_disp_order"
   end
 

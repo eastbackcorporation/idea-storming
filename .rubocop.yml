@@ -12,6 +12,7 @@ AllCops:
     - 'config/initializers/devise.rb'
     - 'config/routes.rb'
     - 'Guardfile'
+    - 'app/helpers/ancestry_helper.rb'
 
 # Style
 

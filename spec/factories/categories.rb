@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: categories
@@ -8,6 +7,7 @@
 #  title       :string(255)      not null
 #  description :text(65535)
 #  disp_order  :integer
+#  ancestry    :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

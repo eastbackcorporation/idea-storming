@@ -12,8 +12,18 @@
   <% end %>
 
   <div class="field">
+
     <%= form.label :category %>
-    <%= form.collection_select :category, Category.all, :id, :title %>
+
+    <%= arranged_tree_as_list(@categories.arrange, {sort_by: [:title, :id]}) do |category| %>
+
+      <% if category.children.present? %>
+        <strong><%= category.title %></strong>
+      <% else %>
+        <label><%= form.radio_button :category_id, category.id %> <%= category.title %></label>
+      <% end %>
+    <% end %>
+
   </div>
 
   <div class="field">
