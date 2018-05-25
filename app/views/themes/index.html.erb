@@ -1,8 +1,23 @@
-<p id="notice"><%= notice %></p>
+<% if notice.present? %>
+  <div class="alert alert-primary" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
 
 <h1><%= Theme.model_name.human%></h1>
 
-<table>
+
+
+<div class="actions">
+  <% if user_signed_in? %>
+    <%= link_to t("helpers.links.new"), new_theme_path, class: 'btn btn-light active right' %>
+  <% else %>
+    テーマを投稿するにはログインしてください。
+  <% end %>
+</div>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th><%= Theme.human_attribute_name :category %></th>
@@ -26,14 +41,6 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<% if user_signed_in? %>
-  <%= link_to t("helpers.links.new"), new_theme_path %>
-<% else %>
-  テーマを投稿するにはログインしてください。
-<% end %>
 
 <hr/>
 <%= link_to "TOP", root_path %>

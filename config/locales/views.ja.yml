@@ -6,7 +6,13 @@ ja:
       title: テーマの編集
     show:
       title: テーマの内容
+      regist_idea: 新規アイディアを投稿する
     create:
       success: テーマを登録しました。
     update:
       success: テーマを更新しました。
+    ideas:
+      create:
+        success: アイディアを登録しました。
+      idea:
+        regist_idea: 派生アイディアを投稿する

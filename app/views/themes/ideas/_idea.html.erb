@@ -1,0 +1,24 @@
+
+<div class="card mb-2">
+  <div class="card-header bg-light small">
+    <span class="tree-in"></span>
+    <strong><%= idea.title %></strong>
+    <span class="float-right"><%= Idea.human_attribute_name :creator %>: <%= idea.creator.nick_name %></span>
+  </div>
+  <div class="card-body pb-3">
+    <p><%= simple_format idea.description %></p>
+    <%= sub_ideas if sub_ideas.present? %>
+    <div class="border rounded">
+      <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
+        <%= t(".regist_idea") %>
+      <% end %>
+
+      <%= tag.div id: "idea-form-#{idea.id}", class: "collapse p-4"  do %>
+        <%= form_with model: Idea.new, url: theme_ideas_path(theme_id: @theme.id), local: true do |f|%>
+          <%= hidden_field_tag "parent_id", idea.id %>
+          <%= render "themes/ideas/form", form: f %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

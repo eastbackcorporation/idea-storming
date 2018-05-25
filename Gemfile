@@ -86,5 +86,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise'
 
+
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'ancestry'
+

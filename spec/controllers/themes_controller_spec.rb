@@ -55,10 +55,14 @@ RSpec.describe ThemesController, type: :controller do
   end
 
   describe 'GET #show' do
+    let!(:theme) { FactoryBot.create(:theme, owner: FactoryBot.create(:user), category: FactoryBot.create(:category)) }
+    let!(:ideas) { FactoryBot.create_list(:idea, 10, creator: FactoryBot.create(:user), theme: theme) }
+
     it 'returns a success response' do
-      theme = FactoryBot.create(:theme, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
       get :show, params: { id: theme.to_param }
       expect(response).to be_successful
+      expect(assigns[:theme]).to eq theme
+      expect(assigns[:theme].ideas).to eq ideas
     end
   end
 
@@ -97,7 +101,7 @@ RSpec.describe ThemesController, type: :controller do
 
       it 'redirects to the created theme' do
         post :create, params: { theme: valid_attributes }
-        expect(response).to redirect_to(Theme.last)
+        expect(response).to redirect_to(themes_path)
       end
     end
 
