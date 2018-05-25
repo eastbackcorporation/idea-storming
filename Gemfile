@@ -44,18 +44,19 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'annotate'
+  gem 'bullet'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :test do
   gem 'autodoc'
+  gem 'brakeman', require: false
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails', require: false
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-rubocop'
-  gem 'guard-shell'
   gem 'json_spec'
   gem 'pry-rails'
   gem 'rails-controller-testing'
@@ -64,13 +65,6 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-shell'
-  gem 'guard-rubocop'
-  gem 'pry-rails'
-  gem 'dotenv-rails'
-  gem 'brakeman', :require => false
 end
 
 group :test do
@@ -86,8 +80,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise'
 
-
+gem 'ancestry'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
-gem 'ancestry'
-

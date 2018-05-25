@@ -29,7 +29,7 @@
   </thead>
 
   <tbody>
-    <% @themes.each do |theme| %>
+    <% @themes.includes(:category,:owner).each do |theme| %>
       <tr>
         <td><%= theme.category.title %></td>
         <td><%= theme.title %></td>

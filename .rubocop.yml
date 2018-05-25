@@ -63,7 +63,7 @@ Metrics/BlockLength:
   Exclude:
     - "spec/**/*.rb"
     - "config/routes.rb"
-
+    - 'config/environments/*'
 
 Metrics/ParameterLists:
   Max: 5
