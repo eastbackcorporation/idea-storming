@@ -3,6 +3,7 @@
 class ThemesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_theme, only: %i[show edit update]
+  before_action :set_theme_tags, only: %i[new create edit update]
   before_action :set_categories, only: %i[new create edit update]
   before_action :check_owner, only: %i[edit update]
 
@@ -32,7 +33,7 @@ class ThemesController < ApplicationController
     @theme.owner = current_user
 
     respond_to do |format|
-      if @theme.save
+      if @theme.save && @theme.save_tags(theme_tags_params)
         format.html { redirect_to themes_path, notice: t('.success') }
         format.json { render :show, status: :created, location: @theme }
       else
@@ -48,7 +49,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       @theme.assign_attributes(theme_params)
       @theme.category = Category.find_by(id: params[:theme][:category_id])
-      if @theme.save
+      if @theme.save && @theme.save_tags(theme_tags_params)
         format.html { redirect_to @theme, notice: t('.success') }
         format.json { render :show, status: :ok, location: @theme }
       else
@@ -72,6 +73,14 @@ class ThemesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def theme_params
     params.require(:theme).permit(:title, :description)
+  end
+
+  def set_theme_tags
+    @theme_tags = params[:theme_tags] || @theme&.tags&.pluck(:name)&.join(',').to_s
+  end
+
+  def theme_tags_params
+    @theme_tags.split(',')
   end
 
   # Check current user is thema owner.

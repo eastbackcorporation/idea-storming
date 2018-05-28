@@ -33,11 +33,14 @@ ja:
         owner: 作成者
         category: カテゴリ
         item_count: アイテム数
+        tags: タグ
       category:
         title: カテゴリ
       idea:
         title: タイトル
         description: 説明
         creator: 投稿者
-
-        
+    errors:
+      models:
+        theme:
+          attributes:
