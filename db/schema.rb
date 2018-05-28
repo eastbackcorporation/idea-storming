@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2018_05_22_070415) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "name", null: false
     t.text "description"
     t.integer "disp_order"
     t.string "ancestry"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 2018_05_22_070415) do
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_ideas_on_ancestry_256", length: 256
     t.index ["theme_id"], name: "index_ideas_on_theme_id"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "disp_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "theme_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.bigint "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_theme_tags_on_tag_id"
+    t.index ["theme_id"], name: "index_theme_tags_on_theme_id"
   end
 
   create_table "themes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
