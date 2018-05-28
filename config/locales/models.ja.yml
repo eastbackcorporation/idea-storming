@@ -6,6 +6,9 @@ ja:
       category: カテゴリ
       idea: アイディア
     attributes:
+      shared-attributes: &shared-attributes
+        created_at: 登録日時
+        updated_at: 更新日時
       user:
         nick_name: "ニックネーム"
         email: "メールアドレス"
@@ -24,10 +27,12 @@ ja:
         unconfirmed_email:
         unlock_token: "ロック解除用のトークン"
       theme:
+        <<: *shared-attributes
         title: タイトル
         description: 説明
         owner: 作成者
         category: カテゴリ
+        item_count: アイテム数
       category:
         title: カテゴリ
       idea:
