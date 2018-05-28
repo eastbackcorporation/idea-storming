@@ -21,6 +21,15 @@ class Theme < ApplicationRecord
   validates :title, presence: true
   validates :category, presence: true
 
+  # userが作成者であるThemeを取得
+  scope :is_owner, ->(user) { where(owner_id: user.id) }
+
+  # userが作成者でないThemeを取得
+  scope :no_owner, ->(user) { where.not(owner_id: user.id) }
+
+  # userが関連Ideaの作成者であるか
+  scope :is_idea_creator, ->(user) { where(id: Idea.where(creator_id: user.id).select(:theme_id)) }
+
   # テーマの作成者であるか
   # @param [User] user
   # @return [True/False]

@@ -26,6 +26,7 @@
 #                     theme GET    /themes/:id(.:format)                                                                    themes#show
 #                           PATCH  /themes/:id(.:format)                                                                    themes#update
 #                           PUT    /themes/:id(.:format)                                                                    themes#update
+#           dashboard_index GET    /dashboard(.:format)                                                                     dashboard#index
 #                      root GET    /                                                                                        top#index
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -39,6 +40,8 @@ Rails.application.routes.draw do
   resources :themes, only: %i[index show new create edit update] do
     resources :ideas, only: %i[create], module: 'themes'
   end
+
+  resources :dashboard, only: :index
 
   root to: 'top#index'
 end

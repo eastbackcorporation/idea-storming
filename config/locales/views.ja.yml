@@ -1,4 +1,10 @@
 ja:
+  dashboard:
+   index:
+    title: ダッシュボード
+    owner_themes: 発案したテーマ
+    joining_themes: 参加しているテーマ
+    blank: "%{name}はありません" 
   themes:
     new:
       title: テーマの登録
