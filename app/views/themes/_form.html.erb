@@ -15,12 +15,12 @@
 
     <%= form.label :category %>
 
-    <%= arranged_tree_as_list(@categories.arrange, {sort_by: [:title, :id]}) do |category| %>
+    <%= arranged_tree_as_list(@categories.arrange, {sort_by: [:name, :id]}) do |category| %>
 
       <% if category.children.present? %>
-        <strong><%= category.title %></strong>
+        <strong><%= category.name %></strong>
       <% else %>
-        <label><%= form.radio_button :category_id, category.id %> <%= category.title %></label>
+        <label><%= form.radio_button :category_id, category.id %> <%= category.name %></label>
       <% end %>
     <% end %>
 
@@ -34,6 +34,10 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= text_field_tag('theme_tags', @theme_tags,  { data: { role: "tagsinput" }, style: "display: none;" }) %>
   </div>
 
   <div class="actions">

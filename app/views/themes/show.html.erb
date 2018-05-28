@@ -10,13 +10,14 @@
 <div class="card">
   <div class="card-header">
     <strong><%= Theme.model_name.human %>: <%= @theme.title %></strong>
-    
+
     <span class="float-right">
       <%= Theme.human_attribute_name :owner %>: <%= @theme.owner.nick_name %>
     </span>
   </div>
   <div class="card-body">
-    <small class="pl-2"><%= Theme.human_attribute_name :category %>: <%= @theme.category.title %></small>
+    <small class="pl-2"><%= Theme.human_attribute_name :category %>: <%= @theme.category.name %></small>
+    <small class="pl-2"><%= Theme.human_attribute_name :tags %>: <%= @theme.tags.pluck(:name).join(' ') %></small>
     <p class="p-2">
       <%= simple_format @theme.description %>
     </p>

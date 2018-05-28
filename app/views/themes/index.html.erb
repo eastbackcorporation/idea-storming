@@ -24,6 +24,7 @@
       <th><%= Theme.human_attribute_name :title %></th>
       <th><%= Theme.human_attribute_name :description %></th>
       <th><%= Theme.human_attribute_name :owner %></th>
+      <th><%= Theme.human_attribute_name :tags %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,10 +32,13 @@
   <tbody>
     <% @themes.includes(:category,:owner).each do |theme| %>
       <tr>
-        <td><%= theme.category.title %></td>
+        <td><%= theme.category.name %></td>
         <td><%= theme.title %></td>
         <td><%= theme.description %></td>
         <td><%= theme.owner.nick_name %></td>
+        <td>
+          <%= theme.tags.pluck(:name).join(' ') %>
+        </td>
         <td><%= link_to t("helpers.links.show"), theme %></td>
         <td><%= link_to t("helpers.links.edit"), edit_theme_path(theme) if theme.owner?(current_user) %></td>
       </tr>

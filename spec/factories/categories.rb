@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :category, class: 'Category' do
-    sequence(:title) { |n| "Title#{n}" }
+    sequence(:name) { |n| "Name#{n}" }
     description 'Description'
   end
 end
