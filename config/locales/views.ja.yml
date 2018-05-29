@@ -4,8 +4,10 @@ ja:
     title: ダッシュボード
     owner_themes: 発案したテーマ
     joining_themes: 参加しているテーマ
-    blank: "%{name}はありません" 
+    blank: "%{name}はありません"
   themes:
+    index:
+      plese_login: テーマを投稿するにはログインしてください。
     new:
       title: テーマの登録
     edit:

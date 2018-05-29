@@ -14,9 +14,14 @@
 #
 
 class Theme < ApplicationRecord
+  has_many :ideas, dependent: :destroy
+
+  has_many :theme_tags, dependent: :destroy
+  accepts_nested_attributes_for :theme_tags, allow_destroy: true
+  has_many :tags, through: :theme_tags
+
   belongs_to :owner, class_name: 'User'
   belongs_to :category
-  has_many :ideas, dependent: :destroy
 
   validates :title, presence: true
   validates :category, presence: true
@@ -35,5 +40,29 @@ class Theme < ApplicationRecord
   # @return [True/False]
   def owner?(user)
     owner == user
+  end
+
+  # タグを保存する。
+  # @param [Array] tag_name(String)
+  # @return [Boolean]
+  def save_tags(posted_tags)
+    current_tags = tags.pluck(:name) unless tags.nil?
+    old_tags = current_tags - posted_tags
+    new_tags = posted_tags - current_tags
+
+    old_tags.each do |old_name|
+      tags.delete Tag.find_by(name: old_name)
+    end
+
+    new_tags.each do |new_name|
+      theme_tag = Tag.find_or_create_by(name: new_name)
+      tags << theme_tag
+    end
+
+    true
+  rescue StandardError => e
+    errors.add(:tags, :invalid)
+    logger.error e.backtrace
+    false
   end
 end

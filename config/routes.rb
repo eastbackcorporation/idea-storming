@@ -19,6 +19,8 @@
 #                           DELETE /users(.:format)                                                                         devise/registrations#destroy
 #                           POST   /users(.:format)                                                                         devise/registrations#create
 #               theme_ideas POST   /themes/:theme_id/ideas(.:format)                                                        themes/ideas#create
+#                theme_tags POST   /themes/:theme_id/tags(.:format)                                                         themes/tags#create
+#                 theme_tag DELETE /themes/:theme_id/tags/:id(.:format)                                                     themes/tags#destroy
 #                    themes GET    /themes(.:format)                                                                        themes#index
 #                           POST   /themes(.:format)                                                                        themes#create
 #                 new_theme GET    /themes/new(.:format)                                                                    themes#new
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
 
   resources :themes, only: %i[index show new create edit update] do
     resources :ideas, only: %i[create], module: 'themes'
+    resources :tags, only: %i[create destroy], module: 'themes'
   end
 
   resources :dashboard, only: :index
