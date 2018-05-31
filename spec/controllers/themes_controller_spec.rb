@@ -47,10 +47,37 @@ RSpec.describe ThemesController, type: :controller do
   end
 
   describe 'GET #index' do
+    let!(:themes) do
+      FactoryBot.create_list(:theme, 100, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
+    end
+
     it 'returns a success response' do
-      FactoryBot.create_list(:theme, 10, owner: FactoryBot.create(:user), category: FactoryBot.create(:category))
-      get :index, params: {}
+      get :index, params: {
+        category_id: themes.last.category.id, search_content: themes.last.title, order_by: :ideas_count
+      }
       expect(response).to be_successful
+      expect(assigns[:themes]).to be_present
+    end
+
+    context 'pagenation' do
+      it 'get pagination limit' do
+        get :index, params: {}
+        expect(response).to be_successful
+        expect(assigns[:themes].length).to eq Kaminari.config.default_per_page
+      end
+
+      it 'change page' do
+        get :index, params: { page: 2 }
+        expect(response).to be_successful
+        expect(assigns[:themes].current_page).to eq 2
+      end
+    end
+
+    context 'order' do
+      it 'call order_ideas_count' do
+        expect(Theme).to receive(:order_ideas_count).and_return(double('themes', page: []))
+        get :index, params: { order_by: :ideas_count }
+      end
     end
   end
 

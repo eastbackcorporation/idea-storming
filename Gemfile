@@ -83,3 +83,5 @@ gem 'devise'
 gem 'ancestry'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+
+gem 'kaminari'

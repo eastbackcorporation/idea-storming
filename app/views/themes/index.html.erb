@@ -4,49 +4,48 @@
   </div>
 <% end %>
 
-
-<h1><%= Theme.model_name.human%></h1>
-
-
-
 <div class="actions">
   <% if user_signed_in? %>
-    <%= link_to t("helpers.links.new"), new_theme_path, class: 'btn btn-light active right' %>
+    <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-secondary" %>
   <% else %>
-    <%= t(".plese_login")%>
+    <%= t(".please_login")%>
   <% end %>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= Theme.human_attribute_name :category %></th>
-      <th><%= Theme.human_attribute_name :title %></th>
-      <th><%= Theme.human_attribute_name :description %></th>
-      <th><%= Theme.human_attribute_name :owner %></th>
-      <th><%= Theme.human_attribute_name :tags %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<br/>
 
-  <tbody>
-    <% @themes.includes(:category,:owner).each do |theme| %>
-      <tr>
-        <td><%= theme.category.name %></td>
-        <td><%= theme.title %></td>
-        <td><%= theme.description %></td>
-        <td><%= theme.owner.nick_name %></td>
-        <td>
-          <% theme.tags.pluck(:name).each do |tag_name| %>
-            <span class="badge badge-primary"><%= tag_name %></span>
-          <% end %>
-        </td>
-        <td><%= link_to t("helpers.links.show"), theme %></td>
-        <td><%= link_to t("helpers.links.edit"), edit_theme_path(theme) if theme.owner?(current_user) %></td>
-      </tr>
+<%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
+  <div class="input-group col-md-4">
+    <%= select_tag :category_id, options_for_select(ancestry_options(Category.all.arrange(:order => 'name')), selected: params[:category_id]),
+                    prompt: t(".select_categories"), class:"col-12" %>
+  </div>
+  <div class="input-group col-md-8">
+    <%= 
+      text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t(".search_placeholder_html")
+    %>
+    <span class="input-group-append">
+      <%= f.submit t("helpers.submit.search"), class:"btn btn-info", name: nil %>
+    </span>
+  </div>
+<% end %>
+
+<hr/>
+<div class="clearfix mb-2">
+  <div class="float-right">
+    <% case params[:order_by]&.to_sym %>
+    <% when :ideas_count %>
+      <%= link_to t(".order_by_updated_at"), themes_path(category_id: params[:category_id], search_content: params[:search_content])%>
+      /
+      <strong><%= t(".order_by_ideas_count") %></strong>
+    <% else %>
+      <strong><%= t(".order_by_updated_at") %></strong>
+      /
+      <%= link_to t(".order_by_ideas_count"), themes_path(category_id: params[:category_id], search_content: params[:search_content], order_by: :ideas_count)%>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+<%= render "themes", themes: @themes.includes(:category) %>
+
 
 <hr/>
 <%= link_to "TOP", root_path %>

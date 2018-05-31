@@ -1,0 +1,33 @@
+<div class="row px-1">
+  <% themes.each do |theme| %>
+    <div class="col-md-4 col-sm-6 pb-2">
+      <div class="card rounded-0">
+        <div class="card-header bg-light">
+         <h4 class="pb-0 mb-0">
+            <%= link_to theme.title, theme_path(theme), class: "text-dark" %>
+          </h4>
+        </div>
+        <div class="card-body py-2">
+          <small class="text-muted">
+            <%= Theme.human_attribute_name :category %>: <%= theme.category.name %>
+          </small>
+          <p class="card-text py-3"><%= theme.description %></p>
+          <% theme.tags.pluck(:name).each do |tag_name| %>
+            <span class="badge badge-primary"><%= tag_name %></span>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <small class="float-left">
+            <%= Theme.human_attribute_name :idea_count %>:
+            <%= theme.ideas.count %>
+          </small>
+          <small class="float-right">
+            <%= Theme.human_attribute_name :updated_at %>:
+            <%= l(theme.updated_at, format: :short) %>
+          </small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+  <%= paginate themes %>

@@ -46,5 +46,5 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: :index
 
-  root to: 'top#index'
+  root to: 'themes#index'
 end
