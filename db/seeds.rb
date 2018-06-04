@@ -8,11 +8,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.find_or_initialize_by(nick_name: 'demo_user')
-user.email = 'demo@example.com'
-user.password = 'password'
-user.password_confirmation = 'password'
-user.save
+(1..10).each do |i|
+  user = User.find_or_initialize_by(nick_name: "demo_user#{i}")
+  user.email = "demo_#{i}@example.com"
+  user.password = 'password'
+  user.password_confirmation = 'password'
+  user.save
+end
 
 (1..10).each do |i|
   category = Category.find_or_initialize_by(name: "Category#{i}") do |c|

@@ -18,6 +18,8 @@
 #                           PUT    /users(.:format)                                                                         devise/registrations#update
 #                           DELETE /users(.:format)                                                                         devise/registrations#destroy
 #                           POST   /users(.:format)                                                                         devise/registrations#create
+#          theme_idea_likes POST   /themes/:theme_id/ideas/:idea_id/likes(.:format)                                         themes/likes#create
+#           theme_idea_like DELETE /themes/:theme_id/ideas/:idea_id/likes/:id(.:format)                                     themes/likes#destroy
 #               theme_ideas POST   /themes/:theme_id/ideas(.:format)                                                        themes/ideas#create
 #                theme_tags POST   /themes/:theme_id/tags(.:format)                                                         themes/tags#create
 #                 theme_tag DELETE /themes/:theme_id/tags/:id(.:format)                                                     themes/tags#destroy
@@ -40,7 +42,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :themes, only: %i[index show new create edit update] do
-    resources :ideas, only: %i[create], module: 'themes'
+    resources :ideas, only: %i[create], module: 'themes' do
+      resources :likes, only: %i[create destroy], module: 'ideas'
+    end
     resources :tags, only: %i[create destroy], module: 'themes'
   end
 
