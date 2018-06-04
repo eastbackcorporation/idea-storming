@@ -14,5 +14,15 @@
 require 'rails_helper'
 
 RSpec.describe ThemeTag, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'association' do
+    it 'should belongs to theme' do
+      t = ThemeTag.reflect_on_association(:theme)
+      expect(t.macro).to eq(:belongs_to)
+    end
+
+    it 'should belongs to tag' do
+      t = ThemeTag.reflect_on_association(:tag)
+      expect(t.macro).to eq(:belongs_to)
+    end
+  end
 end

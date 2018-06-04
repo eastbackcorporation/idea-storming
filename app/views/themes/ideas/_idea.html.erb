@@ -1,4 +1,3 @@
-
 <div class="card mb-2">
   <div class="card-header bg-light small">
     <span class="tree-in"></span>
@@ -7,6 +6,9 @@
   </div>
   <div class="card-body pb-3">
     <p><%= simple_format idea.description %></p>
+    <div id='<%= "idea-like-#{idea.id}" %>'>
+      <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
+    </div>
     <%= sub_ideas if sub_ideas.present? %>
     <div class="border rounded">
       <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
