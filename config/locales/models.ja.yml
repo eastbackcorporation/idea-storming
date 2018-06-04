@@ -5,6 +5,7 @@ ja:
       theme: テーマ
       category: カテゴリ
       idea: アイディア
+      tag: タグ
     attributes:
       shared-attributes: &shared-attributes
         created_at: 登録日時
@@ -37,9 +38,11 @@ ja:
       category:
         title: カテゴリ
       idea:
+        theme: テーマ
         title: タイトル
         description: 説明
         creator: 投稿者
+        is_display: 表示/非表示
     errors:
       models:
         theme:

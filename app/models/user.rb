@@ -27,4 +27,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, presence: true
+
+  def admin?
+    is_admin?
+  end
 end

@@ -14,7 +14,18 @@ class ApplicationController < ActionController::Base
   end
 
   # ログイン後のリダイレクト先
+  def after_sign_in_path_for(resource)
+    return admin_root_path if resource&.admin?
+    super
+  end
+
+  # ログアウト後のリダイレクト先
   def after_sign_out_path_for(_resource)
     dashboard_index_path
+  end
+
+  def sign_out_user
+    return if current_user.blank?
+    sign_out :admin_user if current_user&.admin?
   end
 end
