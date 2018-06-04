@@ -1,0 +1,1 @@
+$('#<%= "idea-like-#{@idea.id}"%>').html('<%= escape_javascript(render "themes/ideas/like", idea: @idea, theme: @idea.theme) %>')

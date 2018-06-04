@@ -63,7 +63,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :themes, only: %i[index show new create edit update] do
-    resources :ideas, only: %i[create], module: 'themes'
+    resources :ideas, only: %i[create], module: 'themes' do
+      resources :likes, only: %i[create destroy], module: 'ideas'
+    end
     resources :tags, only: %i[create destroy], module: 'themes'
   end
 

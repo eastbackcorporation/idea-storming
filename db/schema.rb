@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 2018_06_04_043356) do
     t.index ["disp_order"], name: "index_categories_on_disp_order"
   end
 
+  create_table "idea_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "idea_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_idea_likes_on_idea_id"
+    t.index ["user_id"], name: "index_idea_likes_on_user_id"
+  end
+
   create_table "ideas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "theme_id"
     t.text "ancestry"

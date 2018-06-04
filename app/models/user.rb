@@ -26,6 +26,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :idea_likes, dependent: :destroy
+  accepts_nested_attributes_for :idea_likes, allow_destroy: true
+  has_many :like_ideas, class_name: 'Idea', through: :idea_likes, source: 'idea'
+
   validates :email, presence: true
 
   def admin?
