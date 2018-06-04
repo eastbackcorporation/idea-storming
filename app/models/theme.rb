@@ -35,6 +35,31 @@ class Theme < ApplicationRecord
   # userが関連Ideaの作成者であるか
   scope :is_idea_creator, ->(user) { where(id: Idea.where(creator_id: user.id).select(:theme_id)) }
 
+  # テーマのタイトル、内容、タグの部分一致による取得
+  # @param [String] value
+  scope :search_content, ->(value) do
+    return Theme.all if value.blank?
+    scope = Theme # .left_outer_joins(:tags)
+    scope.where('title LIKE ?', "%#{value}%")
+         .or(scope.where('description LIKE ?', "%#{value}%"))
+         .or(scope.where(id: ThemeTag.where(tag_id: Tag.where('name LIKE ?', "%#{value}%")).select(:theme_id)))
+  end
+
+  # 指定されたカテゴリまたはそのカテゴリの下部階層のカテゴリに関連するテーマを取得する
+  # @param [Integer] category_id
+  scope :include_category, ->(category_id) do
+    category = Category.find_by(id: category_id)
+    where(category_id: category.descendant_ids.push(category_id))
+  end
+
+  # アイディア数の降順にsortする
+  scope :order_ideas_count, -> do
+    joins("LEFT OUTER JOIN(
+             SELECT theme_id, count(id) AS count_ideas FROM ideas GROUP BY theme_id
+           ) AS count_ideas_tb ON count_ideas_tb.theme_id = id")
+      .order('count_ideas DESC')
+  end
+
   # テーマの作成者であるか
   # @param [User] user
   # @return [True/False]

@@ -7,7 +7,11 @@ ja:
     blank: "%{name}はありません"
   themes:
     index:
-      plese_login: テーマを投稿するにはログインしてください。
+      please_login: テーマを投稿するにはログインしてください。
+      search_placeholder_html: 'タイトル、内容、タグ'
+      select_categories: "--カテゴリ選択--"
+      order_by_updated_at: 更新日時順
+      order_by_ideas_count: アイディア数順
     new:
       title: テーマの登録
     edit:

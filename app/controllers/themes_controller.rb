@@ -10,7 +10,17 @@ class ThemesController < ApplicationController
   # GET /themes
   # GET /themes.json
   def index
-    @themes = Theme.all
+    @themes = Theme.search_content(params[:search_content])
+    @themes = @themes.include_category(params[:category_id]) if params[:category_id].present?
+
+    @themes =
+      case params[:order_by]&.to_sym
+      when :ideas_count
+        @themes.order_ideas_count
+      else
+        @themes.order(updated_at: :desc)
+      end
+    @themes = @themes.page(params[:page])
   end
 
   # GET /themes/1

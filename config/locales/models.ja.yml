@@ -32,7 +32,7 @@ ja:
         description: 説明
         owner: 作成者
         category: カテゴリ
-        item_count: アイテム数
+        idea_count: アイディア数
         tags: タグ
       category:
         title: カテゴリ
