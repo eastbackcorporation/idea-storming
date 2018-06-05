@@ -13,35 +13,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-
+  <div class="form-group">
     <%= form.label :category %>
-
-    <%= arranged_tree_as_list(@categories.arrange, {sort_by: [:name, :id]}) do |category| %>
+    <%= arranged_tree_as_list(@categories.arrange, {
+        sort_by: [:name, :id],
+        ul_class_children: ["list-inline pt-1 pb-2"],
+        li_class_children:["list-inline-item pl-2"]}) do |category| %>
       <% if category.children.present? %>
         <strong><%= category.name %></strong>
       <% else %>
         <label><%= form.radio_button :category_id, category.id %> <%= category.name %></label>
       <% end %>
     <% end %>
-
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class:"form-control form-control-sm" %>
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class:"form-control form-control-sm", style: "height: 100px;" %>
   </div>
 
-  <div class="field">
-    <%= text_field_tag('theme_tags', @theme_tags) %>
+  <div class="form-group">
+    <%= form.label :tags %>
+    <%= text_field_tag('theme_tags', @theme_tags, class:"form-control form-control-sm") %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-lg btn-success col-12 col-sm-4 offset-sm-4" %>
   </div>
 <% end %>
