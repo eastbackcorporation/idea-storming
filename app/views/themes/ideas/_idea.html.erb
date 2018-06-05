@@ -6,12 +6,12 @@
   </div>
   <div class="card-body pb-3">
     <p><%= simple_format idea.description %></p>
-    <div id='<%= "idea-like-#{idea.id}" %>'>
+    <div id='<%= "idea-like-#{idea.id}" %>' class="pb-2">
       <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
     </div>
     <%= sub_ideas if sub_ideas.present? %>
     <div class="border rounded">
-      <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
+      <%= button_tag type: "button", class: "btn btn-outline-dark  btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
         <%= t(".regist_idea") %>
       <% end %>
 

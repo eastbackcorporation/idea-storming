@@ -6,7 +6,7 @@
 
 <div class="actions">
   <% if user_signed_in? %>
-    <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
   <% else %>
     <%= t(".please_login")%>
   <% end %>
@@ -17,7 +17,7 @@
 <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
   <div class="input-group col-md-4">
     <%= select_tag :category_id, options_for_select(ancestry_options(Category.all.arrange(:order => 'name')), selected: params[:category_id]),
-                    prompt: t(".select_categories"), class:"col-12" %>
+                    prompt: t(".select_categories"), class:"form-control" %>
   </div>
   <div class="input-group col-md-8">
     <%= 
@@ -46,6 +46,3 @@
 </div>
 <%= render "themes", themes: @themes.includes(:category) %>
 
-
-<hr/>
-<%= link_to "TOP", root_path %>
