@@ -33,5 +33,8 @@ module IdeaStorming
                        request_specs: true
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    config.assets.paths << config.root.join("vendor/assets/javascripts")
+    config.assets.paths << config.root.join("vendor/assets/stylesheets")
   end
 end

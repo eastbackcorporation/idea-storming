@@ -2,7 +2,7 @@
   <%= link_to "アイディアストーミング", root_path, class:"navbar-brand" %>
 
 
-  <div class="collapse navbar-collapse justify-content-end">   
+  <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <% if user_signed_in? %>
         <%= link_to dashboard_index_path, class:"nav-link" do %>
@@ -12,7 +12,7 @@
         <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
       <% else %>
         <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link" %>
-        <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link" %> %>
+        <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link" %>
       <% end %>
     </ul>
   </div>
