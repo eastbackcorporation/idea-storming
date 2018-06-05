@@ -5,11 +5,13 @@ ja:
       theme: テーマ
       category: カテゴリ
       idea: アイディア
+      tag: タグ
     attributes:
       shared-attributes: &shared-attributes
         created_at: 登録日時
         updated_at: 更新日時
       user:
+        <<: *shared-attributes
         nick_name: "ニックネーム"
         email: "メールアドレス"
         encrypted_password:
@@ -31,15 +33,28 @@ ja:
         title: タイトル
         description: 説明
         owner: 作成者
+        owner_id: 作成者
         category: カテゴリ
+        category_id: カテゴリ
         idea_count: アイディア数
         tags: タグ
+        ideas: アイディア
       category:
+        <<: *shared-attributes
         title: カテゴリ
+        name: カテゴリ名
+        description: 説明
+        disp_order: 並び順
       idea:
+        <<: *shared-attributes
+        theme: テーマ
         title: タイトル
         description: 説明
         creator: 投稿者
+        is_display: 表示
+      tag:
+        <<: *shared-attributes
+        name: タグ名
     errors:
       models:
         theme:

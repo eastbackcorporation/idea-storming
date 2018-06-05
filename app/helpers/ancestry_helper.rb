@@ -56,7 +56,7 @@ module AncestryHelper
 
       output = content_tag(options[:list_type], output.html_safe, class: ul_classes)
     end
-
+  
     output.html_safe
   end
 

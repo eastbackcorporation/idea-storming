@@ -31,4 +31,12 @@ class User < ApplicationRecord
   has_many :like_ideas, class_name: 'Idea', through: :idea_likes, source: 'idea'
 
   validates :email, presence: true
+
+  scope :general_users, lambda {
+    where(is_admin: false)
+  }
+
+  def admin?
+    is_admin?
+  end
 end
