@@ -7,7 +7,7 @@
       </strong>
       <span class="float-right"><%= Idea.human_attribute_name :creator %>: <%= idea.creator.nick_name %></span>
     <% else %>
-      <font color='red'>非表示</font>
+      <font color='red'><%= t(".hide_idea") %></font>
     <% end %>
   </div>
   <div class="card-body pb-3">

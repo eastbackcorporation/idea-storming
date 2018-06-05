@@ -28,6 +28,6 @@ class Idea < ApplicationRecord
   validates :description, presence: true
 
   def like_from(user)
-    likes.find_by(user_id: user.id)
+    likes.find_by(user_id: user&.id)
   end
 end
