@@ -1,0 +1,10 @@
+<table class="show_table">
+  <tbody>
+    <% ancestry_options(ideas.arrange) do |idea| %>
+      <tr>
+        <td><%= "#{'-' * idea.depth} #{idea.title}" %></td>
+        <td><%= link_to t('helpers.links.edit'), edit_admin_idea_path(idea) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

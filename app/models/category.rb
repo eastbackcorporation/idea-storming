@@ -16,4 +16,6 @@
 class Category < ApplicationRecord
   has_ancestry
   has_many :themes
+
+  validates :name, uniqueness: true
 end

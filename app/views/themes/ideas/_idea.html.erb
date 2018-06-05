@@ -1,14 +1,22 @@
 <div class="card mb-2">
   <div class="card-header bg-light small">
     <span class="tree-in"></span>
-    <strong><%= idea.title %></strong>
-    <span class="float-right"><%= Idea.human_attribute_name :creator %>: <%= idea.creator.nick_name %></span>
+    <% if idea.is_display? %>
+      <strong>
+        <%= idea.title %>
+      </strong>
+      <span class="float-right"><%= Idea.human_attribute_name :creator %>: <%= idea.creator.nick_name %></span>
+    <% else %>
+      <font color='red'><%= t(".hide_idea") %></font>
+    <% end %>
   </div>
   <div class="card-body pb-3">
-    <p><%= simple_format idea.description %></p>
-    <div id='<%= "idea-like-#{idea.id}" %>' class="pb-2">
-      <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
-    </div>
+    <% if idea.is_display? %>
+      <p><%= simple_format idea.description %></p>
+      <div id='<%= "idea-like-#{idea.id}" %>'>
+        <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
+      </div>
+    <% end %>
     <%= sub_ideas if sub_ideas.present? %>
     <div class="border rounded">
       <%= button_tag type: "button", class: "btn btn-outline-dark  btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>

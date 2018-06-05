@@ -28,3 +28,8 @@ ja:
         success: アイディアを登録しました。
       idea:
         regist_idea: 派生アイディアを投稿する
+        hide_idea: 非表示
+  admin:
+    categories:
+      tree:
+        create_child: 子カテゴリ作成
