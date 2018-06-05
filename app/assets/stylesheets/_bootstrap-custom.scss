@@ -5,6 +5,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+
+@import "variables";
+
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
@@ -41,7 +44,6 @@
 @import "bootstrap/utilities";
 @import "bootstrap/print";
 
-
 .tree-in {
   float: left;
   border-color: $gray-400;
@@ -62,4 +64,13 @@
 
 .pagination {
   justify-content: center;
+}
+
+// Font
+@import url(https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css);
+html {
+  font-size: 16px;
+}
+body {
+  font-family: "Rounded Mplus 1c","Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }

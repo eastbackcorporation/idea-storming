@@ -1,7 +1,15 @@
 <h1><%= t('.title') %></h1>
 
-<%= render 'form', theme: @theme %>
+<div class="card">
+  <div class="card-body">
+    <%= render 'form', theme: @theme %>
+  </div>
+</div>
 
-<%= link_to t("helpers.links.show"), @theme %> |
-<%= link_to t("helpers.links.back"), themes_path %>
+<hr/>
+
+<div class="actions pb-4">
+  <%= link_to t("helpers.links.show"), @theme, class: "btn btn-outline-primary" %>
+</div>
+
 

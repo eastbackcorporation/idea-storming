@@ -1,12 +1,19 @@
-<header class="border-bottom py-1 px-2 mb-4">
-  <% if user_signed_in? %>
-    <%= link_to dashboard_index_path do %>
-      <%= User.model_name.human %>:
-      <%= current_user&.nick_name %>
-    <% end %>
-    <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"ml-2" %>
-  <% else %>
-    <%= link_to t("devise.shared.links.sign_in"), new_session_path(User) %> /
-    <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User) %>
-  <% end %>
-</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+  <%= link_to "アイディアストーミング", root_path, class:"navbar-brand" %>
+
+
+  <div class="collapse navbar-collapse justify-content-end">   
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <%= link_to dashboard_index_path, class:"nav-link" do %>
+          <%= User.model_name.human %>:
+          <%= current_user&.nick_name %>
+        <% end %>
+        <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
+      <% else %>
+        <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link" %>
+        <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link" %> %>
+      <% end %>
+    </ul>
+  </div>
+</nav>

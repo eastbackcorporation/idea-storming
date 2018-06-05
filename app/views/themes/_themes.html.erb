@@ -1,8 +1,8 @@
 <div class="row px-1">
   <% themes.each do |theme| %>
     <div class="col-md-4 col-sm-6 pb-2">
-      <div class="card rounded-0">
-        <div class="card-header bg-light">
+      <div class="card">
+        <div class="card-header">
          <h4 class="pb-0 mb-0">
             <%= link_to theme.title, theme_path(theme), class: "text-dark" %>
           </h4>

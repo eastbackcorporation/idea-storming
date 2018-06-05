@@ -19,7 +19,7 @@
     <% end %>
     <%= sub_ideas if sub_ideas.present? %>
     <div class="border rounded">
-      <%= button_tag type: "button", class: "btn btn-light btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
+      <%= button_tag type: "button", class: "btn btn-outline-dark  btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
         <%= t(".regist_idea") %>
       <% end %>
 
