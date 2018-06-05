@@ -1,0 +1,21 @@
+<li class="text input optional" id="">
+  <label for="theme_description" class="label"><%= Idea.model_name.human %></label>
+  <div style='width: 80%; float: right;'>
+    <table class="index_table">
+      <thead>
+        <tr>
+          <th><%= Idea.model_name.human %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ancestry_options(ideas.arrange) do |idea| %>
+          <tr>
+            <td><%= "#{'-' * idea.depth} #{idea.title}" %></td>
+            <td><%= link_to t('helpers.links.edit'), edit_admin_idea_path(idea) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</li>

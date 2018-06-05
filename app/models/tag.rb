@@ -15,4 +15,6 @@ class Tag < ApplicationRecord
   has_many :theme_tags, dependent: :destroy
   accepts_nested_attributes_for :theme_tags, allow_destroy: true
   has_many :themes, through: :theme_tags
+
+  validates :name, uniqueness: true
 end

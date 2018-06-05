@@ -32,6 +32,10 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
+  scope :general_users, lambda {
+    where(is_admin: false)
+  }
+
   def admin?
     is_admin?
   end
