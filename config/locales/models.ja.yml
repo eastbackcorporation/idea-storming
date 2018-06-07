@@ -39,6 +39,8 @@ ja:
         idea_count: アイディア数
         tags: タグ
         ideas: アイディア
+        images: 添付画像
+        images_and_annotation: 添付画像 (複数選択可)
       category:
         <<: *shared-attributes
         title: カテゴリ
@@ -59,3 +61,5 @@ ja:
       models:
         theme:
           attributes:
+            images:
+              dont_image_file: 画像ファイルのみ添付できます。

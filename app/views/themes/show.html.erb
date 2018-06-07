@@ -24,6 +24,20 @@
     <p class="p-2">
       <%= simple_format @theme.description %>
     </p>
+
+    <% if @theme.images.present?%>
+      <p class="p-2 border">
+        <%= Theme.human_attribute_name :images %>
+        <br>
+        <% @theme.images.includes(:blob).each do |image| %>
+          <% if image.variable? %>
+            <%= image_tag image.variant(resize: "200x160"), class: "p-2" %>  
+          <% else %>
+            <%= link_to image.filename, rails_blob_path(image, disposition: "attachment") %>
+          <% end %>
+        <% end %>
+      </p>
+    <% end %>
   </div>
 </div>
 <hr/>

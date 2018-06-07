@@ -82,7 +82,7 @@ class ThemesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def theme_params
-    params.require(:theme).permit(:title, :description)
+    params.require(:theme).permit(:title, :description, images: [], images_attachments_attributes: %i[id _destroy])
   end
 
   def set_theme_tags

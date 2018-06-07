@@ -130,6 +130,13 @@ RSpec.describe ThemesController, type: :controller do
         post :create, params: { theme: valid_attributes }
         expect(response).to redirect_to(themes_path)
       end
+
+      it 'attaches the uploaded file' do
+        file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+        expect do
+          post :create, params: { theme: valid_attributes.merge(images: [file]) }
+        end.to change(ActiveStorage::Attachment, :count).by(1)
+      end
     end
 
     context 'with invalid params' do

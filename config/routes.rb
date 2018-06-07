@@ -5,6 +5,42 @@
 #                         Prefix Verb   URI Pattern                                                                              Controller#Action
 #                     admin_root GET    /admin(.:format)                                                                         admin/dashboard#index
 #                admin_dashboard GET    /admin/dashboard(.:format)                                                               admin/dashboard#index
+#       batch_action_admin_ideas POST   /admin/ideas/batch_action(.:format)                                                      admin/ideas#batch_action
+#                    admin_ideas GET    /admin/ideas(.:format)                                                                   admin/ideas#index
+#                                POST   /admin/ideas(.:format)                                                                   admin/ideas#create
+#                 new_admin_idea GET    /admin/ideas/new(.:format)                                                               admin/ideas#new
+#                edit_admin_idea GET    /admin/ideas/:id/edit(.:format)                                                          admin/ideas#edit
+#                     admin_idea GET    /admin/ideas/:id(.:format)                                                               admin/ideas#show
+#                                PATCH  /admin/ideas/:id(.:format)                                                               admin/ideas#update
+#                                PUT    /admin/ideas/:id(.:format)                                                               admin/ideas#update
+#                                DELETE /admin/ideas/:id(.:format)                                                               admin/ideas#destroy
+#  batch_action_admin_categories POST   /admin/categories/batch_action(.:format)                                                 admin/categories#batch_action
+#               admin_categories GET    /admin/categories(.:format)                                                              admin/categories#index
+#                                POST   /admin/categories(.:format)                                                              admin/categories#create
+#             new_admin_category GET    /admin/categories/new(.:format)                                                          admin/categories#new
+#            edit_admin_category GET    /admin/categories/:id/edit(.:format)                                                     admin/categories#edit
+#                 admin_category GET    /admin/categories/:id(.:format)                                                          admin/categories#show
+#                                PATCH  /admin/categories/:id(.:format)                                                          admin/categories#update
+#                                PUT    /admin/categories/:id(.:format)                                                          admin/categories#update
+#                                DELETE /admin/categories/:id(.:format)                                                          admin/categories#destroy
+#        batch_action_admin_tags POST   /admin/tags/batch_action(.:format)                                                       admin/tags#batch_action
+#                     admin_tags GET    /admin/tags(.:format)                                                                    admin/tags#index
+#                                POST   /admin/tags(.:format)                                                                    admin/tags#create
+#                  new_admin_tag GET    /admin/tags/new(.:format)                                                                admin/tags#new
+#                 edit_admin_tag GET    /admin/tags/:id/edit(.:format)                                                           admin/tags#edit
+#                      admin_tag GET    /admin/tags/:id(.:format)                                                                admin/tags#show
+#                                PATCH  /admin/tags/:id(.:format)                                                                admin/tags#update
+#                                PUT    /admin/tags/:id(.:format)                                                                admin/tags#update
+#                                DELETE /admin/tags/:id(.:format)                                                                admin/tags#destroy
+#      batch_action_admin_themes POST   /admin/themes/batch_action(.:format)                                                     admin/themes#batch_action
+#                   admin_themes GET    /admin/themes(.:format)                                                                  admin/themes#index
+#                                POST   /admin/themes(.:format)                                                                  admin/themes#create
+#                new_admin_theme GET    /admin/themes/new(.:format)                                                              admin/themes#new
+#               edit_admin_theme GET    /admin/themes/:id/edit(.:format)                                                         admin/themes#edit
+#                    admin_theme GET    /admin/themes/:id(.:format)                                                              admin/themes#show
+#                                PATCH  /admin/themes/:id(.:format)                                                              admin/themes#update
+#                                PUT    /admin/themes/:id(.:format)                                                              admin/themes#update
+#                                DELETE /admin/themes/:id(.:format)                                                              admin/themes#destroy
 #                 admin_comments GET    /admin/comments(.:format)                                                                admin/comments#index
 #                                POST   /admin/comments(.:format)                                                                admin/comments#create
 #                  admin_comment GET    /admin/comments/:id(.:format)                                                            admin/comments#show
@@ -24,6 +60,8 @@
 #                                PUT    /users(.:format)                                                                         devise/registrations#update
 #                                DELETE /users(.:format)                                                                         devise/registrations#destroy
 #                                POST   /users(.:format)                                                                         devise/registrations#create
+#               theme_idea_likes POST   /themes/:theme_id/ideas/:idea_id/likes(.:format)                                         themes/ideas/likes#create
+#                theme_idea_like DELETE /themes/:theme_id/ideas/:idea_id/likes/:id(.:format)                                     themes/ideas/likes#destroy
 #                    theme_ideas POST   /themes/:theme_id/ideas(.:format)                                                        themes/ideas#create
 #                     theme_tags POST   /themes/:theme_id/tags(.:format)                                                         themes/tags#create
 #                      theme_tag DELETE /themes/:theme_id/tags/:id(.:format)                                                     themes/tags#destroy

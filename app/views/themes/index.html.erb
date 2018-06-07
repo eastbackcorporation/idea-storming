@@ -44,5 +44,5 @@
     <% end %>
   </div>
 </div>
-<%= render "themes", themes: @themes.includes(:category) %>
+<%= render "themes", themes: @themes.includes(:category, :images_attachments) %>
 

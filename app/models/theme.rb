@@ -14,6 +14,10 @@
 #
 
 class Theme < ApplicationRecord
+  has_many_attached :images
+
+  accepts_nested_attributes_for :images_attachments, allow_destroy: true
+
   has_many :ideas, dependent: :destroy
 
   has_many :theme_tags, dependent: :destroy
@@ -25,6 +29,17 @@ class Theme < ApplicationRecord
 
   validates :title, presence: true
   validates :category, presence: true
+
+  # validate do
+  #   if images.attached? && images.any? do |i|
+  #       if i.blob.present? && !i.content_type.starts_with?('image/')
+  #         i.purge
+  #         true
+  #       end
+  #     end
+  #     errors.add(:images, :dont_image_file)
+  #   end
+  # end
 
   # userが作成者であるThemeを取得
   scope :is_owner, ->(user) { where(owner_id: user.id) }

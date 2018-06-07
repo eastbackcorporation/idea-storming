@@ -12,6 +12,10 @@
             <%= Theme.human_attribute_name :category %>: <%= theme.category.name %>
           </small>
           <p class="card-text py-3"><%= theme.description %></p>
+
+          <% if theme.images.present? && theme.images.first.variable?%>
+            <%= image_tag theme.images.first.variant(resize: "400x300"), class: "img-fluid" %>  
+          <% end %>
           <% theme.tags.pluck(:name).each do |tag_name| %>
             <span class="badge badge-primary"><%= tag_name %></span>
           <% end %>

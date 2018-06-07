@@ -2,13 +2,11 @@
 
 <%= form_with(model: theme, local: true) do |form| %>
   <% if theme.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
-
-      <ul>
-      <% theme.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+    <div class="alert alert-danger " role="alert">
+      <ul class="mb-0">
+        <% theme.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -39,6 +37,27 @@
   <div class="form-group">
     <%= form.label :tags %>
     <%= text_field_tag('theme_tags', @theme_tags, class:"form-control form-control-sm") %>
+  </div>
+
+  <div class="form-group col-12">
+    <div class="form-group border p-2 row">
+      <%= form.label :images_and_annotation %>
+      <%= form.file_field :images, multiple: true, accept:"image/*", class: "form-control" %>
+
+      <% form.object.images.includes(:blob).each do |image| %>
+        <div class="col-2 m-2 p-2 border">
+          <%= form.fields_for :images_attachments, image do |fields| %>
+            <label><%= fields.check_box :_destroy %> <%= t("helpers.links.destroy") %></label>
+          <% end %>
+          <br/>
+          <% if image.variable? %>
+            <%= image_tag image.variant(resize: "200x160"), class: "mx-auto d-block img-fluid" %>  
+          <% else %>
+            <%= image.filename %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="actions">
