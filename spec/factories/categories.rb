@@ -5,7 +5,7 @@
 # Table name: categories
 #
 #  id          :bigint(8)        not null, primary key
-#  title       :string(255)      not null
+#  name        :string(255)      not null
 #  description :text(65535)
 #  disp_order  :integer
 #  ancestry    :string(255)

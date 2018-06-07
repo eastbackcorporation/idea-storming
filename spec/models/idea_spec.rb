@@ -10,6 +10,7 @@
 #  creator_id  :bigint(8)        not null
 #  title       :string(255)      not null
 #  description :text(65535)
+#  is_display  :boolean          default(TRUE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

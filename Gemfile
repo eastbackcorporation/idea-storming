@@ -84,3 +84,6 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
+
+gem 'google-cloud-storage', '~> 1.3', require: false
+gem 'mini_magick'
