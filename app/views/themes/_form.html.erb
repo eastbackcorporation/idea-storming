@@ -51,7 +51,9 @@
           <% end %>
           <br/>
           <% if image.variable? %>
-            <%= image_tag image.variant(resize: "200x160"), class: "mx-auto d-block img-fluid" %>  
+            <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
+              <%= image_tag image.variant(resize: "200x160"), class: "img-fluid" %>
+            <% end %>
           <% else %>
             <%= image.filename %>
           <% end %>
