@@ -11,6 +11,6 @@ class CreateIdeas < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :ideas, 'ancestry(256)'
+    add_index :ideas, 'ancestry(128)'
   end
 end

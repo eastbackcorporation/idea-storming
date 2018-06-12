@@ -9,9 +9,8 @@ local:
 # Remember not to checkin your GCS keyfile to a repository
 google:
   service: GCS
-  project: idea-storming01
-  credentials: <%= Rails.root.join("tmp/credentials.json") %>
-  bucket: eastback_is_images_test
+  credentials: <%= Rails.root.join("secret.json") %>
+  bucket: <%= ENV['GOOGLE_CLOUD_STORAGE_BUCKET'] %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
