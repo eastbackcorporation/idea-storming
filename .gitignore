@@ -21,6 +21,10 @@ pickle-email-*.html
 
 /storage/
 
+# GCP
+app_env.yaml
+secret.json
+
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
 
