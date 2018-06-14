@@ -41,8 +41,11 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :google
-
+  if ENV['GOOGLE_CLOUD_STORAGE_BUCKET'].present?
+    config.active_storage.service = :google
+  else
+    config.active_storage.service = :local
+  end
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
@@ -93,4 +96,19 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
+    address: ENV['SMTP_ADDERSS'],
+    port: 587,
+    domain: ENV['SMTP_DOMAIN'],
+    authentication: 'plain',
+    user_name: ENV['SMTP_USER_NAME_PRODUCTION'],
+    password: ENV['SMTP_PASSWORD_PRODUCTION']
+  }
+
+  config.action_mailer.default_url_options = { host: ENV['HOST_NAME'], protocol: 'https' }
+  Rails.application.routes.default_url_options = { host: ENV['HOST_NAME'], protocol: 'https' }
 end
