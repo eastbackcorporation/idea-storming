@@ -6,6 +6,7 @@ ja:
       category: カテゴリ
       idea: アイディア
       tag: タグ
+      setting: 設定
     attributes:
       shared-attributes: &shared-attributes
         created_at: 登録日時
@@ -57,6 +58,10 @@ ja:
       tag:
         <<: *shared-attributes
         name: タグ名
+      setting:
+        <<: *shared-attributes
+        name: 設定名
+        value: 設定値
     errors:
       models:
         theme:

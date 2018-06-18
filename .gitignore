@@ -10,11 +10,8 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
-/public/uploads
-/public/uploads/*/**
 /coverage/
 /spec/tmp
-/app/assets/javascripts/i18n/translations.js
 *.orig
 rerun.txt
 pickle-email-*.html
@@ -27,6 +24,9 @@ secret.json
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
@@ -56,9 +56,8 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-coverage
-.env
-/app/assets/javascripts/i18n/*
+# Ignore node_modules
+node_modules/
 
 #############################################################################
  macOS用

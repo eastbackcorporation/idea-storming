@@ -1,40 +1,42 @@
-<div class="row px-1">
+<div class="card-columns">
   <% themes.each do |theme| %>
-    <div class="col-md-4 col-sm-6 pb-2">
-      <div class="card">
-        <div class="card-header">
-         <h4 class="pb-0 mb-0">
-            <%= link_to theme.title, theme_path(theme), class: "text-dark" %>
-          </h4>
-        </div>
-        <div class="card-body py-2">
-          <small class="text-muted">
-            <%= Theme.human_attribute_name :category %>: <%= theme.category.name %>
-          </small>
-          <p class="card-text py-3"><%= theme.description %></p>
+    <div class="card border-0">
+      <% if theme.images.present? && theme.images.first.variable? %>
+        <% image = theme.images.first %>
+        <%= link_to rails_blob_path(image), rel: "lightbox" do %>
+          <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
+        <% end %>
+      <% end %>
 
-          <% if theme.images.present? && theme.images.first.variable? %>
-            <% image = theme.images.first %>
-            <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block" do %>
-              <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
-            <% end %>
-          <% end %>
+      <div class="card-body">
+        <h5 class='card-title'>
+          <%= link_to theme.title, theme_path(theme) %>
+        </h5>
+
+        <h6 class='card-sub-title'>
+          <%= Theme.human_attribute_name :category %>:
+          <%= theme.category.name %>
+        </h6>
+
+        <p class="card-text"><%= theme.description %></p>
+
+        <p class="card-text">
           <% theme.tags.pluck(:name).each do |tag_name| %>
             <span class="badge badge-primary"><%= tag_name %></span>
           <% end %>
-        </div>
-        <div class="card-footer">
-          <small class="float-left">
-            <%= Theme.human_attribute_name :idea_count %>:
-            <%= theme.ideas.count %>
-          </small>
-          <small class="float-right">
-            <%= Theme.human_attribute_name :updated_at %>:
-            <%= l(theme.updated_at, format: :short) %>
-          </small>
-        </div>
+        </p>
+
+        <p class="card-text">
+          <%= Theme.human_attribute_name :idea_count %>:
+          <%= theme.ideas.count %>
+        </p>
+        <p class="card-text">
+          <%= Theme.human_attribute_name :updated_at %>:
+          <%= l(theme.updated_at, format: :short) %>
+        </p>
       </div>
+      <hr />
+
     </div>
   <% end %>
 </div>
-  <%= paginate themes %>

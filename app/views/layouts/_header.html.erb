@@ -1,19 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-  <%= link_to "アイディアストーミング", root_path, class:"navbar-brand" %>
-
+<header>
+<nav class="navbar navbar-expand-lg">
+  <%= link_to t('app_name'), root_path, class:"navbar-brand" %>
 
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
+        <li>
+          <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
+            <div class="input-group col-12">
+              <%=
+                text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t("themes.index.search_placeholder_html")
+              %>
+            </div>
+          <% end %>
+        </li>
       <% if user_signed_in? %>
-        <%= link_to dashboard_index_path, class:"nav-link" do %>
-          <%= User.model_name.human %>:
-          <%= current_user&.nick_name %>
-        <% end %>
-        <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
+        <li>
+          <%= link_to dashboard_index_path, class:"nav-link" do %>
+            <%= User.model_name.human %>:
+            <%= current_user&.nick_name %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
+        </li>
       <% else %>
-        <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link" %>
-        <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link" %>
+        <li>
+          <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link" %>
+        </li>
+        <li>
+          <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link" %>
+        </li>
       <% end %>
     </ul>
   </div>
 </nav>
+</header>

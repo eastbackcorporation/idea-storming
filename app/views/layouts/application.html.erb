@@ -5,15 +5,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width">
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag    'bootstrap', media: 'all' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column">
     <%= render "layouts/header" %>
-    <div class="container-fluid px-4 pb-4">
+    <main class="container-fluid mb-auto">
       <%= yield %>
-    </div>
+    </main>
+    <%= render "layouts/footer" %>
   </body>
 </html>

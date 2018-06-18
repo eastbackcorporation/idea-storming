@@ -1,6 +1,6 @@
 ---
 ja:
-  app_name: ''
+  app_name: 'IdeaStorming'
   activerecord:
     errors:
       messages:

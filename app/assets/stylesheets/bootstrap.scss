@@ -5,9 +5,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-
-@import "variables";
-
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
@@ -44,33 +41,18 @@
 @import "bootstrap/utilities";
 @import "bootstrap/print";
 
-.tree-in {
-  float: left;
-  border-color: $gray-400;
-  border-style: none none solid solid;
-  border-width: 2px;
-  line-height: 12px;
-  overflow: hidden;
-  position: absolute;
-  height: 12px;
-  width: 10px;
-  text-indent: -999999px;
-  left: -12px;
-}
-
 .bootstrap-tagsinput input {
   width: 15em !important;
 }
 
-.pagination {
-  justify-content: center;
-}
-
-// Font
-@import url(https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css);
-html {
-  font-size: 16px;
-}
-body {
-  font-family: "Rounded Mplus 1c","Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+.card-columns {
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
 }
