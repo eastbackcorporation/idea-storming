@@ -31,7 +31,9 @@
         <br>
         <% @theme.images.includes(:blob).each do |image| %>
           <% if image.variable? %>
-            <%= image_tag image.variant(resize: "200x160"), class: "p-2" %>  
+            <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
+              <%= image_tag image.variant(resize: "200x160") %>
+            <% end %>
           <% else %>
             <%= link_to image.filename, rails_blob_path(image, disposition: "attachment") %>
           <% end %>

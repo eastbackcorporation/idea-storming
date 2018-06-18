@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2018_06_05_082929) do
     t.boolean "is_display", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ancestry"], name: "index_ideas_on_ancestry_256", length: 256
+    t.index ["ancestry"], name: "index_ideas_on_ancestry_128", length: 128
     t.index ["theme_id"], name: "index_ideas_on_theme_id"
   end
 
