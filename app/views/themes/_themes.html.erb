@@ -3,9 +3,7 @@
     <div class="card border-0">
       <% if theme.images.present? && theme.images.first.variable? %>
         <% image = theme.images.first %>
-        <%= link_to rails_blob_path(image), rel: "lightbox" do %>
-          <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
-        <% end %>
+        <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
       <% end %>
 
       <div class="card-body">
