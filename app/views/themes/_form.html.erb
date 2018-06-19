@@ -12,17 +12,19 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :category %>
-    <%= arranged_tree_as_list(@categories.arrange, {
-        sort_by: [:name, :id],
-        ul_class_children: ["list-inline pt-1 pb-2"],
-        li_class_children:["list-inline-item pl-2"]}) do |category| %>
-      <% if category.children.present? %>
-        <strong><%= category.name %></strong>
-      <% else %>
-        <label><%= form.radio_button :category_id, category.id %> <%= category.name %></label>
+    <% CategoryType.all.each do |category_type| %>
+      <%= category_type.name %>
+      <%= arranged_tree_as_list(@categories.arrange, {
+          sort_by: [:category_type_id, :id],
+          ul_class_children: ["list-inline pt-1 pb-2"],
+          li_class_children:["list-inline-item pl-2"]}) do |category| %>
+        <% if category.children.present? %>
+          <strong><%= category.name %></strong>
+        <% else %>
+          <label><%= form.radio_button :category_id, category.id %> <%= category.name %></label>
+        <% end %>
+        <br />
       <% end %>
-      <br />
     <% end %>
   </div>
   <div class="form-group">

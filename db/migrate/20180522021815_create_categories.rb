@@ -7,6 +7,7 @@ class CreateCategories < ActiveRecord::Migration[5.2]
       t.text    :description
       t.integer :disp_order
       t.string  :ancestry
+      t.references  :category_type, null: false
       t.timestamps
     end
 

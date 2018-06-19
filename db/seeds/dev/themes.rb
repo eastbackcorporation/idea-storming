@@ -4,7 +4,7 @@
   theme = Theme.new(
     title: "テスト #{index + 1}",
     description: "内容 #{index + 1}...............",
-    category: Category.roots.sample.subtree.sample,
+    category_id: Category.roots.sample.id,
     owner: User.all.sample
   )
   rand(3).times do |r|

@@ -52,10 +52,20 @@ ActiveRecord::Schema.define(version: 2018_06_08_024844) do
     t.text "description"
     t.integer "disp_order"
     t.string "ancestry"
+    t.bigint "category_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["category_type_id"], name: "index_categories_on_category_type_id"
     t.index ["disp_order"], name: "index_categories_on_disp_order"
+  end
+
+  create_table "category_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "type_name", null: false
+    t.string "name", null: false
+    t.integer "disp_order"
+    t.bigint "category_type_id"
+    t.index ["category_type_id"], name: "index_category_types_on_category_type_id"
   end
 
   create_table "idea_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
