@@ -16,4 +16,32 @@
  *= require_self
  */
 
- @import "bootstrap-custom";
+ //@import "bootstrap-custom";
+
+
+ .tree-in {
+   float: left;
+   border-color: gray;
+   border-style: none none solid solid;
+   border-width: 2px;
+   line-height: 12px;
+   overflow: hidden;
+   position: absolute;
+   height: 12px;
+   width: 10px;
+   text-indent: -999999px;
+   left: -12px;
+ }
+
+ // Font
+ html {
+   font-size: 16px;
+ }
+ body {
+   font-family: '';
+   min-height: 100vh;
+ }
+
+ .themes-index-cover{
+   background: #6DD5FA;
+ }

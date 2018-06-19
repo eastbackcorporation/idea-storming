@@ -12,9 +12,4 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require jquery3
-//= require popper
-//= require tagsinput
-//= require lightbox
-//= require bootstrap-sprockets
 //= require_tree .

@@ -1,19 +1,31 @@
 # frozen_string_literal: true
 
-(1..10).each do |i|
-  category = Category.find_or_initialize_by(name: "Category#{i}") do |c|
-    c.description = "Description#{i}"
-    c.disp_order = i
+def register_category(category, parent)
+  if category.is_a?(Hash)
+    c = Category.find_or_initialize_by(name: category.keys.first)
+    c.save
+    category.values.flatten.each do |cc|
+      if cc.is_a?(Hash)
+        ccc = Category.find_or_initialize_by(name: category)
+        ccc.save
+        parent = ccc
+      else
+        parent = c
+      end
+      register_category(cc, parent)
+    end
+  else
+    if parent.present?
+      parent.children.create(
+        name: category
+      )
+    else
+      c = Category.find_or_initialize_by(name: category)
+      c.save
+    end
   end
+end
 
-  next unless category.new_record?
-  category.save
-
-  3.times do |ii|
-    category.children.create(
-      name: (category.name * 2) + ii.to_s,
-      description: (category.description * 2) + ii.to_s,
-      disp_order: category.disp_order
-    )
-  end
+YAML.safe_load(File.open(Rails.root.join('db', 'seeds', 'categories.yml')).read).each do |category|
+  register_category(category, nil)
 end

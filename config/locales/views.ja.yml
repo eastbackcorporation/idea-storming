@@ -7,8 +7,9 @@ ja:
     blank: "%{name}はありません"
   themes:
     index:
-      please_login: テーマを投稿するにはログインしてください。
-      search_placeholder_html: 'タイトル、内容、タグ'
+      please_login: テーマを投稿する
+      search_theme: テーマをさがす
+      search_placeholder_html: 'テーマをさがす'
       select_categories: "--カテゴリ選択--"
       order_by_updated_at: 更新日時順
       order_by_ideas_count: アイディア数順

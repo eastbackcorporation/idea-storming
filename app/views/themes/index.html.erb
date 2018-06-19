@@ -1,48 +1,93 @@
-<% if notice.present? %>
-  <div class="alert alert-primary" role="alert">
-    <%= notice %>
-  </div>
-<% end %>
-
-<div class="actions">
-  <% if user_signed_in? %>
-    <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
-  <% else %>
-    <%= t(".please_login")%>
-  <% end %>
-</div>
-
-<br/>
-
-<%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
-  <div class="input-group col-md-4">
-    <%= select_tag :category_id, options_for_select(ancestry_options(Category.all.arrange(:order => 'name')), selected: params[:category_id]),
-                    prompt: t(".select_categories"), class:"form-control" %>
-  </div>
-  <div class="input-group col-md-8">
-    <%= 
-      text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t(".search_placeholder_html")
-    %>
-    <span class="input-group-append">
-      <%= f.submit t("helpers.submit.search"), class:"btn btn-info", name: nil %>
-    </span>
-  </div>
-<% end %>
-
-<hr/>
-<div class="clearfix mb-2">
-  <div class="float-right">
-    <% case params[:order_by]&.to_sym %>
-    <% when :ideas_count %>
-      <%= link_to t(".order_by_updated_at"), themes_path(category_id: params[:category_id], search_content: params[:search_content])%>
-      /
-      <strong><%= t(".order_by_ideas_count") %></strong>
-    <% else %>
-      <strong><%= t(".order_by_updated_at") %></strong>
-      /
-      <%= link_to t(".order_by_ideas_count"), themes_path(category_id: params[:category_id], search_content: params[:search_content], order_by: :ideas_count)%>
+<div class='row'>
+  <div class='col-12'>
+    <% if notice.present? %>
+      <div class="alert alert-primary" role="alert">
+        <%= notice %>
+      </div>
     <% end %>
   </div>
 </div>
-<%= render "themes", themes: @themes.includes(:category, :images_attachments) %>
 
+<div class='row'>
+    <div class='col-12 py-5 themes-index-cover'>
+      <div class='d-flex justify-content-center'>
+
+      </div>
+
+      <div class='d-flex justify-content-center'>
+        <div class="actions text-white">
+          <% if user_signed_in? %>
+            <%= link_to "#{Theme.model_name.human}をつくる", new_theme_path, class: "btn btn-primary" %>
+          <% else %>
+            <h3><%= t(".please_login") %></h3>
+            <%= link_to "ログイン", new_user_session_path, class: 'btn btn-primary' %>
+            <%= link_to "アカウント登録", new_user_registration_path, class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+      <hr />
+
+      <div class='d-flex justify-content-center'>
+        <div class="actions text-white">
+        <h3><%= t(".search_theme") %></h3>
+      </div>
+      </div>
+
+      <div class='d-flex justify-content-center'>
+
+        <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
+          <div class="input-group col-5">
+            <%= select_tag :category_id, options_for_select(ancestry_options(Category.all.arrange(:order => 'name')), selected: params[:category_id]),
+                          prompt: 'すべてのカテゴリ', class:"form-control" %>
+
+            <span class='d-flex align-self-end'>
+              　から
+            </span>
+          </div>
+
+          <div class="input-group col-7">
+            <%=
+              text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t(".search_placeholder_html")
+            %>
+            <span class="input-group-append">
+              <%= f.submit t("helpers.submit.search"), class:"btn btn-secondary", name: nil %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+</div>
+
+
+<div class='row'>
+  <div class='col-12'>
+    <div class='float-right mb-2'>
+      <% case params[:order_by]&.to_sym %>
+      <% when :ideas_count %>
+        <%= link_to t(".order_by_updated_at"), themes_path(category_id: params[:category_id], search_content: params[:search_content])%>
+        /
+        <strong><%= t(".order_by_ideas_count") %></strong>
+      <% else %>
+        <strong><%= t(".order_by_updated_at") %></strong>
+        /
+        <%= link_to t(".order_by_ideas_count"), themes_path(category_id: params[:category_id], search_content: params[:search_content], order_by: :ideas_count)%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-12'>
+    <%= render "themes", themes: @themes.includes(:category, :images_attachments) %>
+  </div>
+</div>
+
+
+<div class='row'>
+  <div class='col-12'>
+    <div class='d-flex justify-content-center'>
+      <%= paginate @themes %>
+    </div>
+  </div>
+</div>
