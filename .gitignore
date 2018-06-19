@@ -10,8 +10,12 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
+/public/uploads
+/public/uploads/*/**
 /coverage/
 /spec/tmp
+/app/assets/javascripts/i18n/*
+/app/assets/javascripts/i18n/translations.js
 *.orig
 rerun.txt
 pickle-email-*.html
