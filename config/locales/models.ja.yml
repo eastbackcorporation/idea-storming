@@ -23,7 +23,7 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_created_at:
-        remember_me: "ログインを記憶"
+        remember_me: "ログインしたままにする"
         reset_password_sent_at:
         reset_password_token: "パスワードリセット用のトークン"
         sign_in_count:
