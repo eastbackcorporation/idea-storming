@@ -2,8 +2,21 @@
 
 # == Route Map
 #
+# Note: Google::Cloud::Logging is disabled because the project ID could not be determined. Falling back to the default Rails logger.
+# Note: Google::Cloud::Debugger is disabled because the project ID could not be determined.
+# Note: Google::Cloud::ErrorReporting is disabled because the project ID could not be determined.
+# Note: Google::Cloud::Trace is disabled because the project ID could not be determined.
 #                         Prefix Verb   URI Pattern                                                                              Controller#Action
 #                     admin_root GET    /admin(.:format)                                                                         admin/dashboard#index
+#    batch_action_admin_settings POST   /admin/settings/batch_action(.:format)                                                   admin/settings#batch_action
+#                 admin_settings GET    /admin/settings(.:format)                                                                admin/settings#index
+#                                POST   /admin/settings(.:format)                                                                admin/settings#create
+#              new_admin_setting GET    /admin/settings/new(.:format)                                                            admin/settings#new
+#             edit_admin_setting GET    /admin/settings/:id/edit(.:format)                                                       admin/settings#edit
+#                  admin_setting GET    /admin/settings/:id(.:format)                                                            admin/settings#show
+#                                PATCH  /admin/settings/:id(.:format)                                                            admin/settings#update
+#                                PUT    /admin/settings/:id(.:format)                                                            admin/settings#update
+#                                DELETE /admin/settings/:id(.:format)                                                            admin/settings#destroy
 #                admin_dashboard GET    /admin/dashboard(.:format)                                                               admin/dashboard#index
 #       batch_action_admin_ideas POST   /admin/ideas/batch_action(.:format)                                                      admin/ideas#batch_action
 #                    admin_ideas GET    /admin/ideas(.:format)                                                                   admin/ideas#index

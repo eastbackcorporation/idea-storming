@@ -1,0 +1,6 @@
+business:
+  id: 1
+  name: "カテゴリ"
+genre:
+  id: 2
+  name: "ジャンル"
