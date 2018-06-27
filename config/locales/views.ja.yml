@@ -2,6 +2,7 @@ ja:
   dashboard:
    index:
     title: ダッシュボード
+    regist_bookmarks: ブックマークカテゴリ登録
     owner_themes: 発案したテーマ
     joining_themes: 参加しているテーマ
     blank: "%{name}はありません"
@@ -30,6 +31,14 @@ ja:
       idea:
         regist_idea: 派生アイディアを投稿する
         hide_idea: 非表示
+  category_bookmarks:
+    show:
+      title: カテゴリ/ジャンルのブックマーク
+      note_html:
+        関心のある/得意なカテゴリ/ジャンルを登録できます。<br/>
+        ブックマーク登録されたカテゴリ/ジャンルのテーマが登録された場合、メール通知されます。
+    update:
+      success: カテゴリ/ジャンルのブックマークを更新しました。
   admin:
     categories:
       tree:

@@ -31,6 +31,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :idea_likes, allow_destroy: true
   has_many :like_ideas, class_name: 'Idea', through: :idea_likes, source: 'idea'
 
+  has_many :category_bookmarks, dependent: :destroy
+  has_many :categories, through: :category_bookmarks
+  accepts_nested_attributes_for :category_bookmarks, allow_destroy: true
+
   validates :email, presence: true
 
   scope :general_users, lambda {

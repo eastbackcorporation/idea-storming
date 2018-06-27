@@ -20,5 +20,8 @@ class Category < ApplicationRecord
   belongs_to :category_type
   belongs_to :categories, optional: true
 
+  has_many :category_bookmarks, dependent: :destroy
+  has_many :bookmark_users, through: :category_bookmarks, source: :user
+
   validates :name, uniqueness: true
 end

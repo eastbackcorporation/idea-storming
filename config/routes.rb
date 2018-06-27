@@ -86,6 +86,9 @@
 #                                PATCH  /themes/:id(.:format)                                                                    themes#update
 #                                PUT    /themes/:id(.:format)                                                                    themes#update
 #                dashboard_index GET    /dashboard(.:format)                                                                     dashboard#index
+#             category_bookmarks GET    /category_bookmarks(.:format)                                                            category_bookmarks#show
+#                                PATCH  /category_bookmarks(.:format)                                                            category_bookmarks#update
+#                                PUT    /category_bookmarks(.:format)                                                            category_bookmarks#update
 #         new_admin_user_session GET    /admin/users/sign_in(.:format)                                                           admin/users/sessions#new
 #             admin_user_session POST   /admin/users/sign_in(.:format)                                                           admin/users/sessions#create
 #     destroy_admin_user_session DELETE /admin/users/sign_out(.:format)                                                          admin/users/sessions#destroy
@@ -121,6 +124,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: :index
+  resource :category_bookmarks, only: %i[show update]
 
   namespace :admin do
     devise_for :users, controllers: {

@@ -1,0 +1,61 @@
+<% if notice.present? %>
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    　<span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<div class="pb-4">
+  <%= link_to "#{Theme.model_name.human} #{t('helpers.index')}", themes_path, class: "btn btn-outline-primary" %>
+  <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
+</div>
+
+<div class="row">
+  <section class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <strong><%= t(".title") %></strong>
+      </div>
+      <div class="card-body">
+        <p class="text-muted border rounded p-2">
+          <%= t(".note_html") %>
+        </p>
+
+        <%= form_with url: category_bookmarks_path, local: true, method: :patch do |f| %>
+          <% if @user.errors.any? %>
+            <div class="alert alert-danger " role="alert">
+              <ul class="mb-0">
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <% CategoryType.all.each do |category_type| %>
+            <%= category_type.name %>
+            <%= arranged_tree_as_list(category_type.categories.arrange, {
+                sort_by: [:category_type_id, :id],
+                ul_class_top: ["list-inline pt-1 pb-2"],
+                li_class_top:["list-inline-item pl-2"]}) do |category| %>
+              <% if category.children.present? %>
+                <strong><%= category.name %></strong>
+              <% else %>
+                <label class="pl-1">
+                  <%= check_box_tag 'user[category_bookmarks_attributes][][category_id]', category.id, category.in?(@user.categories) %>
+                  <%= category.name %>
+                </label>
+              <% end %>
+              <br />
+            <% end %>
+          <% end %>
+          <div class="actions">
+            <%= f.submit class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
+
