@@ -10,6 +10,7 @@
 <div class="pb-4">
   <%= link_to "#{Theme.model_name.human} #{t('helpers.index')}", themes_path, class: "btn btn-outline-primary" %>
   <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
+  <%= link_to t(".regist_bookmarks"), category_bookmarks_path, class: "btn btn-outline-primary float-right" %>
 </div>
 
 <div class="row">
