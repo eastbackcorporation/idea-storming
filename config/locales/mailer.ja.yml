@@ -1,0 +1,10 @@
+ja:
+  user_mailer:
+    notify_regist_theme:
+      subject: "[Idea Storming] テーマが投稿されました"
+      greeting: "こんにちは、%{recipient}さん"
+      login_annotate: "以下からログインできます。"
+      body_message:
+        "ブックマーク登録しているカテゴリ/ジャンルのテーマが登録されましたので、通知いたします。
+
+        テーマ名: %{theme_title}"

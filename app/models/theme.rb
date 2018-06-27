@@ -30,16 +30,13 @@ class Theme < ApplicationRecord
   validates :title, presence: true
   validates :category, presence: true
 
-  # validate do
-  #   if images.attached? && images.any? do |i|
-  #       if i.blob.present? && !i.content_type.starts_with?('image/')
-  #         i.purge
-  #         true
-  #       end
-  #     end
-  #     errors.add(:images, :dont_image_file)
-  #   end
-  # end
+  after_commit on: :create do
+    # 登録カテゴリをブックマークしているユーザに通知する
+    category.bookmark_users.each do |bookmark_user|
+      next if owner == bookmark_user
+      UserMailer.notify_regist_theme(bookmark_user, self).deliver
+    end
+  end
 
   # userが作成者であるThemeを取得
   scope :is_owner, ->(user) { where(owner_id: user.id) }

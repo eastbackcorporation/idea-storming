@@ -26,11 +26,14 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ThemesController, type: :controller do
+  include_context 'Regist Categories'
+
+  let!(:category) { Category.all.sample }
+
   # This should return the minimal set of attributes required to create a valid
   # Theme. As you add validations to Theme, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    category = FactoryBot.create(:category)
     { title: 'Test Tile', description: 'Test description', category_id: category.id }
   end
 
@@ -136,6 +139,28 @@ RSpec.describe ThemesController, type: :controller do
         expect do
           post :create, params: { theme: valid_attributes.merge(images: [file]) }
         end.to change(ActiveStorage::Attachment, :count).by(1)
+      end
+
+      it 'Notification Mail Category Bookmark User' do
+        ActionMailer::Base.deliveries.clear
+
+        category.bookmark_users << FactoryBot.create(:user, email: 'bookmark_users1@examplec.com')
+        category.bookmark_users << FactoryBot.create(:user, email: 'bookmark_users2@examplec.com')
+        category.bookmark_users << user # Not Send Mail Owner
+
+        expect do
+          post :create, params: { theme: valid_attributes }
+        end.to change { ActionMailer::Base.deliveries.size }.by(2)
+
+        expect(ActionMailer::Base.deliveries.map(&:to).flatten).to match_array [
+          'bookmark_users1@examplec.com',
+          'bookmark_users2@examplec.com'
+        ]
+        expect(ActionMailer::Base.deliveries.map(&:subject).uniq).to eq [
+          I18n.t('user_mailer.notify_regist_theme.subject')
+        ]
+
+        ActionMailer::Base.deliveries.clear
       end
     end
 
