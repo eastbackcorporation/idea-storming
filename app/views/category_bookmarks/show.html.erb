@@ -23,7 +23,7 @@
           <%= t(".note_html") %>
         </p>
 
-        <%= form_with url: category_bookmarks_path, local: true, method: :patch do |f| %>
+        <%= form_with model: @user, url: category_bookmarks_path, local: true, method: :patch do |f| %>
           <% if @user.errors.any? %>
             <div class="alert alert-danger " role="alert">
               <ul class="mb-0">
@@ -33,6 +33,8 @@
               </ul>
             </div>
           <% end %>
+
+           <%= hidden_field_tag "user[category_ids][]", nil %>
           <% CategoryType.all.each do |category_type| %>
             <%= category_type.name %>
             <%= arranged_tree_as_list(category_type.categories.arrange, {
@@ -43,8 +45,10 @@
                 <strong><%= category.name %></strong>
               <% else %>
                 <label class="pl-1">
-                  <%= check_box_tag 'user[category_bookmarks_attributes][][category_id]', category.id, category.in?(@user.categories) %>
-                  <%= category.name %>
+                  <%= f.label :category_ids, value: category.id, class: 'checkbox' do %>
+                    <%= f.check_box :category_ids, { multiple: true }, category.id, nil %>
+                    <%= category.name %>
+                  <% end %>
                 </label>
               <% end %>
               <br />
@@ -58,4 +62,3 @@
     </div>
   </section>
 </div>
-

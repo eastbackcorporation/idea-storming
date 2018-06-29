@@ -1,0 +1,46 @@
+.themes-index-cover {
+  background: #6DD5FA;
+}
+
+.themes-index-idea-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .round {
+    height: 4em;
+    width: 4em;
+    border: 4px solid orange;
+    border-radius: 50%;
+
+    p {
+      text-align: center;
+      font-size: 2.3em;
+      color: gray;
+    }
+  }
+}
+
+.themes-index-category-type-select {
+  .themes-index-category-type-select-btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.themes-index-add-theme {
+  width: 8em;
+  height: 8em;
+}
+
+
+.theme-show-cover {
+  background-color: rgb(147, 84, 202);
+}
+
+.theme-actions {
+  position: sticky;
+  top: 4rem;
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+}

@@ -81,6 +81,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'activeadmin'
 gem 'ancestry'
 gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap-select-rails'
 gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
@@ -89,3 +90,4 @@ gem 'google-cloud-storage', '~> 1.3', require: false
 gem 'mini_magick'
 
 gem 'appengine'
+gem 'font-awesome-rails'

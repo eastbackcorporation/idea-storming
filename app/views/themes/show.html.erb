@@ -1,87 +1,99 @@
-<% if notice.present? %>
-  <div class="alert alert-primary" role="alert">
-    <%= notice %>
-  </div>
-<% end %>
-
-<h1><%= t('.title') %></h1>
-
-<div class="card">
-  <div class="card-header">
-    <strong><%= Theme.model_name.human %>: <%= @theme.title %></strong>
-
-    <span class="float-right">
-      <%= Theme.human_attribute_name :owner %>: <%= @theme.owner.nick_name %>
-    </span>
-  </div>
-  <div class="card-body">
-    <small class="pl-2"><%= Theme.human_attribute_name :category %>: <%= @theme.category.name %></small>
-    <small class="pl-2"><%= Theme.human_attribute_name :tags %>:
-      <% @theme.tags.pluck(:name).each do |tag_name| %>
-        <span class="badge badge-primary"><%= tag_name %></span>
-      <% end %>
-    </small>
-    <p class="p-2">
-      <%= simple_format @theme.description %>
-    </p>
-
-    <% if @theme.images.present?%>
-      <p class="p-2 border">
-        <%= Theme.human_attribute_name :images %>
-        <br>
-        <% @theme.images.includes(:blob).each do |image| %>
-          <% if image.variable? %>
-            <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
-              <%= image_tag image.variant(resize: "200x160") %>
-            <% end %>
-          <% else %>
-            <%= link_to image.filename, rails_blob_path(image, disposition: "attachment") %>
-          <% end %>
-        <% end %>
-      </p>
-    <% end %>
-  </div>
-</div>
-<hr/>
-
-<div class="card">
-  <div class="card-header">
-    <strong><%= Idea.model_name.human %></strong>
-  </div>
-  <div class="card-body">
-    <% if @idea&.errors&.any? %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <ul class="pb-0 mb-0">
-          <% @idea.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    <%= nested_ideas @theme.ideas.includes(:creator).arrange(order: :created_at) %>
-
-    <div class="border  rounded　mt-4">
-      <%= button_tag type: "button", class: "btn btn-outline-dark btn-sm", data: {toggle: "collapse", target: "#idea-form-root"} do %>
-        <%= t('.regist_idea') %>
-      <% end %>
-
-      <%= tag.div id: "idea-form-root", class: "collapse p-4"  do %>
-        <%= form_with model: Idea.new, url: theme_ideas_path(theme_id: @theme.id), local: true do |f|%>
-          <%= render "themes/ideas/form", form: f %>
-        <% end %>
+<div class='row'>
+  <div class='col-12 py-3 theme-show-cover'>
+    <div class='d-flex justify-content-center'>
+      <h2 class='text-white'>
+        <%= @theme.title %></h2>
+      <p class='text-white'><%= Theme.human_attribute_name :owner %>:
+        <%= @theme.owner.nick_name %></p>
+      <% if @theme.owner?(current_user) %>
+        <%= link_to t("helpers.links.edit"), edit_theme_path(@theme), class: "btn btn-light btn-lg" %>
       <% end %>
     </div>
   </div>
 </div>
 
-<hr/>
+<div class='row'>
+  <div class='col-12'>
+    <% if notice.present? %>
+      <div class="alert alert-primary" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<div class="actions pb-4">
-  <% if @theme.owner?(current_user) %>
-    <%= link_to t("helpers.links.edit"), edit_theme_path(@theme), class: "btn btn-outline-primary" %>
+<div class='row'>
+  <div class='col-md-8'>
+    <div class="card border-0">
+
+      <div class="card-body">
+        <small class="pl-2"><%= Theme.human_attribute_name :category %>:
+          <%= @theme.category.name %></small>
+        <small class="pl-2"><%= Theme.human_attribute_name :tags %>:
+          <% @theme.tags.pluck(:name).each do |tag_name| %>
+            <span class="badge badge-primary"><%= tag_name %></span>
+          <% end %>
+        </small>
+        <p class="p-2">
+          <%= simple_format @theme.description %>
+        </p>
+
+        <% if @theme.images.present?%>
+          <p class="p-2 border">
+            <%= Theme.human_attribute_name :images %>
+            <br>
+            <% @theme.images.includes(:blob).each do |image| %>
+              <% if image.variable? %>
+                <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
+                <%= image_tag image.variant(resize: "200x160") %>
+              <% end %>
+            <% else %>
+              <%= link_to image.filename, rails_blob_path(image, disposition: "attachment") %>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
+
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="actions">
+    <%= link_to t("helpers.links.back"), themes_path, class: "btn" %>
+  </div>
+</div>
+
+<div class='col-md-4'>
+  <div class="card border-0">
+    <div class="card-body">
+      <% if @idea&.errors&.any? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <ul class="pb-0 mb-0">
+            <% @idea.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <%= nested_ideas @theme.ideas.includes(:creator).arrange(order: :created_at) %>
+
+      <div class="border rounded mt-4">
+        <%= button_tag type: "button", class: "btn", data: {toggle: "collapse", target: "#idea-form-root"} do %>
+        <%= t('.regist_idea') %>
+      <% end %>
+
+      <%= tag.div id: "idea-form-root", class: "collapse p-4" do %>
+      <%= form_with model: Idea.new, url: theme_ideas_path(theme_id: @theme.id), local: true do |f|%>
+      <%= render "themes/ideas/form", form: f, theme: @theme %>
+    <% end %>
   <% end %>
-  <%= link_to t("helpers.links.back"), themes_path, class: "btn btn-outline-primary" %>
+</div>
+</div>
+</div>
+
+</div>
 </div>

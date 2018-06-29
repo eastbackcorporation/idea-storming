@@ -9,7 +9,15 @@ class DashboardController < ApplicationController
   # ダッシュボード表示
   # GET /dashboard
   def index
-    @owner_themes = Theme.is_owner(current_user).order(updated_at: :desc)
-    @joining_themes = Theme.no_owner(current_user).is_idea_creator(current_user).order(updated_at: :desc)
+    @owner_themes =
+      Theme.is_owner(current_user)
+           .order(updated_at: :desc)
+           .page(params[:page])
+
+    @joining_themes =
+      Theme.no_owner(current_user)
+           .is_idea_creator(current_user)
+           .order(updated_at: :desc)
+           .page(params[:page])
   end
 end
