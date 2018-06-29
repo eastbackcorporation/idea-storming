@@ -87,6 +87,8 @@ ja:
       updated: "アカウント情報を変更しました。"
     sessions:
       already_signed_out: "既にログアウト済みです。"
+      form:
+        sign_in: "ログイン"
       new:
         sign_in: "ログイン"
       signed_in: "ログインしました。"

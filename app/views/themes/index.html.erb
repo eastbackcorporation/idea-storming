@@ -1,69 +1,83 @@
 <div class='row'>
-  <div class='col-12'>
-    <% if notice.present? %>
-      <div class="alert alert-primary" role="alert">
-        <%= notice %>
+  <div class='col-12 py-5 bg-primary themes-index-cover'>
+    <div class='d-flex justify-content-center'>
+      <div class="actions text-white">
+        <h2><%= t(".search_theme") %></h2>
+        <hr />
       </div>
-    <% end %>
-  </div>
-</div>
+    </div>
 
-<div class='row'>
-    <div class='col-12 py-5 themes-index-cover'>
-      <div class='d-flex justify-content-center'>
+    <div class='d-flex justify-content-center'>
 
-      </div>
+      <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
+      <div class="col-12">
+        <div class='d-flex justify-content-center'>
 
-      <div class='d-flex justify-content-center'>
-        <div class="actions text-white">
-          <% if user_signed_in? %>
-            <%= link_to "#{Theme.model_name.human}をつくる", new_theme_path, class: "btn btn-primary" %>
-          <% else %>
-            <h3><%= t(".please_login") %></h3>
-            <%= link_to "ログイン", new_user_session_path, class: 'btn btn-primary' %>
-            <%= link_to "アカウント登録", new_user_registration_path, class: 'btn btn-primary' %>
+        <ul class="nav mb-3" id="pills-tab" role="tablist">
+          <div class="themes-index-category-type-select btn-group btn-group-toggle" data-toggle="buttons">
+          <% CategoryType.all.each_with_index do |ct, index| %>
+              <a class="themes-index-category-type-select-btn nav-link btn btn-outline-warning text-white" id="pills-<%= ct.type_name %>-tab" data-toggle="pill" href="#pills-<%= ct.type_name %>" role="tab" aria-controls="pills-<%= ct.type_name %>" aria-selected="true">
+                <%= t('.select_search_type', name: ct.name) %>
+              </a>
           <% end %>
         </div>
-      </div>
-      <hr />
+        </ul>
 
-      <div class='d-flex justify-content-center'>
-        <div class="actions text-white">
-        <h3><%= t(".search_theme") %></h3>
-      </div>
-      </div>
+        </div>
 
-      <div class='d-flex justify-content-center'>
+        <div class="tab-content" id="pills-tabContent">
 
-        <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
-          <div class="input-group col-5">
-            <%= select_tag :category_id, options_for_select(ancestry_options(Category.all.arrange(:order => 'name')), selected: params[:category_id]),
-                          prompt: 'すべてのカテゴリ', class:"form-control" %>
+          <% CategoryType.all.each_with_index do |ct, index| %>
+            <div class="tab-pane fade show <%= 'active' if index.zero? %>" id="pills-<%= ct.type_name %>" role="tabpanel" aria-labelledby="pills-<%= ct.type_name %>-tab">
 
-            <span class='d-flex align-self-end'>
-              　から
-            </span>
-          </div>
+              <div class='col-lg-6 col-md-9 col-sm-10 col-12 m-auto'>
 
-          <div class="input-group col-7">
-            <%=
-              text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t(".search_placeholder_html")
-            %>
-            <span class="input-group-append">
-              <%= f.submit t("helpers.submit.search"), class:"btn btn-secondary", name: nil %>
-            </span>
-          </div>
-        <% end %>
-      </div>
+                <div class='row m-auto'>
+                  <% ct.categories.each do |category| %>
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6">
+                      <div class='ml-4'>
+                        <%= f.radio_button :category_id, category.id, {id: category.name, class: "form-check-input" }%>
+                        <label class="form-check-label text-white" for="<%= category.name%>">
+                          <%= category.name %>
+                        </label>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
 
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="input-group col-10 col-md-6 col-lg-4 mt-5 mx-auto">
+          <%= text_field_tag :search_content, params[:search_content], class:"form-control form-control-lg", placeholder: t(".search_placeholder_html") %>
+          <span class="input-group-append">
+            <%= f.submit t("helpers.submit.search"), class:"btn btn-warning btn-lg", name: nil %>
+          </span>
+        </div>
+      <% end %>
     </div>
+
+  </div>
+</div>
 </div>
 
+<% if notice.present? %>
+<div class='row mt-3'>
+  <div class='col-12'>
+    <div class="alert alert-primary" role="alert">
+      <%= notice %>
+    </div>
+  </div>
+</div>
+<% end %>
 
 <div class='row'>
-  <div class='col-12'>
-    <div class='float-right mb-2'>
-      <% case params[:order_by]&.to_sym %>
+<div class='col-12'>
+  <div class='float-right mb-2'>
+    <% case params[:order_by]&.to_sym %>
       <% when :ideas_count %>
         <%= link_to t(".order_by_updated_at"), themes_path(category_id: params[:category_id], search_content: params[:search_content])%>
         /
@@ -83,11 +97,20 @@
   </div>
 </div>
 
-
 <div class='row'>
   <div class='col-12'>
     <div class='d-flex justify-content-center'>
       <%= paginate @themes %>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-bottom">
+  <div class='d-flex justify-content-end m-5'>
+    <div class="actions text-white">
+      <%= link_to new_theme_path, class: "btn btn-danger rounded-circle themes-index-add-theme d-flex align-items-center justify-content-center", data: { toggle: "tooltip", placement: "top", title: t('.create_new_theme') } do %>
+        <%= fa_icon "plus", class: 'fa-4x' %>
+      <% end %>
     </div>
   </div>
 </div>

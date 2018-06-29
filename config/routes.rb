@@ -114,10 +114,12 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+  }
 
   resources :themes, only: %i[index show new create edit update] do
-    resources :ideas, only: %i[create], module: 'themes' do
+    resources :ideas, only: %i[create new], module: 'themes' do
       resources :likes, only: %i[create destroy], module: 'ideas'
     end
     resources :tags, only: %i[create destroy], module: 'themes'

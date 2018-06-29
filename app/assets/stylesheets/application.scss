@@ -13,35 +13,46 @@
  *= require_tree .
  *= require tagsinput
  *= require lightbox
+ *= require bootstrap-select
+ *= require font-awesome
  *= require_self
  */
 
- //@import "bootstrap-custom";
+//@import "bootstrap-custom";
+.tree-in {
+  float: left;
+  border-color: gray;
+  border-style: none none solid solid;
+  border-width: 2px;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  height: 12px;
+  width: 10px;
+  text-indent: -999999px;
+  left: -12px;
+}
+// Font
+html {
+  font-size: 16px;
+}
 
+body {
+  font-family: '';
+  min-height: 100vh;
+}
 
- .tree-in {
-   float: left;
-   border-color: gray;
-   border-style: none none solid solid;
-   border-width: 2px;
-   line-height: 12px;
-   overflow: hidden;
-   position: absolute;
-   height: 12px;
-   width: 10px;
-   text-indent: -999999px;
-   left: -12px;
- }
+.themes-index-cover {
+  background: #6DD5FA;
+}
 
- // Font
- html {
-   font-size: 16px;
- }
- body {
-   font-family: '';
-   min-height: 100vh;
- }
+.theme-show-cover {
+  background-color: rgb(147, 84, 202);
+}
 
- .themes-index-cover{
-   background: #6DD5FA;
- }
+.title {
+  border-bottom: 1px solid #eeeeee;
+  padding: 0 0 0.2em;
+}
+
+.sub-title {}
