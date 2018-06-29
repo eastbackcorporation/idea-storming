@@ -29,22 +29,17 @@ RSpec.describe Themes::IdeasController, type: :controller do
       context 'with valid params' do
         it 'creates a New Idea' do
           expect do
-            post :create, params: { theme_id: theme.id, idea: valid_attributes }
+            post :create, xhr: true, params: { theme_id: theme.id, idea: valid_attributes }
           end.to change(theme.ideas.roots, :count).by(1)
 
           expect(theme.ideas.roots.last).to have_attributes valid_attributes
           expect(theme.ideas.roots.last.creator).to eq user
         end
-
-        it 'redirects to the theme page' do
-          post :create, params: { theme_id: theme.id, idea: valid_attributes }
-          expect(response).to redirect_to(theme)
-        end
       end
 
       context 'with invalid params' do
         it "returns a success response (i.e. to display the theme 'show' template)" do
-          post :create, params: { theme_id: theme.id, idea: invalid_attributes }
+          post :create, xhr: true, params: { theme_id: theme.id, idea: invalid_attributes }
           expect(response).to be_successful
         end
       end
@@ -60,22 +55,17 @@ RSpec.describe Themes::IdeasController, type: :controller do
       context 'with valid params' do
         it 'creates a New Child Idea' do
           expect do
-            post :create, params: { theme_id: theme.id, parent_id: parent_idea, idea: valid_attributes }
+            post :create, xhr: true, params: { theme_id: theme.id, parent_id: parent_idea, idea: valid_attributes }
           end.to change(parent_idea.children, :count).by(1)
 
           expect(parent_idea.children.last).to have_attributes valid_attributes
           expect(parent_idea.children.last.creator).to eq user
         end
-
-        it 'redirects to the theme page' do
-          post :create, params: { theme_id: theme.id, parent_id: parent_idea, idea: valid_attributes }
-          expect(response).to redirect_to(theme)
-        end
       end
 
       context 'with invalid params' do
         it "returns a success response (i.e. to display the theme 'show' template)" do
-          post :create, params: { theme_id: theme.id, parent_id: parent_idea, idea: invalid_attributes }
+          post :create, xhr: true, params: { theme_id: theme.id, parent_id: parent_idea, idea: invalid_attributes }
           expect(response).to be_successful
         end
       end

@@ -1,0 +1,6 @@
+<% if @idea.errors.any? %>
+  $('.idea-form').html('<%= j(render "themes/ideas/form", parent_idea: @idea&.parent&.id, theme: @theme) %>');
+<% else %>
+  $('.theme-ideas').html('<%= j(render "themes/ideas", theme: @theme.reload) %>');
+  $('.idea-form').slideToggle(100);
+<% end %>

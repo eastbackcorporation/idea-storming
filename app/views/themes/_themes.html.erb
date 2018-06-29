@@ -1,6 +1,12 @@
 <div class="card-columns">
   <% themes.each do |theme| %>
     <div class="card border-0">
+      <div class="card-text themes-index-idea-count">
+        <div class='round'>
+          <p><%= theme.ideas.count %></p>
+        </div>
+      </div>
+
       <% if theme.images.present? && theme.images.first.variable? %>
         <% image = theme.images.first %>
         <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
@@ -8,30 +14,26 @@
 
       <div class="card-body">
         <h5 class='card-title'>
-          <%= link_to theme.title, theme_path(theme) %>
+          <strong><%= theme.title %></strong>
         </h5>
 
         <h6 class='card-sub-title'>
-          <%= Theme.human_attribute_name :category %>:
-          <%= theme.category.name %>
+          <% category = theme.category %>
+          <%= category.category_type.name %>:
+          <%= category.name %>
         </h6>
-
-        <p class="card-text"><%= theme.description %></p>
 
         <p class="card-text">
           <% theme.tags.pluck(:name).each do |tag_name| %>
-            <span class="badge badge-primary"><%= tag_name %></span>
+            <span class="badge badge-primary"><%= link_to tag_name, themes_path(search_content: tag_name), class: 'text-white' %></span>
           <% end %>
         </p>
 
-        <p class="card-text">
-          <%= Theme.human_attribute_name :idea_count %>:
-          <%= theme.ideas.count %>
-        </p>
-        <p class="card-text">
-          <%= Theme.human_attribute_name :updated_at %>:
-          <%= l(theme.updated_at, format: :short) %>
-        </p>
+        <p class="card-text"><%= theme.description %></p>
+
+        <div>
+          <%= link_to t('.idea.create'), theme_path(theme), class: 'btn btn-block btn-outline-primary'%>
+        </div>
       </div>
       <hr />
 

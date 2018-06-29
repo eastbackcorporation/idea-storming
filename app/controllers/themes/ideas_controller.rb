@@ -3,6 +3,13 @@
 class Themes::IdeasController < ApplicationController
   before_action :authenticate_user!
 
+  # 新規アイデア
+  # GET    /themes/new
+  def new
+    @theme = Theme.find(params[:theme_id])
+    @parent_idea = Idea.find_by(id: params[:idea_id])
+  end
+
   # アイディア登録
   # POST   /themes/:theme_id/ideas
   def create
@@ -11,12 +18,7 @@ class Themes::IdeasController < ApplicationController
     @idea.theme = @theme
     @idea.parent = @theme.ideas.find(params[:parent_id]) if params[:parent_id].present?
     @idea.creator = current_user
-
-    if @idea.save
-      redirect_to theme_path(@theme), notice: t('.success')
-    else
-      render 'themes/show'
-    end
+    @idea.save
   end
 
   private
