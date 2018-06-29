@@ -86,6 +86,7 @@
 #                                PATCH  /themes/:id(.:format)                                                                    themes#update
 #                                PUT    /themes/:id(.:format)                                                                    themes#update
 #                dashboard_index GET    /dashboard(.:format)                                                                     dashboard#index
+#               dashboard_themes GET    /dashboard/themes(.:format)                                                              dashboard/themes#index
 #             category_bookmarks GET    /category_bookmarks(.:format)                                                            category_bookmarks#show
 #                                PATCH  /category_bookmarks(.:format)                                                            category_bookmarks#update
 #                                PUT    /category_bookmarks(.:format)                                                            category_bookmarks#update
@@ -124,6 +125,9 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: :index
+  namespace :dashboard do
+    resources :themes, only: %i[index]
+  end
   resource :category_bookmarks, only: %i[show update]
 
   namespace :admin do
@@ -132,7 +136,6 @@ Rails.application.routes.draw do
       passwords: 'admin/users/passwords',
     }
   end
-
 
   root to: 'themes#index'
 end

@@ -7,14 +7,14 @@
   </div>
 <% end %>
 
-<div class="pb-4">
+<div class="pb-4 clearfix">
   <%= link_to "#{Theme.model_name.human} #{t('helpers.index')}", themes_path, class: "btn btn-outline-primary" %>
   <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
   <%= link_to t(".regist_bookmarks"), category_bookmarks_path, class: "btn btn-outline-primary float-right" %>
 </div>
 
 <div class="row">
-  <section class="col-sm-6 col-12">
+  <section class="col-sm-4 col-12">
     <div class="card">
       <div class="card-header">
         <strong><%= t(".owner_themes") %></strong>
@@ -22,6 +22,9 @@
       <div class="card-body">
         <% if @owner_themes.present? %>
           <%= render "themes", themes: @owner_themes %>
+          <small class="float-right">
+            <%= link_to t("helpers.links.more_see"), dashboard_themes_path(type: "owner_themes") %>
+          </small>
         <% else %>
           <%= t(".blank", name: t(".owner_themes"))%>
         <% end %>
@@ -29,7 +32,7 @@
     </div>
   </section>
 
-  <section class="col-sm-6 col-12">
+  <section class="col-sm-4 col-12">
     <div class="card">
       <div class="card-header">
         <strong><%= t(".joining_themes") %></strong>
@@ -37,8 +40,29 @@
       <div class="card-body">
         <% if @joining_themes.present? %>
           <%= render "themes", themes: @joining_themes %>
+          <small class="float-right">
+            <%= link_to t("helpers.links.more_see"), dashboard_themes_path(type: "joining_themes") %>
+          </small>
         <% else %>
           <%= t(".blank", name: t(".joining_themes"))%>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <section class="col-sm-4 col-12">
+    <div class="card">
+      <div class="card-header">
+        <strong><%= t(".bookmark_category_themes") %></strong>
+      </div>
+      <div class="card-body">
+        <% if  @bookmark_category_themes.present? %>
+          <%= render "themes", themes:  @bookmark_category_themes %>
+          <small class="float-right">
+            <%= link_to t("helpers.links.more_see"), dashboard_themes_path(type: "bookmark_category_themes") %>
+          </small>
+        <% else %>
+          <%= t(".blank", name: t(".bookmark_category_themes"))%>
         <% end %>
       </div>
     </div>

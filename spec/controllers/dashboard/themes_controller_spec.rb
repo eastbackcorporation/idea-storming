@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DashboardController, type: :controller do
+RSpec.describe Dashboard::ThemesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
   before do
     login_user(user)
@@ -25,33 +25,22 @@ RSpec.describe DashboardController, type: :controller do
       FactoryBot.create_list(:theme, 5, owner: FactoryBot.create(:user), category: user.categories.first)
     end
 
-    it 'returns a success response' do
-      get :index, params: {}
+    it 'set current user owner themes' do
+      get :index, params: { type: 'owner_themes' }
+      expect(assigns[:themes]).to match_array owner_themes
       expect(response).to be_successful
     end
 
-    it 'set current user owner themes' do
-      get :index, params: {}
-      expect(
-        Theme.where(id: assigns[:owner_themes].map(&:id))
-             .order(:updated_at).limit(DashboardController::DISPLAY_LIMIT)
-      ).to match_array owner_themes
-    end
-
     it 'set current user joining_themes' do
-      get :index, params: {}
-      expect(
-        Theme.where(id: assigns[:joining_themes].map(&:id))
-             .order(:updated_at).limit(DashboardController::DISPLAY_LIMIT)
-      ).to match_array joining_themes
+      get :index, params: { type: 'joining_themes' }
+      expect(assigns[:themes]).to match_array joining_themes
+      expect(response).to be_successful
     end
 
     it 'set current user bookmark_category_themes' do
-      get :index, params: {}
-      expect(
-        Theme.where(id: assigns[:bookmark_category_themes].map(&:id))
-             .order(:updated_at).limit(DashboardController::DISPLAY_LIMIT)
-      ).to match_array bookmark_category_themes
+      get :index, params: { type: 'bookmark_category_themes' }
+      expect(assigns[:themes]).to match_array bookmark_category_themes
+      expect(response).to be_successful
     end
   end
 end

@@ -1,0 +1,55 @@
+<% if notice.present? %>
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    　<span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<div class="pb-4 clearfix">
+  <%= link_to t('helpers.links.back'), dashboard_index_path, class: "btn btn-outline-primary" %>
+</div>
+
+<div class="row">
+  <section class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <strong><%= t("dashboard.index.#{params[:type]}") %></strong>
+      </div>
+      <div class="card-body">
+        <% if @themes.present? %>
+         <table class="table">
+          <tbody>
+            <% @themes.each do |theme| %>
+              <tr>
+                <td>
+                  <%= link_to theme.title, theme_path(theme) %>
+                  <br/>
+                  <small class="text-muted float-left">
+                    <%= Theme.human_attribute_name :idea_count  %>
+                    <%= theme.ideas.count %>
+                  </small>
+                  <small class="text-muted float-right">
+                    <%= Theme.human_attribute_name :updated_at_short%>
+                    <%= l(theme.updated_at) %>
+                  </small>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class='row'>
+          <div class='col-12'>
+            <div class='d-flex justify-content-center'>
+              <%= paginate @themes %>
+            </div>
+          </div>
+        </div>
+        <% else %>
+          <%= t(".blank", name: t(".owner_themes"))%>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
