@@ -47,6 +47,9 @@ class Theme < ApplicationRecord
   # userが関連Ideaの作成者であるか
   scope :is_idea_creator, ->(user) { where(id: Idea.where(creator_id: user.id).select(:theme_id)) }
 
+  # userがブックマークしているカテゴリのテーマであるか
+  scope :bookmark_category, ->(user) { where(category_id: user.categories) }
+
   # テーマのタイトル、内容、タグの部分一致による取得
   # @param [String] value
   scope :search_content, ->(value) do

@@ -131,7 +131,7 @@ RSpec.describe ThemesController, type: :controller do
 
       it 'redirects to the created theme' do
         post :create, params: { theme: valid_attributes }
-        expect(response).to redirect_to(themes_path)
+        expect(response).to redirect_to(dashboard_index_path)
       end
 
       it 'attaches the uploaded file' do

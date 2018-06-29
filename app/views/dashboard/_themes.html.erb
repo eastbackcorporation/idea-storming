@@ -1,17 +1,19 @@
 <table class="table">
-  <thead>
-    <tr>
-      <th><%= Theme.model_name.human %></th>
-      <th><%= Theme.human_attribute_name :idea_count %></th>
-      <th><%= Theme.human_attribute_name :updated_at %></th>
-    </tr>
-  </thead>
   <tbody>
     <% themes.each do |theme| %>
       <tr>
-        <td><%= link_to theme.title, theme_path(theme) %></td>
-        <td><%= theme.ideas.count %></td>
-        <td><%= l(theme.updated_at) %></td>
+        <td>
+          <%= link_to theme.title, theme_path(theme) %>
+          <br/>
+          <small class="text-muted float-left">
+            <%= Theme.human_attribute_name :idea_count  %>
+            <%= theme.ideas.count %>
+          </small>
+          <small class="text-muted float-right">
+            <%= Theme.human_attribute_name :updated_at_short%>
+            <%= l(theme.updated_at) %>
+          </small>
+        </td>
       </tr>
     <% end %>
   </tbody>

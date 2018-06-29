@@ -11,6 +11,8 @@ ja:
       shared-attributes: &shared-attributes
         created_at: 登録日時
         updated_at: 更新日時
+        created_at_short: 登録
+        updated_at_short: 更新
       user:
         <<: *shared-attributes
         nick_name: "ニックネーム"

@@ -44,7 +44,7 @@ class ThemesController < ApplicationController
 
     respond_to do |format|
       if @theme.save && @theme.save_tags(theme_tags_params)
-        format.html { redirect_to themes_path, notice: t('.success') }
+        format.html { redirect_to dashboard_index_path, notice: t('.success') }
         format.json { render :show, status: :created, location: @theme }
       else
         format.html { render :new }
