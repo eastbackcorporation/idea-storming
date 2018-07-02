@@ -1,0 +1,36 @@
+<div class="card border-0">
+  <div class="card-body">
+    <div class='row'>
+      <div class='col-2'>
+        <img src="//placehold.it/100" class="m-x-auto img-fluid rounded-circle" alt="avatar">
+      </div>
+
+      <div class='col-10'>
+        <div class='px-2'>
+          <p class=''>
+            <strong><%= theme.owner.nick_name %></strong>
+            <%= l theme.created_at %></p>
+          <%= simple_format theme.description %>
+        </div>
+        <% if theme.images.present?%>
+          <% theme.images.includes(:blob).each do |image| %>
+            <% if image.variable? %>
+              <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
+              <%= image_tag image.variant(resize: "150x150") %>
+            <% end %>
+          <% else %>
+            <%= link_to image.filename, rails_blob_path(image, disposition: "attachment") %>
+          <% end %>
+        <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= nested_ideas theme.ideas.includes(:creator).arrange(order: :created_at) %>
+
+<div class="actions">
+  <%= link_to t("helpers.links.back"), themes_path, class: "btn" %>
+</div>

@@ -1,34 +1,56 @@
-<div class="card mb-2">
-  <div class="card-header bg-light small">
-    <span class="tree-in"></span>
-    <% if idea.is_display? %>
-      <strong>
-        <%= idea.title %>
-      </strong>
-      <span class="float-right"><%= Idea.human_attribute_name :creator %>: <%= idea.creator.nick_name %></span>
-    <% else %>
-      <font color='red'><%= t(".hide_idea") %></font>
-    <% end %>
-  </div>
-  <div class="card-body pb-3">
-    <% if idea.is_display? %>
-      <p><%= simple_format idea.description %></p>
-      <div id='<%= "idea-like-#{idea.id}" %>'>
-        <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
-      </div>
-    <% end %>
-    <%= sub_ideas if sub_ideas.present? %>
-    <div class="border rounded">
-      <%= button_tag type: "button", class: "btn btn-outline-dark  btn-sm", data: {toggle: "collapse", target: "#idea-form-#{idea.id}"} do %>
-        <%= t(".regist_idea") %>
-      <% end %>
+<% if idea.root? %>
+  <hr />
+<% end %>
+<div class=''>
+  <% unless idea.root? %>
+     <div class="card border-0" style='<%= "margin-left: #{idea.depth * 2}em;" %>'>
+  <% else %>
+  <div class="card border-0">
+  <% end %>
+    <div class="card-body">
+      <div class='row'>
+        <div class='col-1'>
+          <img src="//placehold.it/50" class="m-x-auto img-fluid rounded-circle" alt="avatar">
+        </div>
 
-      <%= tag.div id: "idea-form-#{idea.id}", class: "collapse p-4"  do %>
-        <%= form_with model: Idea.new, url: theme_ideas_path(theme_id: @theme.id), local: true do |f|%>
-          <%= hidden_field_tag "parent_id", idea.id %>
-          <%= render "themes/ideas/form", form: f %>
-        <% end %>
-      <% end %>
+        <div class='col-11'>
+          <div class='idea clearfix'>
+            <% if idea.is_display? %>
+              <p>
+                <strong><%= idea.creator.nick_name %></strong>
+                <%= l idea.updated_at %></p>
+              <strong>
+                <%= idea.title %>
+              </strong>
+            <% else %>
+              <font color='red'><%= t(".hide_idea") %></font>
+            <% end %>
+
+            <% if idea.is_display? %>
+              <p><%= simple_format idea.description %></p>
+
+              <div class="float-right">
+                <% if user_signed_in? %>
+                  <%= link_to t('.register_idea'), new_theme_idea_path(@theme, idea_id: idea.id),remote: true, class: "ml-2 btn text-muted idea-add-new"%>
+                <% else %>
+                  <a class="ml-2 btn text-muted" data-toggle="modal" data-target="#sign-in-modal">
+                    <%= t('.register_idea') %>
+                  </a>
+                <% end %>
+              </div>
+
+              <div id='<%= "idea-like-#{idea.id}" %>' class='float-right'>
+                <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
+
+
+  <%= sub_ideas if sub_ideas.present? %>
 </div>

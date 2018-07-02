@@ -11,17 +11,20 @@ ja:
     index:
       please_login: テーマを投稿する
       search_theme: テーマをさがす
+      select_search_type: "%{name}から探す"
       search_placeholder_html: 'テーマをさがす'
       select_categories: "--カテゴリ選択--"
-      order_by_updated_at: 更新日時順
+      order_by_updated_at: 新しい順
       order_by_ideas_count: アイディア数順
+      create_new_theme: 新しくテーマをつくる
     new:
-      title: テーマの登録
+      title: テーマの作成
     edit:
       title: テーマの編集
     show:
       title: テーマの内容
-      regist_idea: 新規アイディアを投稿する
+      register_idea: アイディアを投稿する
+      edit: テーマを編集
     create:
       success: テーマを登録しました。
     update:
@@ -30,8 +33,15 @@ ja:
       create:
         success: アイディアを登録しました。
       idea:
-        regist_idea: 派生アイディアを投稿する
+        register_idea: 派生アイディアを投稿する
         hide_idea: 非表示
+    form:
+      select_search_type: "%{name}を選択"
+      create: テーマを作成
+      update: テーマを更新
+    themes:
+      idea:
+        create: アイデアを投稿
   category_bookmarks:
     show:
       title: カテゴリ/ジャンルのブックマーク
