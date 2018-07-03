@@ -1,9 +1,12 @@
-entrypoint: bundle exec rackup --port $PORT
+entrypoint: bundle exec foreman start
 env: flex
 runtime: ruby
 
 manual_scaling:
   instances: 1
+
+env_variables:
+  ENABLE_GOOGLE_APP_ENGINE_LIB: true
 
 includes:
   - app_env.yaml

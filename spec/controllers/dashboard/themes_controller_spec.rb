@@ -9,6 +9,10 @@ RSpec.describe Dashboard::ThemesController, type: :controller do
   end
 
   describe 'GET #index' do
+    before do
+      allow(UserMailer).to receive(:notify_regist_theme).and_return(double('mailer', deliver_later: true))
+    end
+
     let!(:owner_themes) do
       FactoryBot.create_list(:theme, 5, owner: user, category: FactoryBot.create(:category))
     end

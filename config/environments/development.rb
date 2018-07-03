@@ -86,5 +86,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000', protocol: 'http' }
   Rails.application.routes.default_url_options = { host: 'localhost:3000', protocol: 'http' }
 
-  config.active_job.queue_adapter = :inline
+  # config.active_job.queue_adapter = :inline
+  config.active_job.queue_adapter = :delayed_job
 end
