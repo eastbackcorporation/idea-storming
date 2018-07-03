@@ -5,8 +5,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+
+
 @import "bootstrap/functions";
-@import "bootstrap/variables";
+@import "bootstrap_variables";
+// @import "bootstrap/variables";
 @import "bootstrap/mixins";
 @import "bootstrap/root";
 @import "bootstrap/reboot";
@@ -41,9 +44,9 @@
 @import "bootstrap/utilities";
 @import "bootstrap/print";
 
-.bootstrap-tagsinput input {
-  width: 15em !important;
-}
+
+@import "bootstrap_custom";
+
 
 .card-columns {
   @include media-breakpoint-only(md) {
@@ -55,4 +58,8 @@
   @include media-breakpoint-only(xl) {
     column-count: 4;
   }
+}
+
+.bootstrap-tagsinput input {
+  width: 15em !important;
 }

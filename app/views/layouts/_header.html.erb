@@ -1,39 +1,43 @@
-<header class='bg-primary'>
-<nav class="navbar navbar-expand-lg">
-  <%= link_to root_path, class:"navbar-brand" do %>
-    <%= image_tag 'logo.png', width: 250 %>
-  <% end %>
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <%= link_to root_path, class:"navbar-brand" do %>
+      <%= image_tag 'logo.png', width: 250 %>
+    <% end %>
 
-  <div class="collapse navbar-collapse justify-content-end">
-    <ul class="navbar-nav">
-        <li>
-          <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
-            <div class="input-group col-12">
-              <%=
-                text_field_tag :search_content, params[:search_content], class:"form-control", placeholder: t("themes.index.search_placeholder_html")
-              %>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+          <li>
+            <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
+              <div class="input-group col-12">
+                <%=
+                  text_field_tag :search_content, params[:search_content], class:"form-control form-control-lg", placeholder: t("themes.index.search_placeholder_html")
+                %>
+              </div>
+            <% end %>
+          </li>
+        <% if user_signed_in? %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white float-left p-0 ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+              <img src="//placehold.it/45" class="img-fluid rounded-circle" alt="avatar">
+              <span><%= current_user&.nick_name %></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to t('.dashboard'), dashboard_index_path, class:"dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"dropdown-item", data: { confirm: t('.are_you_surel_log_out') } %>
             </div>
-          <% end %>
-        </li>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to dashboard_index_path, class:"nav-link text-white" do %>
-            <%= User.model_name.human %>:
-            <%= current_user&.nick_name %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to t("devise.shared.links.sign_out"), destroy_user_session_path, method: :delete, class:"nav-link text-white", data: { confirm: 'Are you sure?' } %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link text-white" %>
-        </li>
-        <li>
-          <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link text-white" %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</nav>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to t("devise.shared.links.sign_in"), new_session_path(User), class:"nav-link text-white" %>
+          </li>
+          <li>
+            <%= link_to t("devise.shared.links.sign_up"), new_registration_path(User), class:"nav-link text-white" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 </header>

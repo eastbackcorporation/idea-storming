@@ -1,5 +1,10 @@
+.themes-index-cover-search {
+  background: rgba(0,0,0,0.03);
+  border-radius: 1.5rem !important;
+}
+
 .themes-index-cover {
-  background: #6DD5FA;
+  background: linear-gradient(0deg, #00dcc9, #5983e8);
 }
 
 .themes-index-idea-count {
@@ -33,9 +38,10 @@
   height: 8em;
 }
 
-
-.theme-show-cover {
-  background-color: rgb(147, 84, 202);
+.themes-index-add-theme-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .theme-actions {

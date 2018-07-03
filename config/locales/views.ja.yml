@@ -1,4 +1,9 @@
 ja:
+  layouts:
+    header:
+      dashboard: ダッシュボード
+      are_you_surel_log_out: ログアウトしてもよろしいですか？
+
   dashboard:
    index:
     title: ダッシュボード
@@ -18,9 +23,11 @@ ja:
       order_by_ideas_count: アイディア数順
       create_new_theme: 新しくテーマをつくる
     new:
-      title: テーマの作成
+      title: 新しくテーマを作成
+      description: ''
     edit:
-      title: テーマの編集
+      title: テーマを編集
+      description: ''
     show:
       title: テーマの内容
       register_idea: アイディアを投稿する

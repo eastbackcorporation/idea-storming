@@ -1,92 +1,109 @@
 <%= javascript_include_tag "themes/form" %>
 
-<%= form_with(model: theme, local: true) do |form| %>
-  <% if theme.errors.any? %>
-    <div class="alert alert-danger " role="alert">
-      <ul class="mb-0">
-        <% theme.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="card mt-4 border-0 shadow-sm rounded">
+  <div class="card-body">
+    <h4 class="card-title"><%= title %></h4>
+    <hr />
+    <p><%= description %></p>
+    <%= form_with(model: theme, local: true) do |form| %>
+      <% if theme.errors.any? %>
+        <div class="alert alert-danger " role="alert">
+          <ul class="mb-0">
+            <% theme.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="form-group">
-    <% CategoryType.all.each do |ct| %>
-      <h2><%= t('.select_search_type', name: ct.name) %></h2>
+      <div class="form-group">
+        <% category_types = CategoryType.all %>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <% category_types.each_with_index do |ct, idx| %>
+            <li class="nav-item">
+              <a class="nav-link <%= 'active' if active_category_tab?(theme, ct) %>" id="pills-<%= ct.type_name %>-tab" data-toggle="pill" href="#pills-<%= ct.type_name %>" role="tab" aria-controls="pills-<%= ct.type_name %>" aria-selected="true">
+                <%= t('.select_search_type', name: ct.name) %>
+              </a>
+            </li>
+          <% end %>
 
-      <div class='row'>
-        <% ct.categories.arrange.keys.each do |root| %>
-          <div class='col-md-4 col-lg-3'>
-            <div class='card border-0'>
-              <div class='card-body px-0 py-0'>
-                <div class='card-title'>
-                  <% if root.children.present? %>
-                    <strong><%= root.name %></strong>
-                  <% else %>
-                    <label><%= form.radio_button :category_id, root.id %> <%= root.name %></label>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+
+          <% category_types.all.each_with_index do |ct, index| %>
+            <div class="tab-pane fade show <%= 'active' if active_category_tab?(theme, ct) %>" id="pills-<%= ct.type_name %>" role="tabpanel" aria-labelledby="pills-<%= ct.type_name %>-tab">
+
+              <div class=''>
+
+                <div class='row m-auto'>
+                  <% ct.categories.each do |category| %>
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6">
+                      <div class='ml-4'>
+                        <%= form.radio_button :category_id, category.id, {id: category.name, class: "form-check-input" }%>
+                        <label class="form-check-label" for="<%= category.name%>">
+                          <%= category.name %>
+                        </label>
+                      </div>
+                    </div>
                   <% end %>
                 </div>
-                <% ancestry_options(root.children.arrange) do |category| %>
-                  <% if category.children.present? %>
-                    <strong><%= category.name %></strong>
-                  <% else %>
-                    <label><%= form.radio_button :category_id, category.id %> <%= category.name %></label>
-                  <% end %>
-                  <br>
-                <% end %>
 
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="form-group mb-4">
-    <%= form.label :title %>
-    <%= form.text_field :title, class:"form-control col-md-6" %>
-  </div>
-  <div class="form-group mb-4">
-    <%= form.label :description %>
-    <%= form.text_area :description, class:"form-control col-md-9", rows: 8 %>
-  </div>
-
-  <div class="form-group mb-4">
-    <%= form.label :tags %>
-    <div class='row'>
-      <div class='col-6'>
-        <%= text_field_tag 'theme_tags', @theme_tags, class: "form-control col-md-3"  %>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group col-8 mb-4">
-    <div class="form-group border p-2 row">
-      <%= form.label :images_and_annotation %>
-      <%= form.file_field :images, multiple: true, accept:"image/*", class: "form-control" %>
-
-      <% form.object.images.includes(:blob).each do |image| %>
-        <div class="col-2 m-2 p-2 border">
-          <%= form.fields_for :images_attachments, image do |fields| %>
-            <label><%= fields.check_box :_destroy %> <%= t("helpers.links.destroy") %></label>
           <% end %>
-          <br/>
-          <% if image.variable? %>
-            <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
-              <%= image_tag image.variant(resize: "200x160"), class: "img-fluid" %>
-            <% end %>
-          <% else %>
-            <%= image.filename %>
+
+        </div>
+
+      </div>
+
+      <div class="form-group mb-4">
+        <%= form.label :title %>
+        <%= form.text_field :title, class:"form-control col-md-6" %>
+      </div>
+      <div class="form-group mb-4">
+        <%= form.label :description %>
+        <%= form.text_area :description, class:"form-control col-md-9", rows: 8 %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= form.label :tags %>
+        <div class='row'>
+          <div class='col-6'>
+            <%= text_field_tag 'theme_tags', @theme_tags, class: "form-control col-md-3"  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-8 mb-4">
+        <div class="form-group border p-2 row">
+          <%= form.label :images_and_annotation %>
+          <%= form.file_field :images, multiple: true, accept:"image/*", class: "form-control" %>
+
+          <% form.object.images.includes(:blob).each do |image| %>
+            <div class="col-2 m-2 p-2 border">
+              <%= form.fields_for :images_attachments, image do |fields| %>
+                <label><%= fields.check_box :_destroy %> <%= t("helpers.links.destroy") %></label>
+              <% end %>
+              <br/>
+              <% if image.variable? %>
+                <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
+                  <%= image_tag image.variant(resize: "200x160"), class: "img-fluid" %>
+                <% end %>
+              <% else %>
+                <%= image.filename %>
+              <% end %>
+            </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
+      </div>
 
-  <div class="actions float-left">
-    <% button_name = theme.new_record? ? t('.create') : t('.update') %>
-    <%= form.submit button_name, class: "btn btn-primary btn-lg" %>
+      <div class="actions float-left">
+        <% button_name = theme.new_record? ? t('.create') : t('.update') %>
+        <%= form.submit button_name, class: "btn btn-success " %>
+      </div>
+    <% end %>
+
+    <%= link_to t("helpers.links.cancel"), themes_path, class: "btn btn-secondary ml-3" %>
+
   </div>
-<% end %>
+</div>
