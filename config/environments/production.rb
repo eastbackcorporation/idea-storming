@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'appengine' if ENV['ENABLE_GOOGLE_APP_ENGINE_LIB']
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

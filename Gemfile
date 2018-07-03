@@ -88,7 +88,7 @@ gem 'kaminari'
 gem 'google-cloud-storage', '~> 1.3', require: false
 gem 'mini_magick'
 
-gem 'appengine'
+gem 'appengine', require: false
 gem 'font-awesome-rails'
 
 gem 'delayed_job_active_record'
