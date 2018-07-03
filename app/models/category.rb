@@ -24,4 +24,8 @@ class Category < ApplicationRecord
   has_many :bookmark_users, through: :category_bookmarks, source: :user
 
   validates :name, uniqueness: true
+
+  before_create do
+    self.color = format('#%06x', (rand * 0xffffff))
+  end
 end

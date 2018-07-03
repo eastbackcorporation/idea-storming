@@ -1,15 +1,18 @@
 <div class='row'>
   <div class='col-12'>
     <div class="d-flex justify-content-center">
-      <div class='col-7'>
+      <div class='col-lg-8 col-sm-12 col-12'>
         <% if notice.present? %>
           <div class="alert alert-primary" role="alert">
             <%= notice %>
           </div>
         <% end %>
-        <h1 class='title'><%= t('.title') %></h1>
-        <%= render 'form', theme: @theme %>
-        <%= link_to t("helpers.links.cancel"), themes_path, class: "btn btn-lg btn-secondary ml-3" %>
+
+        <div class='row'>
+          <div class='col'>
+            <%= render 'form', theme: @theme, title: t('.title'), description: t('.description') %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

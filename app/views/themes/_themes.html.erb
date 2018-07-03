@@ -1,7 +1,7 @@
 <div class="card-columns">
   <% themes.each do |theme| %>
-    <div class="card border-0">
-      <div class="card-text themes-index-idea-count">
+    <div class="card border-0 rounded shadow-sm">
+      <div class="card-text themes-index-idea-count m-3">
         <div class='round'>
           <p><%= theme.ideas.count %></p>
         </div>
@@ -29,13 +29,12 @@
           <% end %>
         </p>
 
-        <p class="card-text"><%= theme.description %></p>
+        <p class="card-text text-justify"><%= theme.description %></p>
 
         <div>
           <%= link_to t('.idea.create'), theme_path(theme), class: 'btn btn-block btn-outline-primary'%>
         </div>
       </div>
-      <hr />
 
     </div>
   <% end %>
