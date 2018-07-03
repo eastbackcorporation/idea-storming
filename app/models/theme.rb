@@ -34,7 +34,7 @@ class Theme < ApplicationRecord
     # 登録カテゴリをブックマークしているユーザに通知する
     category.bookmark_users.each do |bookmark_user|
       next if owner == bookmark_user
-      UserMailer.notify_regist_theme(bookmark_user, self).deliver
+      UserMailer.notify_regist_theme(bookmark_user, self).deliver_later
     end
   end
 

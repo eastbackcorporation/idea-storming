@@ -90,3 +90,6 @@ gem 'mini_magick'
 
 gem 'appengine'
 gem 'font-awesome-rails'
+
+gem 'delayed_job_active_record'
+gem 'foreman'

@@ -1,4 +1,4 @@
-entrypoint: bundle exec rackup --port $PORT
+entrypoint: bundle exec foreman start
 env: flex
 runtime: ruby
 

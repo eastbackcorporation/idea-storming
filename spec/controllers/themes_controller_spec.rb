@@ -142,25 +142,13 @@ RSpec.describe ThemesController, type: :controller do
       end
 
       it 'Notification Mail Category Bookmark User' do
-        ActionMailer::Base.deliveries.clear
-
         category.bookmark_users << FactoryBot.create(:user, email: 'bookmark_users1@examplec.com')
         category.bookmark_users << FactoryBot.create(:user, email: 'bookmark_users2@examplec.com')
         category.bookmark_users << user # Not Send Mail Owner
 
-        expect do
-          post :create, params: { theme: valid_attributes }
-        end.to change { ActionMailer::Base.deliveries.size }.by(2)
-
-        expect(ActionMailer::Base.deliveries.map(&:to).flatten).to match_array [
-          'bookmark_users1@examplec.com',
-          'bookmark_users2@examplec.com'
-        ]
-        expect(ActionMailer::Base.deliveries.map(&:subject).uniq).to eq [
-          I18n.t('user_mailer.notify_regist_theme.subject')
-        ]
-
-        ActionMailer::Base.deliveries.clear
+        expect(UserMailer).to receive(:notify_regist_theme)
+          .and_return(double('mailer', deliver_later: true)).exactly(2).times
+        post :create, params: { theme: valid_attributes }
       end
     end
 
