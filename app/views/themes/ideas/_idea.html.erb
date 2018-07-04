@@ -1,56 +1,59 @@
-<% if idea.root? %>
-  <hr />
-<% end %>
-<div class=''>
-  <% unless idea.root? %>
-     <div class="card border-0" style='<%= "margin-left: #{idea.depth * 2}em;" %>'>
-  <% else %>
-  <div class="card border-0">
-  <% end %>
-    <div class="card-body">
-      <div class='row'>
-        <div class='col-1'>
-          <img src="//placehold.it/50" class="m-x-auto img-fluid rounded-circle" alt="avatar">
-        </div>
+<ul>
+  <div class='<%= 'themes-ideas-idea-branch-mark' if first_idea?(idea) %>'></div>
+  <li class='<%= 'themes-ideas-idea-last' if last_idea?(idea) %>'>
+    <div class='themes-ideas-idea-wrapper'>
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-1'>
+              <%= image_tag 'default_avatar.png', width: 50, class: "m-x-auto img-fluid rounded-circle", alt: "avatar" %>
+            </div>
 
-        <div class='col-11'>
-          <div class='idea clearfix'>
-            <% if idea.is_display? %>
-              <p>
-                <strong><%= idea.creator.nick_name %></strong>
-                <%= l idea.updated_at %></p>
-              <strong>
-                <%= idea.title %>
-              </strong>
-            <% else %>
-              <font color='red'><%= t(".hide_idea") %></font>
-            <% end %>
-
-            <% if idea.is_display? %>
-              <p><%= simple_format idea.description %></p>
-
-              <div class="float-right">
-                <% if user_signed_in? %>
-                  <%= link_to t('.register_idea'), new_theme_idea_path(@theme, idea_id: idea.id),remote: true, class: "ml-2 btn text-muted idea-add-new"%>
+            <div class='col-md-11 col-12'>
+              <div class='idea clearfix'>
+                <% if idea.is_display? %>
+                  <div class='row'>
+                    <div class='float-left col'>
+                      <strong><%= idea.creator.nick_name %></strong>
+                      <br />
+                      <small><%= l idea.updated_at %></small>
+                    </div>
+                    <div id='<%= "idea-like-#{idea.id}" %>' class='float-right mr-3'>
+                      <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
+                    </div>
+                  </div>
+                  <strong>
+                    <%= idea.title %>
+                  </strong>
                 <% else %>
-                  <a class="ml-2 btn text-muted" data-toggle="modal" data-target="#sign-in-modal">
-                    <%= t('.register_idea') %>
-                  </a>
+                  <font color='red'><%= t(".hide_idea") %></font>
+                <% end %>
+
+                <% if idea.is_display? %>
+                  <p><%= simple_format idea.description %></p>
+
+
+                  <div class="float-right">
+                    <% if user_signed_in? %>
+                      <%= link_to t('.register_idea'),
+                                  new_theme_idea_path(@theme, idea_id: idea.id),
+                                  remote: true, class: "ml-2 btn btn-primary idea-add-new"%>
+                    <% else %>
+                      <a class="ml-2 btn btn-primary" data-toggle="modal" data-target="#sign-in-modal">
+                        <%= t('.register_idea') %>
+                      </a>
+                    <% end %>
+                  </div>
                 <% end %>
               </div>
+            </div>
 
-              <div id='<%= "idea-like-#{idea.id}" %>' class='float-right'>
-                <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
-              </div>
-            <% end %>
           </div>
+
         </div>
-
       </div>
-
     </div>
-  </div>
 
-
-  <%= sub_ideas if sub_ideas.present? %>
-</div>
+    <%= sub_ideas if sub_ideas.present? %>
+  </li>
+</ul>
