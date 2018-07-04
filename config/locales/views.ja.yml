@@ -30,17 +30,17 @@ ja:
       description: ''
     show:
       title: テーマの内容
-      register_idea: アイディアを投稿する
       edit: テーマを編集
     create:
       success: テーマを登録しました。
     update:
       success: テーマを更新しました。
     ideas:
+      register_idea: アイデアを投稿
       create:
         success: アイディアを登録しました。
       idea:
-        register_idea: 派生アイディアを投稿する
+        register_idea: ＋ 派生アイデアを投稿
         hide_idea: 非表示
     form:
       select_search_type: "%{name}を選択"

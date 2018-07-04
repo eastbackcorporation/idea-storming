@@ -19,8 +19,7 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white float-left p-0 ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              
-              <img src="//placehold.it/45" class="img-fluid rounded-circle" alt="avatar">
+              <%= image_tag 'default_avatar.png', width: 45, class: "img-fluid rounded-circle", alt: "avatar" %>
               <span><%= current_user&.nick_name %></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

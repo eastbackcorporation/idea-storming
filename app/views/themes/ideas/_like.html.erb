@@ -1,12 +1,12 @@
 <% if user_signed_in? %>
   <% like = idea.like_from(current_user) %>
   <% if like.present? %>
-    <%= link_to "#{t('helpers.already_like')} #{idea.likes.count}", theme_idea_like_path(theme_id: theme.id, idea_id: idea.id, id: like), method: :delete, class: 'btn text-muted', remote: true %>
+    <%= link_to "#{t('helpers.already_like')} #{idea.likes.count}", theme_idea_like_path(theme_id: theme.id, idea_id: idea.id, id: like), method: :delete, class: 'btn btn-sm btn-info', remote: true %>
   <% else %>
     <%= form_with model: IdeaLike.new, url: theme_idea_likes_path(theme_id: theme.id, idea_id: idea.id), method: :post, remote: true do |f|%>
-      <%= f.submit "#{t('helpers.like')} #{idea.likes.count}", class: 'btn text-muted' %>
+      <%= f.submit "#{t('helpers.like')} #{idea.likes.count}", class: 'btn btn-sm btn-info' %>
     <% end %>
   <% end %>
 <% else %>
-  <span class='ml-2 btn text-muted' style='cursor: text;'><%= "#{t('helpers.like')} #{idea.likes.count}" %></span>
+  <span class='ml-2 btn btn-sm btn-info' style='cursor: text;'><%= "#{t('helpers.like')} #{idea.likes.count}" %></span>
 <% end %>

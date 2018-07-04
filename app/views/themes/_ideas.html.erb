@@ -1,8 +1,9 @@
-<div class="card border-0">
+<div class='themes-ideas-theme rounded'>
+<div class="card border-0 shadow-sm mt-4">
   <div class="card-body">
     <div class='row'>
       <div class='col-2'>
-        <img src="//placehold.it/100" class="m-x-auto img-fluid rounded-circle" alt="avatar">
+        <%= image_tag 'default_avatar.png', width: 100, class: "m-x-auto img-fluid rounded-circle", alt: "avatar" %>
       </div>
 
       <div class='col-10'>
@@ -23,14 +24,25 @@
           <% end %>
         <% end %>
         <% end %>
+
+        <div class='col-12'>
+          <div class='float-right'>
+            <% if user_signed_in? %>
+            <%= link_to t('.register_idea'), new_theme_idea_path(@theme),
+                  class: "btn btn-primary mt-3 ml-2 idea-add-new", remote: true %>
+            <% else %>
+            <%= link_to t('.register_idea'), new_user_session_path,
+                  class: "btn btn-primary mt-3 ml-2" %>
+            <% end %>
+          </div>
+        </div>
       </div>
 
     </div>
   </div>
 </div>
+</div>
 
-<%= nested_ideas theme.ideas.includes(:creator).arrange(order: :created_at) %>
-
-<div class="actions">
-  <%= link_to t("helpers.links.back"), themes_path, class: "btn" %>
+<div class='themes-ideas-idea-tree'>
+  <%= nested_ideas theme.ideas.includes(:creator).arrange(order: :created_at) %>
 </div>

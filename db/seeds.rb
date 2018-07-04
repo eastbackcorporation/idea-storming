@@ -6,6 +6,6 @@ load(File.join(Rails.root, 'db', 'seeds', 'settings.rb'))
 
 if Rails.env.development?
   load(File.join(Rails.root, 'db', 'seeds', 'dev', 'admin_users.rb'))
-  load(File.join(Rails.root, 'db', 'seeds', 'dev', 'themes.rb'))
   load(File.join(Rails.root, 'db', 'seeds', 'dev', 'users.rb'))
+  load(File.join(Rails.root, 'db', 'seeds', 'dev', 'themes.rb'))
 end

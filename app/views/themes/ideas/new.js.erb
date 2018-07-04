@@ -1,1 +1,1 @@
-$('.idea-form').html('<%= j(render "themes/ideas/form", parent_idea: @parent_idea, theme: @theme) %>');
+$('.idea-form').html('<%= j(render "themes/ideas/form", parent_idea_id: @parent_idea&.id, theme: @theme) %>');
