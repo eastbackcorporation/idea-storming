@@ -117,6 +117,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    unlocks: 'users/unlocks'
   }
 
   resources :themes, only: %i[index show new create edit update] do

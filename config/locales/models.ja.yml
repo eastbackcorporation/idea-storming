@@ -3,7 +3,8 @@ ja:
     models:
       user: ユーザ
       theme: テーマ
-      category: カテゴリ
+      category: テーマ区分
+      category_type: タイプ
       idea: アイディア
       tag: タグ
       setting: 設定
@@ -44,12 +45,16 @@ ja:
         ideas: アイディア
         images: 添付画像
         images_and_annotation: 添付画像 (複数選択可)
+      category_type:
+        <<: *shared-attributes
       category:
         <<: *shared-attributes
-        title: カテゴリ
-        name: カテゴリ名
+        title: テーマ区分
+        name: 区分名
+        category_type: タイプ
         description: 説明
         disp_order: 並び順
+        color: 色
       idea:
         <<: *shared-attributes
         theme: テーマ

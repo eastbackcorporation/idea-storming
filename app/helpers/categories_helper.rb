@@ -6,7 +6,7 @@ module CategoriesHelper
 
     result = []
     categories.map do |category, sub_categories|
-      result << [yield(category), category.id, category.disp_order]
+      result << [yield(category), category.id, category.disp_order, category.color, category.category_type]
       result += nested_categories(sub_categories, &block)
     end
     result
