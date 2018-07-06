@@ -21,7 +21,13 @@
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <% category_types.each_with_index do |ct, idx| %>
             <li class="nav-item">
-              <a class="nav-link <%= 'active' if active_category_tab?(theme, ct) %>" id="pills-<%= ct.type_name %>-tab" data-toggle="pill" href="#pills-<%= ct.type_name %>" role="tab" aria-controls="pills-<%= ct.type_name %>" aria-selected="true">
+              <a class="nav-link <%= 'active' if active_category_tab?(theme, ct) %>"
+                 id="pills-<%= ct.type_name %>-tab"
+                 data-toggle="pill"
+                 href="#pills-<%= ct.type_name %>"
+                 role="tab"
+                 aria-controls="pills-<%= ct.type_name %>"
+                 aria-selected="true">
                 <%= t('.select_search_type', name: ct.name) %>
               </a>
             </li>
@@ -103,7 +109,7 @@
       </div>
     <% end %>
 
-    <%= link_to t("helpers.links.cancel"), themes_path, class: "btn btn-secondary ml-3" %>
+    <%= link_to t("helpers.links.cancel"), @request_from || themes_path, class: "btn btn-secondary ml-3" %>
 
   </div>
 </div>

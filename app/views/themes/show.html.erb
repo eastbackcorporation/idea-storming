@@ -28,15 +28,7 @@
   </div>
 </div>
 
-<div class='row'>
-  <div class='col-12'>
-    <% if notice.present? %>
-      <div class="alert alert-primary" role="alert">
-        <%= notice %>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render 'shared/notice' %>
 
 <div class='row'>
   <div class='col-lg-10 col-12 m-auto'>
@@ -45,7 +37,7 @@
         <%= render 'ideas', theme: @theme %>
       </div>
       <div class='col-12'>
-        <%= link_to t("helpers.links.back"), themes_path, class: "btn btn-secondary mt-5" %>
+        <%= link_to t("helpers.links.back"), @request_from || themes_path, class: "btn btn-secondary mt-5" %>
       </div>
     </div>
   </div>
@@ -62,7 +54,7 @@
     <div class='col-lg-6 col-md-8 col-12 m-auto'>
       <div class='col-12'>
          <div class='idea-form p-3'>
-            <%= render "themes/ideas/form", theme: @theme, parent_idea_id: nil %>
+            <%= render "themes/ideas/form", idea: nil, theme: @theme, parent_idea_id: nil %>
          </div>
        </div>
     </div>

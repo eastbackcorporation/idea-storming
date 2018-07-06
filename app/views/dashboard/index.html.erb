@@ -1,25 +1,30 @@
-<% if notice.present? %>
-  <div class="alert alert-primary alert-dismissible fade show" role="alert">
-    <%= notice %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    　<span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-<% end %>
+<%= render 'shared/notice' %>
 
-<div class="pb-4 clearfix">
-  <%= link_to "#{Theme.model_name.human} #{t('helpers.index')}", themes_path, class: "btn btn-outline-primary" %>
-  <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-outline-primary" %>
-  <%= link_to t(".regist_bookmarks"), category_bookmarks_path, class: "btn btn-outline-primary float-right" %>
+<div class="row">
+  <div class="col-12 my-4">
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class='row'>
+        <div class='col-8'>
+          <%= link_to "#{Theme.model_name.human} #{t('helpers.links.new')}", new_theme_path, class: "btn btn-primary mb-2" %>
+          <%= link_to t(".regist_bookmarks"), category_bookmarks_path, class: "btn btn-primary mb-2" %>
+        </div>
+
+        <div class='col-4'>
+          <%= link_to "#{t('helpers.index')}に戻る", themes_path, class: "btn btn-secondary float-right" %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
-  <section class="col-sm-4 col-12">
-    <div class="card">
-      <div class="card-header">
-        <strong><%= t(".owner_themes") %></strong>
-      </div>
+  <section class="col-md-4 col-12 mb-3">
+    <div class="card border-0 shadow-sm">
       <div class="card-body">
+        <h5 class='card-title'><strong><%= t(".owner_themes") %></strong></h5>
         <% if @owner_themes.present? %>
           <%= render "themes", themes: @owner_themes %>
           <small class="float-right">
@@ -32,12 +37,10 @@
     </div>
   </section>
 
-  <section class="col-sm-4 col-12">
-    <div class="card">
-      <div class="card-header">
-        <strong><%= t(".joining_themes") %></strong>
-      </div>
+  <section class="col-md-4 col-12 mb-3">
+    <div class="card border-0 shadow-sm">
       <div class="card-body">
+        <h5 class='card-title'><strong><%= t(".joining_themes") %></strong></h5>
         <% if @joining_themes.present? %>
           <%= render "themes", themes: @joining_themes %>
           <small class="float-right">
@@ -50,12 +53,10 @@
     </div>
   </section>
 
-  <section class="col-sm-4 col-12">
-    <div class="card">
-      <div class="card-header">
-        <strong><%= t(".bookmark_category_themes") %></strong>
-      </div>
+  <section class="col-md-4 col-12 mb-3">
+    <div class="card border-0 shadow-sm">
       <div class="card-body">
+        <h5 class='card-title'><strong><%= t(".bookmark_category_themes") %></strong></h5>
         <% if  @bookmark_category_themes.present? %>
           <%= render "themes", themes:  @bookmark_category_themes %>
           <small class="float-right">

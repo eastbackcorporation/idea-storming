@@ -39,9 +39,7 @@
                                   new_theme_idea_path(@theme, idea_id: idea.id),
                                   remote: true, class: "ml-2 btn btn-primary idea-add-new"%>
                     <% else %>
-                      <a class="ml-2 btn btn-primary" data-toggle="modal" data-target="#sign-in-modal">
-                        <%= t('.register_idea') %>
-                      </a>
+                      <%= link_to t('.register_idea'), new_user_session_path, class: "ml-2 btn btn-primary" %>
                     <% end %>
                   </div>
                 <% end %>
