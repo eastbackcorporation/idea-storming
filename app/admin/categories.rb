@@ -20,13 +20,15 @@ ActiveAdmin.register Category do
     f.inputs do
       input :name
       input :description
+      input :category_type
       input :disp_order
       input :ancestry, as: :hidden if params[:parent_category_id].present?
+      input :color
     end
     f.actions
   end
 
   permit_params do
-    %i[name description disp_order ancestry]
+    %i[name description disp_order ancestry color]
   end
 end

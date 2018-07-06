@@ -8,9 +8,9 @@
             <div class="card-wrapper border-0 shadow-sm">
               <div class="card fat">
                 <div class="card-body">
-                  <h4 class="card-title"><%= t('.sign_up') %></h4>
+                  <h4 class="card-title"><%= t('devise.registrations.new.sign_up') %></h4>
                   <hr />
-                  <%= render "devise/shared/flash_messages" %>
+                  <%= render "users/shared/flash_messages" %>
                   <%= devise_error_messages! %>
 
                   <div class="form-group">
@@ -37,10 +37,10 @@
                   </div>
 
                   <div class="form-group no-margin">
-                    <%= f.submit t(".sign_up"), class: 'btn btn-success btn-block' %>
+                    <%= f.submit t("devise.registrations.new.sign_up"), class: 'btn btn-success btn-block' %>
                   </div>
                   <div class="margin-top20 text-right">
-                    <%= render "devise/shared/links" %>
+                    <%= render "users/shared/links" %>
                   </div>
                 </div>
               </div>
