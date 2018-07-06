@@ -8,8 +8,8 @@
             <div class="card-wrapper boder-0 shadow-sm">
               <div class="card fat">
                 <div class="card-body">
-                  <h4 class="card-title"><%= t('.forgot_your_password') %></h4>
-                  <%= render "devise/shared/flash_messages" %>
+                  <h4 class="card-title"><%= t('devise.passwords.new.forgot_your_password') %></h4>
+                  <%= render "users/shared/flash_messages" %>
                   <%= devise_error_messages! %>
 
                   <div class="form-group">
@@ -17,13 +17,13 @@
                     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'  %>
                   </div>
                   <p class="text-muted">
-                    <small><%= t(".forgot_your_password_annotation") %></small>
+                    <small><%= t("devise.passwords.new.forgot_your_password_annotation") %></small>
                   </p>
                   <div class="form-group no-margin">
-                    <%= f.submit t(".send_me_reset_password_instructions"), class: 'btn btn-success btn-block' %>
+                    <%= f.submit t("devise.passwords.new.send_me_reset_password_instructions"), class: 'btn btn-success btn-block' %>
                   </div>
                   <div class="margin-top20 text-right">
-                    <%= render "devise/shared/links" %>
+                    <%= render "users/shared/links" %>
                   </div>
                 </div>
               </div>

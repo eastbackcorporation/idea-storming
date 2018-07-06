@@ -1,28 +1,35 @@
-<table class="index_table">
-  <thead>
-    <tr>
-      <th><%= Category.human_attribute_name(:name) %></th>
-      <th><%= Category.human_attribute_name(:disp_order) %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% nested_categories(Category.all.arrange(order: :disp_order)).each do |category| %>
+<% CategoryType.all.each do |ct| %>
+  <table class="index_table">
+    <thead>
       <tr>
-        <td>
-          <%= category[0] %>
-        </td>
-
-        <td>
-          <%= category[2] %>
-        </td>
-
-        <td>
-          <%= link_to t('helpers.links.edit'), edit_admin_category_path(category[1]), class: 'btn btn-danger' %>
-          <%= link_to t('admin.categories.tree.create_child'), new_admin_category_path(parent_category_id: category[1]), class: 'btn btn-danger' %>
-          <%= link_to t('helpers.links.destroy'), admin_category_path(category[1]), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
-        </td>
+        <th><%= ct.name %></th>
+        <th><%= Category.human_attribute_name(:disp_order) %></th>
+        <th><%= Category.human_attribute_name(:color) %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% nested_categories(Category.where(category_type_id: ct.id).all.arrange(order: :disp_order)).each do |category| %>
+        <tr>
+          <td>
+            <%= category[0] %>
+          </td>
+
+          <td>
+            <%= category[2] %>
+          </td>
+
+          <td>
+            <div style='width: 1em; height: 1em; background: <%= category[3] %>'></div>
+          </td>
+
+          <td>
+            <%= link_to t('helpers.links.edit'), edit_admin_category_path(category[1]), class: 'btn btn-danger' %>
+            <%= link_to t('admin.categories.tree.create_child'), new_admin_category_path(parent_category_id: category[1]), class: 'btn btn-danger' %>
+            <%= link_to t('helpers.links.destroy'), admin_category_path(category[1]), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
