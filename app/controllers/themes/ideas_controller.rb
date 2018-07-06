@@ -3,7 +3,7 @@
 class Themes::IdeasController < ApplicationController
   before_action :authenticate_user!
 
-  # 新規アイデア
+  # 新規アイディア
   # GET    /themes/new
   def new
     @theme = Theme.find(params[:theme_id])

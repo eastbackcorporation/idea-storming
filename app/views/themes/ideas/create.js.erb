@@ -1,6 +1,14 @@
 <% if @idea.errors.any? %>
-  $('.idea-form').html('<%= j(render "themes/ideas/form", parent_idea_id: @idea&.parent&.id, theme: @theme) %>');
+  $('.idea-form').html('<%= j(render "themes/ideas/form", idea: @idea, parent_idea_id: @idea&.parent&.id, theme: @theme) %>');
 <% else %>
   $('.theme-ideas').html('<%= j(render "themes/ideas", theme: @theme.reload) %>');
   $('.idea-form').slideToggle(100);
+
+  $(".idea-add-new").off('click');
+  $(".idea-add-new").on('click', function(){
+    $('.idea-form').slideToggle(100);
+  });
+
+  $(".idea-add-close").off('click');
+  $(".idea-add-close").on('click', function(){ $('.idea-form').slideToggle(100); });
 <% end %>

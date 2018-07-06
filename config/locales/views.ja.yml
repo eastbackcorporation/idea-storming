@@ -36,19 +36,18 @@ ja:
     update:
       success: テーマを更新しました。
     ideas:
-      register_idea: アイデアを投稿
+      register_idea: アイディアを投稿
       create:
         success: アイディアを登録しました。
       idea:
-        register_idea: ＋ 派生アイデアを投稿
+        register_idea: ＋ 派生アイディアを投稿
         hide_idea: 非表示
     form:
       select_search_type: "%{name}を選択"
       create: テーマを作成
       update: テーマを更新
     themes:
-      idea:
-        create: アイデアを投稿
+      detail: もっと見る
   category_bookmarks:
     show:
       title: カテゴリ/ジャンルのブックマーク

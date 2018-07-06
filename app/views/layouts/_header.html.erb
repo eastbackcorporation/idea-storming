@@ -6,6 +6,7 @@
 
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
+       <% unless current_page?(root_path) %>
           <li>
             <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
               <div class="input-group col-12">
@@ -15,6 +16,7 @@
               </div>
             <% end %>
           </li>
+        <% end %>
         <% if user_signed_in? %>
 
           <li class="nav-item dropdown">

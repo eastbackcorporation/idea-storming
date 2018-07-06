@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :set_request_from
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # 戻るボタン用に、元いたページをセットする。
+  def set_request_from
+    @request_from = session[stored_location_key_for(:user)]
+  end
 
   protected
 
