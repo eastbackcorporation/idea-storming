@@ -16,6 +16,8 @@ class Dashboard::ThemesController < ApplicationController
       @themes = Theme.no_owner(current_user).is_idea_creator(current_user)
     when 'bookmark_category_themes'
       @themes = Theme.bookmark_category(current_user)
+    when 'watch_themes'
+      @themes = current_user.watch_themes
     end
 
     @themes = @themes.page(params[:page])

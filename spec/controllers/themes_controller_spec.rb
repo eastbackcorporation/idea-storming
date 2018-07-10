@@ -146,7 +146,7 @@ RSpec.describe ThemesController, type: :controller do
         category.bookmark_users << FactoryBot.create(:user, email: 'bookmark_users2@examplec.com')
         category.bookmark_users << user # Not Send Mail Owner
 
-        expect(UserMailer).to receive(:notify_regist_theme)
+        expect(UserMailer).to receive(:notify_register_theme)
           .and_return(double('mailer', deliver_later: true)).exactly(2).times
         post :create, params: { theme: valid_attributes }
       end

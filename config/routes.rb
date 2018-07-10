@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     resources :ideas, only: %i[create new], module: 'themes' do
       resources :likes, only: %i[create destroy], module: 'ideas'
     end
+    resources :watches, only: %i[create destroy], module: 'themes'
     resources :tags, only: %i[create destroy], module: 'themes'
   end
 

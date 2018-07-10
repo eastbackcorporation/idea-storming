@@ -35,6 +35,10 @@ class User < ApplicationRecord
   has_many :categories, through: :category_bookmarks
   accepts_nested_attributes_for :category_bookmarks, allow_destroy: true
 
+  has_many :watches, dependent: :destroy, class_name: 'ThemeWatch'
+  has_many :watch_themes, through: :watches, class_name: 'Theme', source: 'theme'
+  accepts_nested_attributes_for :watches, allow_destroy: true
+
   validates :email, presence: true
   validates :nick_name, presence: true
   

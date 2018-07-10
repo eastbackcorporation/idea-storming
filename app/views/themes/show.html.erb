@@ -25,6 +25,12 @@
         <%= link_to t('.edit'), edit_theme_path(@theme), class: "text-white float-right" %>
       <% end %>
     </div>
+
+    <div class='d-flex justify-content-center'>
+      <di id='theme-watch'>
+        <%= render 'themes/watch', theme: @theme %>
+      </div>
+    </div>
   </div>
 </div>
 

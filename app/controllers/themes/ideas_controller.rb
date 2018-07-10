@@ -19,6 +19,12 @@ class Themes::IdeasController < ApplicationController
     @idea.parent = @theme.ideas.find(params[:parent_id]) if params[:parent_id].present?
     @idea.creator = current_user
     @idea.save
+
+    # ウォッチしているユーザにメール通知
+    @theme.watch_users.each do |user|
+      next if user == current_user
+      UserMailer.notify_register_idea(user, @theme).deliver_later
+    end
   end
 
   private
