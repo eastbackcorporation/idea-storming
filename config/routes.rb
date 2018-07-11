@@ -135,6 +135,11 @@ Rails.application.routes.draw do
   end
   resource :category_bookmarks, only: %i[show update]
 
+  namespace :settings do
+    resource :profile, only: %i[edit update] do
+    end
+  end
+
   namespace :admin do
     devise_for :users, controllers: {
       sessions: 'admin/users/sessions',

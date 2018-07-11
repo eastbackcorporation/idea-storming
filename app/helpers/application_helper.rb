@@ -39,4 +39,19 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def avatar_image(user)
+    if user.avatar.attached?
+      return image_tag(user.avatar.variant(resize: "45x45"), class: 'rounded-circle bg-white').html_safe
+    else
+      tag.div class: 'avatar' do
+        tag.div class: "text-center text-white avatar-circle rounded-circle avatar-#{user.avatar_color}" do
+          tag.span do
+            user&.avatar_char
+          end
+        end
+      end.html_safe
+    end
+  end
+
 end

@@ -3,13 +3,13 @@
 <div class="card border-0 shadow-sm mt-4">
   <div class="card-body">
     <div class='row'>
-      <div class='col-2'>
-        <%= image_tag 'default_avatar.png', width: 100, class: "m-x-auto img-fluid rounded-circle", alt: "avatar" %>
+      <div class='col-1 mb-2'>
+        <%= avatar_image(theme.owner) %>
       </div>
 
-      <div class='col-10'>
+      <div class='col-md-11 col-12'>
         <div class='px-2'>
-          <p class=''>
+          <p>
             <strong><%= theme.owner.nick_name %></strong>
             <%= l theme.created_at %></p>
           <%= simple_format theme.description %>
