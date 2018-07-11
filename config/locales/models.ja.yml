@@ -32,6 +32,7 @@ ja:
         sign_in_count:
         unconfirmed_email:
         unlock_token: "ロック解除用のトークン"
+        avatar: プロフィール画像
       theme:
         <<: *shared-attributes
         title: タイトル

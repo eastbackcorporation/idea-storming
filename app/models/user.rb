@@ -36,10 +36,30 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :category_bookmarks, allow_destroy: true
 
   validates :email, presence: true
-
+  validates :nick_name, presence: true
+  
   scope :general_users, lambda {
     where(is_admin: false)
   }
+
+  # プロフィール画像
+  has_one_attached :avatar
+
+  # プロフィール画像未設定時のプロフィール色
+  enum avatar_color:  {
+    blue: 0,
+    green: 1,
+    red: 2,
+    pink: 3,
+    purple: 4,
+    orange: 5,
+    black: 6,
+    brown: 7
+  }
+
+  before_create do
+    self.avatar_color = (0...self.class.avatar_colors.count).to_a.sample
+  end
 
   def admin?
     is_admin?
@@ -47,5 +67,9 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def avatar_char
+    nick_name.strip[0].upcase
   end
 end

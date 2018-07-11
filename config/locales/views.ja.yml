@@ -2,8 +2,8 @@ ja:
   layouts:
     header:
       dashboard: ダッシュボード
+      settings: 設定
       are_you_surel_log_out: ログアウトしてもよろしいですか？
-
   dashboard:
    index:
     title: ダッシュボード
@@ -12,6 +12,12 @@ ja:
     joining_themes: 参加しているテーマ
     bookmark_category_themes: ブックマークカテゴリのテーマ
     blank: "%{name}はありません"
+  settings:
+    profiles:
+      edit:
+        title: プロフィール設定
+      update:
+        success: プロフィールを更新しました。
   themes:
     index:
       please_login: テーマを投稿する
