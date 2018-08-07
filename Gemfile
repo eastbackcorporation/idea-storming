@@ -92,7 +92,8 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
 
-gem 'google-cloud-storage', '~> 1.3', require: false
+#gem 'google-cloud-storage', '~> 1.3', require: false
+gem "aws-sdk-s3", require: false
 gem 'mini_magick'
 
 gem 'appengine', require: false
