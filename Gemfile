@@ -65,6 +65,13 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
+
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano3-puma',   require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano3-delayed-job', '~> 1.0', require: false
 end
 
 group :test do
@@ -85,7 +92,8 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
 
-gem 'google-cloud-storage', '~> 1.3', require: false
+#gem 'google-cloud-storage', '~> 1.3', require: false
+gem "aws-sdk-s3", require: false
 gem 'mini_magick'
 
 gem 'appengine', require: false
@@ -93,3 +101,4 @@ gem 'font-awesome-rails'
 
 gem 'delayed_job_active_record'
 gem 'foreman'
+gem 'daemons'
