@@ -12,9 +12,9 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require_tree .
+// require_tree .
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
-  $('.dropdown-toggle').dropdown()
+  $('.dropdown-toggle').dropdown();
 })

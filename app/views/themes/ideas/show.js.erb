@@ -1,0 +1,5 @@
+<% @idea.children.each do |child| %>
+  $('.idea_<%= @idea.id %>_sub').append('<%= j(render('themes/ideas/idea', idea: child, sub_ideas: nil)) %>');
+<% end %>
+
+$('.idea_<%= @idea.id %>').html('<%= j(render('themes/ideas/plus_minus', idea: @idea, theme: @theme, minus: true)) %>')

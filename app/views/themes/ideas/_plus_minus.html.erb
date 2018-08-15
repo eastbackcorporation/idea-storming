@@ -1,0 +1,11 @@
+<div class='<%= idea.children.present? ? 'themes-ideas-idea-branch-mark' : 'd-none' %>'>
+  <% if minus.present? %>
+    <%= link_to theme_idea_hide_path(@theme, idea), remote: true do %>
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    <% end %>
+  <% else %>
+    <%= link_to theme_idea_path(@theme, idea), remote: true do %>
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</div>

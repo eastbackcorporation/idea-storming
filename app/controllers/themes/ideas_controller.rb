@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Themes::IdeasController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create]
 
   # 新規アイディア
   # GET    /themes/new
@@ -25,6 +25,18 @@ class Themes::IdeasController < ApplicationController
       next if user == current_user
       UserMailer.notify_register_idea(user, @theme).deliver_later
     end
+  end
+
+  #=== アイデアを表示する
+  def show
+    @theme = Theme.find(params[:theme_id])
+    @idea = Idea.find(params[:id])
+  end
+
+  #=== アイデアを非表示にする
+  def hide
+    @theme = Theme.find(params[:theme_id])
+    @idea = Idea.find(params[:idea_id])
   end
 
   private

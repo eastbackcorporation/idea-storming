@@ -41,7 +41,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true
   validates :nick_name, presence: true
-  
+
   scope :general_users, lambda {
     where(is_admin: false)
   }

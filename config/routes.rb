@@ -123,7 +123,8 @@ Rails.application.routes.draw do
   }
 
   resources :themes, only: %i[index show new create edit update] do
-    resources :ideas, only: %i[create new], module: 'themes' do
+    resources :ideas, only: %i[create new show], module: 'themes' do
+      get :hide
       resources :likes, only: %i[create destroy], module: 'ideas'
     end
     resources :watches, only: %i[create destroy], module: 'themes'

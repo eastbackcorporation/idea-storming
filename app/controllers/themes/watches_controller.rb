@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Themes::WatchesController < ApplicationController
   def create
     @theme = Theme.find_by(id: params[:theme_id])
