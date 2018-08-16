@@ -4,14 +4,15 @@
   <div class="card-body">
     <div class='row'>
       <div class='col-1 mb-2'>
-        <%= avatar_image(theme.owner) %>
+        <%= avatar_image(user: theme.owner) %>
       </div>
 
       <div class='col-md-11 col-12'>
         <div class='px-2'>
           <p>
             <strong><%= theme.owner.nick_name %></strong>
-            <%= l theme.created_at %></p>
+            <%= l theme.created_at %>
+          </p>
           <%= simple_format theme.description %>
         </div>
         <% if theme.images.present?%>
@@ -45,5 +46,5 @@
 </div>
 
 <div class='themes-ideas-idea-tree'>
-  <%= nested_ideas theme.ideas.includes(:creator).arrange(order: :created_at) %>
+  <%= nested_ideas theme.ideas.includes(:creator).arrange(order: { created_at: :desc }) %>
 </div>

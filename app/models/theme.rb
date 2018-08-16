@@ -24,6 +24,10 @@ class Theme < ApplicationRecord
   accepts_nested_attributes_for :theme_tags, allow_destroy: true
   has_many :tags, through: :theme_tags
 
+  has_many :watches, dependent: :destroy, class_name: 'ThemeWatch'
+  accepts_nested_attributes_for :watches, allow_destroy: true
+  has_many :watch_users, through: :watches, class_name: 'User', source: 'user'
+
   belongs_to :owner, class_name: 'User'
   belongs_to :category
 
@@ -34,7 +38,7 @@ class Theme < ApplicationRecord
     # 登録カテゴリをブックマークしているユーザに通知する
     category.bookmark_users.each do |bookmark_user|
       next if owner == bookmark_user
-      UserMailer.notify_regist_theme(bookmark_user, self).deliver_later
+      UserMailer.notify_register_theme(bookmark_user, self).deliver_later
     end
   end
 
@@ -104,5 +108,12 @@ class Theme < ApplicationRecord
     errors.add(:tags, :invalid)
     logger.error e.backtrace
     false
+  end
+
+  # 引数で渡されたユーザのウォッチ
+  # @param [User] user
+  # @return [nil/ThemeWatch]
+  def watch_from(user)
+    watches.find_by(user_id: user&.id)
   end
 end

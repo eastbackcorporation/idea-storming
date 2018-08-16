@@ -25,7 +25,14 @@ class ThemesController < ApplicationController
 
   # GET /themes/1
   # GET /themes/1.json
-  def show; end
+  def show
+    if params[:current_idea_id].present?
+      @ideas = Idea.where(id: params[:current_idea_id])
+      @current_idea = @ideas.first
+    else
+      @ideas = @theme.ideas
+    end
+  end
 
   # GET /themes/new
   def new

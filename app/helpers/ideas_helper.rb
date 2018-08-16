@@ -12,13 +12,18 @@ module IdeasHelper
   end
 
   def last_idea?(idea)
+    return true  if leaf_idea?(idea) && first_sibling_idea?(idea)
+    return true  if only_child_idea?(idea)
     return false if !last_sibling_idea?(idea) && leaf_idea?(idea)
-    return true  if last_sibling_idea?(idea)
-    return true  if leaf_idea?(idea)
+    return true  if first_sibling_idea?(idea)
     false
   end
 
   private
+
+  def only_child_idea?(idea)
+    idea.siblings.count == 1
+  end
 
   def first_sibling_idea?(idea)
     if idea.parent.blank?

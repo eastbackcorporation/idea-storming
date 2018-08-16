@@ -1,0 +1,255 @@
+/*!
+ * Bootstrap v4.1.1 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+
+
+@import "bootstrap/functions";
+@import "bootstrap_variables";
+// @import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+@import "bootstrap/code";
+@import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+@import "bootstrap/transitions";
+@import "bootstrap/dropdown";
+@import "bootstrap/button-group";
+@import "bootstrap/input-group";
+@import "bootstrap/custom-forms";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+@import "bootstrap/breadcrumb";
+@import "bootstrap/pagination";
+@import "bootstrap/badge";
+@import "bootstrap/jumbotron";
+@import "bootstrap/alert";
+@import "bootstrap/progress";
+@import "bootstrap/media";
+@import "bootstrap/list-group";
+@import "bootstrap/close";
+@import "bootstrap/modal";
+@import "bootstrap/tooltip";
+@import "bootstrap/popover";
+@import "bootstrap/carousel";
+@import "bootstrap/utilities";
+@import "bootstrap/print";
+@import "bootstrap_custom";
+
+
+.card-columns {
+  @include media-breakpoint-only(sm) {
+    column-count: 1;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
+}
+
+.bootstrap-tagsinput input {
+  width: 15em !important;
+}
+
+
+.themes-ideas-theme {
+  @include media-breakpoint-down(sm) {
+    min-width: 22rem;
+  }
+  @include media-breakpoint-only(md) {
+    min-width: 42rem;
+    //max-width: 42rem;
+  }
+  @include media-breakpoint-only(lg) {
+    min-width: 52rem;
+    //max-width: 52rem;
+  }
+  @include media-breakpoint-only(xl) {
+    min-width: 52rem;
+    //max-width: 52rem;
+  }
+}
+
+
+.themes-index-cover-search {
+  background: rgba(0,0,0,0.03);
+  border-radius: 1.5rem !important;
+}
+
+.themes-index-cover {
+  background-image: url(<%= image_path('background.png') %>), linear-gradient(0deg, #00dcc9, #5983e8);
+  position: relative;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  background-position: center 5%;
+}
+
+.themes-index-category-type-select {
+  .themes-index-category-type-select-btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.themes-index-add-theme {
+  width: 8rem;
+  height: 8rem;
+}
+
+.themes-index-add-theme-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.themes-index-theme-no-set-image {
+  div {
+    height: 8rem;
+    text-decoration: none;
+    background-image: url(<%= image_path('background_sm.png') %>);
+    position: relative;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    background-size: cover;
+    background-position: center 50%;
+
+    h4 {
+      text-decoration: none;
+      text-shadow: #3c3c3c 1px 1px 0px, #3c3c3c -1px 1px 0px,
+             #3c3c3c 1px -1px 0px, #3c3c3c -1px -1px 0px;
+    }
+  }
+}
+
+.themes-index-theme-no-set-image:hover {
+  text-decoration: none !important;
+}
+
+.theme-ideas {
+}
+
+.themes-ideas-idea-tree {
+  li,
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    @include media-breakpoint-down(sm) {
+      min-width: 22rem;
+    }
+    @include media-breakpoint-only(md) {
+      min-width: 42rem;
+      max-width: 42rem;
+    }
+    @include media-breakpoint-only(lg) {
+      min-width: 52rem;
+      max-width: 52rem;
+    }
+    @include media-breakpoint-only(xl) {
+      min-width: 52rem;
+      max-width: 52rem;
+    }
+  }
+
+  ul {
+    position: relative;
+    margin-left: 1.5rem;
+  }
+
+  ul:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    border-left: .5rem solid #ccc;
+  }
+
+
+  li  {
+    position:relative;
+    margin:0;
+  }
+
+  li:before {
+    content:"";
+    display:block;
+    position:absolute;
+    top: 0;
+    left: 0;
+    width:8em;
+    height:0;
+
+    border-top: .5rem solid #ccc;
+
+  }
+
+  li:last-child:before {
+    top: 3rem;
+    bottom: 0;
+    height: auto;
+
+
+  }
+
+  li.themes-ideas-idea-last:before {
+    background: #f2f8f9;
+  }
+
+  .themes-ideas-idea-wrapper {
+    margin-left: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .themes-ideas-idea-branch-mark:hover {
+    border: solid 2px orange;
+  }
+
+  .themes-ideas-idea-branch-mark {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: solid 2px #a7a7bd;
+    background: white;
+    border-radius: 1rem;
+    position: absolute;
+    left: -.5rem;
+    top: 2.5rem;
+    z-index: 1;
+
+        i {
+            position: absolute;
+            top: .2rem;
+            left: .2rem;
+          }
+
+
+
+  }
+}
+
+.card-header .fa {
+  transition: .3s transform ease-in-out;
+}
+.card-header .collapsed .fa {
+  transform: rotate(90deg);
+}

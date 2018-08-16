@@ -7,7 +7,6 @@
     </div>
 
     <div class='d-flex justify-content-center'>
-
       <p class="text-white pl-2"><%= Theme.human_attribute_name :category %>:
         <%= @theme.category.name %></p>
 
@@ -25,29 +24,27 @@
         <%= link_to t('.edit'), edit_theme_path(@theme), class: "text-white float-right" %>
       <% end %>
     </div>
+
+    <div class='d-flex justify-content-center'>
+      <div id='theme-watch'>
+        <%= render 'themes/watch', theme: @theme %>
+      </div>
+    </div>
   </div>
 </div>
 
 <%= render 'shared/notice' %>
 
-<div class='row'>
+<div class='row'  style='overflow: auto;'>
   <div class='col-lg-10 col-12 m-auto'>
-    <div class=''>
       <div class='theme-ideas'>
         <%= render 'ideas', theme: @theme %>
       </div>
       <div class='col-12'>
-        <%= link_to t("helpers.links.back"), @request_from || themes_path, class: "btn btn-secondary mt-5" %>
+        <%= link_to t("helpers.links.back"), request_from_path(themes_path), class: "btn btn-secondary mt-5" %>
       </div>
-    </div>
-  </div>
-
-
   </div>
 </div>
-
-
-
 
 <div class="idea-form-wrapper fixed-bottom">
   <div class='row'>

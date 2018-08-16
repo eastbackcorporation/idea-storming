@@ -40,12 +40,29 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def avatar_image(user)
+  def request_from_path(default_path)
+    current_page?(@request_from) ? default_path : (@request_from || default_path)
+  end
+
+  def avatar_image(**opts)
+    default_opts = {
+      user: nil,
+      mini_icon: false
+    }
+
+    opts = default_opts.merge(opts)
+    raise 'user is not presented!' if opts[:user].blank?
+    user = opts[:user]
     if user.avatar.attached?
-      return image_tag(user.avatar.variant(resize: "45x45"), class: 'rounded-circle bg-white').html_safe
+      image_tag(user.avatar.variant(resize: '45x45'), class: 'rounded-circle bg-white').html_safe
     else
       tag.div class: 'avatar' do
-        tag.div class: "text-center text-white avatar-circle rounded-circle avatar-#{user.avatar_color}" do
+        klass_name = if opts[:mini_icon].present?
+                       "text-center text-white avatar-circle-mini rounded-circle avatar-#{user.avatar_color}"
+                     else
+                       "text-center text-white avatar-circle rounded-circle avatar-#{user.avatar_color}"
+                     end
+        tag.div class: klass_name do
           tag.span do
             user&.avatar_char
           end
@@ -53,5 +70,4 @@ module ApplicationHelper
       end.html_safe
     end
   end
-
 end

@@ -28,6 +28,9 @@ class Idea < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
+  # 引数で渡されたユーザのライク
+  # @param [User] user
+  # @return [nil/IdeaLike]
   def like_from(user)
     likes.find_by(user_id: user&.id)
   end

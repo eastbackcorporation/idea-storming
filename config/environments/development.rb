@@ -88,4 +88,8 @@ Rails.application.configure do
 
   # config.active_job.queue_adapter = :inline
   config.active_job.queue_adapter = :delayed_job
+
+  config.action_mailer.delivery_method = :letter_opener_web
+  # If not everyone on the team is using vagrant
+  config.action_mailer.delivery_method = ENV['USER'] == 'vagrant' ? :letter_opener_web : :letter_opener
 end

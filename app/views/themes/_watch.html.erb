@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+  <% watch = theme.watch_from(current_user) %>
+  <% if watch.present? %>
+     <%= link_to "ウォッチ済", theme_watch_path(theme, theme_id: theme.id), method: :delete, class: 'btn btn-sm btn-warning', data: { confirm: 'ウォッチを解除します。よろしいですか？'}, remote: true %>
+  <% else %>
+    <%= form_with model: ThemeWatch.new, url: theme_watches_path(theme), method: :post, remote: true do |f|%>
+      <%= f.submit "ウォッチ登録", class: 'btn btn-sm btn-warning' %>
+    <% end %>
+  <% end %>
+<% end %>

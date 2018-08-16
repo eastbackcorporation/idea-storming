@@ -33,7 +33,7 @@
 
         <div class='d-flex justify-content-center'>
           <div class="tab-content" id="pills-tabContent">
-            <% category_types.all.each_with_index do |ct, index| %>
+            <% category_types.includes(:categories).all.each_with_index do |ct, index| %>
               <div class="tab-pane fade show <%= 'active' if index.zero? %>" id="pills-<%= ct.type_name %>" role="tabpanel" aria-labelledby="pills-<%= ct.type_name %>-tab">
                 <div class='col-lg-8 col-md-9 col-sm-10 col-12 m-auto'>
                   <div class='row m-auto'>
@@ -91,7 +91,7 @@
 
 <div class='row'>
   <div class='col-12'>
-    <%= render "themes", themes: @themes.includes(:category, :images_attachments) %>
+    <%= render "themes", themes: @themes.includes({category: :category_type}, :images_attachments) %>
   </div>
 </div>
 

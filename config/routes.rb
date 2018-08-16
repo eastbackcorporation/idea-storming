@@ -123,9 +123,11 @@ Rails.application.routes.draw do
   }
 
   resources :themes, only: %i[index show new create edit update] do
-    resources :ideas, only: %i[create new], module: 'themes' do
+    resources :ideas, only: %i[create new show], module: 'themes' do
+      get :hide
       resources :likes, only: %i[create destroy], module: 'ideas'
     end
+    resources :watches, only: %i[create destroy], module: 'themes'
     resources :tags, only: %i[create destroy], module: 'themes'
   end
 
@@ -148,4 +150,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'themes#index'
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

@@ -10,7 +10,7 @@ RSpec.describe Dashboard::ThemesController, type: :controller do
 
   describe 'GET #index' do
     before do
-      allow(UserMailer).to receive(:notify_regist_theme).and_return(double('mailer', deliver_later: true))
+      allow(UserMailer).to receive(:notify_register_theme).and_return(double('mailer', deliver_later: true))
     end
 
     let!(:owner_themes) do
