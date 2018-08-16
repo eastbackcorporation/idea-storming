@@ -40,6 +40,10 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def request_from_path(default_path)
+    current_page?(@request_from) ? default_path : (@request_from || default_path)
+  end
+
   def avatar_image(**opts)
     default_opts = {
       user: nil,
@@ -53,11 +57,11 @@ module ApplicationHelper
       image_tag(user.avatar.variant(resize: '45x45'), class: 'rounded-circle bg-white').html_safe
     else
       tag.div class: 'avatar' do
-        if opts[:mini_icon].present?
-          klass_name = "text-center text-white avatar-circle-mini rounded-circle avatar-#{user.avatar_color}"
-        else
-          klass_name = "text-center text-white avatar-circle rounded-circle avatar-#{user.avatar_color}"
-        end
+        klass_name = if opts[:mini_icon].present?
+                       "text-center text-white avatar-circle-mini rounded-circle avatar-#{user.avatar_color}"
+                     else
+                       "text-center text-white avatar-circle rounded-circle avatar-#{user.avatar_color}"
+                     end
         tag.div class: klass_name do
           tag.span do
             user&.avatar_char

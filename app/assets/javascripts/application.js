@@ -11,10 +11,12 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require spin
+//= require jquery.spin
 //= require activestorage
 // require_tree .
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
   $('.dropdown-toggle').dropdown();
-})
+});
