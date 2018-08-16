@@ -49,6 +49,7 @@ group :development do
   gem 'bullet'
   gem 'letter_opener_web', '~> 1.0'
   gem 'rack-mini-profiler', require: false
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development, :test do
