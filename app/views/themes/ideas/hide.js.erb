@@ -1,2 +1,3 @@
 $('.idea_<%= @idea.id %>_sub').empty();
 $('.idea_<%= @idea.id %>').html('<%= j(render('themes/ideas/plus_minus', idea: @idea, theme: @theme, minus: false)) %>')
+$('#overlay').hide();

@@ -40,6 +40,10 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def request_from_path(default_path)
+    current_page?(@request_from) ? default_path : (@request_from || default_path) 
+  end
+
   def avatar_image(**opts)
     default_opts = {
       user: nil,

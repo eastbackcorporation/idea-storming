@@ -17,7 +17,7 @@
       <% end %>
 
       <div class="form-group">
-        <% category_types = CategoryType.all %>
+        <% category_types = CategoryType.includes(:categories).all %>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <% category_types.each_with_index do |ct, idx| %>
             <li class="nav-item">
@@ -108,8 +108,6 @@
         <%= form.submit button_name, class: "btn btn-success " %>
       </div>
     <% end %>
-
-    <%= link_to t("helpers.links.cancel"), @request_from || themes_path, class: "btn btn-secondary ml-3" %>
-
+    <%= link_to t("helpers.links.cancel"), request_from_path(themes_path), class: "btn btn-secondary ml-3" %>
   </div>
 </div>

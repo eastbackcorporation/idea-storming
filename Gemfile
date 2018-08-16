@@ -48,6 +48,7 @@ group :development do
   gem 'annotate'
   gem 'bullet'
   gem 'rack-mini-profiler', require: false
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development, :test do
@@ -102,3 +103,6 @@ gem 'font-awesome-rails'
 gem 'delayed_job_active_record'
 gem 'foreman'
 gem 'daemons'
+
+# spinner
+gem 'spinjs-rails'
