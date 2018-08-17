@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='col-12 py-5 bg-primary themes-index-cover'>
+  <div class='col-12 bg-primary themes-index-cover'>
 
     <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
     <div>
@@ -58,7 +58,7 @@
         </div>
 
 
-        <div class="input-group col-10 col-md-6 col-lg-4 mt-5 mx-auto">
+        <div class="input-group col-11 col-sm-8 col-md-6 col-lg-5 mt-5 mx-auto">
           <%= text_field_tag :search_content, params[:search_content], class:"form-control form-control-lg", placeholder: t(".search_placeholder_html") %>
           <span class="input-group-append">
             <%= f.submit t("helpers.submit.search"), class:"btn btn-warning btn-lg text-white", name: nil %>
@@ -97,14 +97,14 @@
 
 <div class='row'>
   <div class='col-12'>
-    <div class='d-flex justify-content-center p-5'>
+    <div class='d-flex justify-content-center'>
       <%= paginate @themes %>
     </div>
   </div>
 </div>
 
 <div class="fixed-bottom">
-  <div class='themes-index-add-theme-corner m-5'>
+  <div class='themes-index-add-theme-corner m-3'>
     <div class="actions text-white">
       <%= link_to new_theme_path, class: "btn btn-danger rounded-circle themes-index-add-theme d-flex align-items-center justify-content-center", data: { toggle: "tooltip", placement: "top", title: t('.create_new_theme') } do %>
         <%= fa_icon "plus", class: 'fa-4x' %>
