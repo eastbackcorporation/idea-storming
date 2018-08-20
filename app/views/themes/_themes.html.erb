@@ -1,8 +1,8 @@
 <div class="card-columns">
   <% themes.each do |theme| %>
     <div class="card border-0 rounded shadow-sm">
-      <% if theme.images.present? && theme.images.first.variable? %>
-        <% image = theme.images.first %>
+      <% if theme.main_image.present? && theme.main_image.variable? %>
+        <% image = theme.main_image %>
         <%= link_to theme_path(theme) do %>
           <%= image_tag image.variant(resize: "400x300"), class: "img-fluid" %>
         <% end %>

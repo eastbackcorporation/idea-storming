@@ -2,7 +2,7 @@
   <div class='col-12 bg-primary themes-index-cover'>
 
     <%= form_with(url: themes_path, local:true, method: :get, class: "row") do |f| %>
-    <div>
+    <div class='pb-3'>
       <div class='themes-index-cover-search py-5 m-auto col-lg-8 col-lg-10 col-12'>
         <div class='d-flex justify-content-center'>
           <div class="actions text-white">
@@ -91,7 +91,7 @@
 
 <div class='row'>
   <div class='col-12'>
-    <%= render "themes", themes: @themes.includes({category: :category_type}, :images_attachments) %>
+    <%= render "themes", themes: @themes.includes({category: :category_type}) %>
   </div>
 </div>
 
