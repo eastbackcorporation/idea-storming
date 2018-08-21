@@ -37,7 +37,7 @@
               <div class='row'>
                 <div class='col'>
                   <%= f.submit t('helpers.submit.update'), class: 'btn btn-success' %>
-                  <%= link_to t("helpers.links.cancel"), @request_from || themes_path, class: "btn btn-secondary ml-3" %>
+                  <%= link_to t("helpers.links.cancel"), request_from_path(themes_path), class: "btn btn-secondary ml-3" %>
                 </div>
               </div>
             <% end %>

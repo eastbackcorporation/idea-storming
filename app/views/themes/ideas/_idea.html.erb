@@ -1,59 +1,69 @@
 <ul>
-  <div class='<%= 'themes-ideas-idea-branch-mark' if first_idea?(idea) %>'></div>
+  <% # プラス・マイナスボタン %>
+  <div class='idea_<%= idea.id %>'>
+    <%= render 'themes/ideas/plus_minus', idea: idea, theme: @theme, minus: false %>
+  </div>
+
   <li class='<%= 'themes-ideas-idea-last' if last_idea?(idea) %>'>
     <div class='themes-ideas-idea-wrapper'>
       <div class="card border-0 shadow-sm">
-        <div class="card-body">
+
+        <div class="card-header bg-white">
           <div class='row'>
-            <div class='col-1'>
-              <div class="mb-2">
-                <%= avatar_image(idea.creator) %>
-              </div>
+            <div class='col-sm-1 col-2'>
+              <%= avatar_image(user: idea.creator, mini_icon: true) %>
             </div>
-
-            <div class='col-md-11 col-12'>
-              <div class='idea clearfix'>
-                <% if idea.is_display? %>
-                  <div class='row'>
-                    <div class='float-left col'>
-                      <strong><%= idea.creator.nick_name %></strong>
-                      <br />
-                      <small><%= l idea.updated_at %></small>
-                    </div>
-                    <div id='<%= "idea-like-#{idea.id}" %>' class='float-right mr-3'>
-                      <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
-                    </div>
-                  </div>
-                  <strong>
-                    <%= idea.title %>
-                  </strong>
-                <% else %>
-                  <font color='red'><%= t(".hide_idea") %></font>
-                <% end %>
-
-                <% if idea.is_display? %>
-                  <p><%= simple_format idea.description %></p>
-
-
-                  <div class="float-right">
-                    <% if user_signed_in? %>
-                      <%= link_to t('.register_idea'),
-                                  new_theme_idea_path(@theme, idea_id: idea.id),
-                                  remote: true, class: "ml-2 btn btn-primary idea-add-new"%>
-                    <% else %>
-                      <%= link_to t('.register_idea'), new_user_session_path, class: "ml-2 btn btn-primary" %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
+            <div class='col-sm-11 col-10'>
+              <h5>
+                <a class="collapsed d-block"
+                   data-toggle="collapse"
+                   href="#collapse-collapsed_<%= idea.id %>"
+                   aria-expanded="true"
+                   aria-controls="collapse-collapsed_<%= idea.id %>" id="heading-collapsed_<%= idea.id %>">
+                  <i class="fa fa-chevron-down pull-right"></i>
+                  <%= truncate idea.title %>
+                </a>
+              </h5>
             </div>
-
           </div>
+        </h5>
 
+        <div id="collapse-collapsed_<%= idea.id %>" class="collapse" aria-labelledby="heading-collapsed_<%= idea.id %>">
+            <div class="card-body">
+              <% if idea.is_display? %>
+                <div class='row'>
+                  <div class='float-left col'>
+                    <strong><%= idea.creator.nick_name %></strong>
+                    <small><%= l idea.updated_at %></small>
+                  </div>
+                  <div id='<%= "idea-like-#{idea.id}" %>' class='float-right mr-3'>
+                    <%= render 'themes/ideas/like', idea: idea, theme: @theme %>
+                  </div>
+                </div>
+              <% else %>
+                <font color='red'><%= t(".hide_idea") %></font>
+              <% end %>
+
+              <% if idea.is_display? %>
+                <p><%= simple_format idea.description %></p>
+
+
+                <div class="float-right">
+                  <% if user_signed_in? %>
+                    <%= link_to t('.register_idea'),
+                                new_theme_idea_path(@theme, idea_id: idea.id),
+                                remote: true, class: "ml-2 btn btn-primary idea-add-new"%>
+                  <% else %>
+                    <%= link_to t('.register_idea'), new_user_session_path, class: "ml-2 btn btn-primary" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
         </div>
       </div>
     </div>
 
-    <%= sub_ideas if sub_ideas.present? %>
+    <div class='idea_<%= idea.id %>_sub'>
+    </div>
   </li>
 </ul>

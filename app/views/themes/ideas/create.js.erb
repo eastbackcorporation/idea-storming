@@ -1,7 +1,26 @@
 <% if @idea.errors.any? %>
+  <% # バリデーションに失敗した場合はエラーメッセージを表示 %>
   $('.idea-form').html('<%= j(render "themes/ideas/form", idea: @idea, parent_idea_id: @idea&.parent&.id, theme: @theme) %>');
 <% else %>
-  $('.theme-ideas').html('<%= j(render "themes/ideas", theme: @theme.reload) %>');
+  <% # 親になるアイディアがある場合 %>
+  <% if @idea.parent.present? %>
+    <% # 親にマイナスアイコンをつける。（子パネルを表示している状態） %>
+    $('.idea_<%= @idea.parent&.id %>').html('<%= j(render "themes/ideas/plus_minus", idea: @idea.parent, theme: @theme, minus: true) %>');
+
+    <% # 親パネルが開いてない状態で子を追加した場合は、子パネルを開いた状態にする。 %>
+    if($('.idea_<%= @idea.parent&.id %>_sub > ul > li').length === 0) {
+      <% @idea.parent.children.order(created_at: :desc).includes(:creator).each do |child| %>
+        $('.idea_<%= @idea.parent&.id %>_sub').append('<%= j(render "themes/ideas/idea", theme: @theme.reload, idea: child) %>');
+      <% end %>
+    } else {
+      $('.idea_<%= @idea.parent&.id %>_sub').prepend('<%= j(render "themes/ideas/idea", theme: @theme.reload, idea: @idea) %>');
+    }
+  <% else %>
+  <% # 親になるアイディアがない場合（ルート） %>
+    $('.themes-ideas-idea-tree').prepend('<%= j(render "themes/ideas/idea", theme: @theme.reload, idea: @idea) %>');
+  <% end %>
+
+  <% #フォームを隠す %>
   $('.idea-form').slideToggle(100);
 
   $(".idea-add-new").off('click');
