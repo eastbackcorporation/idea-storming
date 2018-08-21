@@ -106,3 +106,6 @@ gem 'foreman'
 
 # spinner
 gem 'spinjs-rails'
+
+#webpacker
+gem 'webpacker', '~> 3.5'

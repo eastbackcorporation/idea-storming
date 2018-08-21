@@ -66,6 +66,18 @@ bower.json
 # Ignore node_modules
 node_modules/
 
+/.bundle
+/pkg
+/test/test_app/log
+node_modules
+.byebug_history
+/test/test_app/tmp
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
+/log
+
+
 #############################################################################
  macOS用
 #############################################################################
@@ -103,3 +115,8 @@ Temporary Items
 #############################################################################
 
 .python-version
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

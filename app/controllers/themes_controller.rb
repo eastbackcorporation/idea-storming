@@ -26,11 +26,12 @@ class ThemesController < ApplicationController
   # GET /themes/1
   # GET /themes/1.json
   def show
-    if params[:current_idea_id].present?
-      @ideas = Idea.where(id: params[:current_idea_id])
-      @current_idea = @ideas.first
+    @ideas = @theme.ideas
+
+    if true
+      render :mindmap, layout: false
     else
-      @ideas = @theme.ideas
+      render :show
     end
   end
 
