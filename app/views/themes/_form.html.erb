@@ -82,15 +82,35 @@
 
       <div class="form-group col-8 mb-4">
         <div class="form-group border p-2 row">
+          <%= form.hidden_field :main_image_id %>
+
           <%= form.label :images_and_annotation %>
           <%= form.file_field :images, multiple: true, accept:"image/*", class: "form-control" %>
 
           <% form.object.images.includes(:blob).each do |image| %>
-            <div class="col-2 m-2 p-2 border">
-              <%= form.fields_for :images_attachments, image do |fields| %>
-                <label><%= fields.check_box :_destroy %> <%= t("helpers.links.destroy") %></label>
-              <% end %>
-              <br/>
+            <div id="image_<%= image.id %>" class="col-2 m-2 p-2 border">
+              <div class='row'>
+                <div class='col'>
+                  <%= form.fields_for :images_attachments, image do |ff| %>
+                    <div class='float-right'>
+                      <%= ff.check_box :_destroy, id: "image_#{image.id}_destroy_checkbox", class: 'd-none' %>
+                      <%= link_to '#', class: 'text-danger image-delete', data: { 'image-id': image.id } do %>
+                        <%= fa_icon 'times' %>
+                      <% end %>
+                    </div>
+
+                    <div class='float-left'>
+                      <% color = '' %>
+                      <% color = 'active' if theme.main_image_id == image.id %>
+                      <%= link_to '#', class: 'image-star', data: { 'image-id': image.id } do %>
+                        <%= fa_icon 'star', class: color %>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+                </div>
+              </div>
+
               <% if image.variable? %>
                 <%= link_to rails_blob_path(image), rel: "lightbox", class: "d-inline-block m-1" do %>
                   <%= image_tag image.variant(resize: "200x160"), class: "img-fluid" %>

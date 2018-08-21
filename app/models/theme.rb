@@ -15,6 +15,7 @@
 
 class Theme < ApplicationRecord
   has_many_attached :images
+  belongs_to :main_image, optional: true, foreign_key: :main_image_id, class_name: 'ActiveStorage::Attachment'
 
   accepts_nested_attributes_for :images_attachments, allow_destroy: true
 
@@ -33,6 +34,17 @@ class Theme < ApplicationRecord
 
   validates :title, presence: true
   validates :category, presence: true
+
+  before_save do
+    # メイン画像が設定されていない場合、一番最初に登録した画像をメイン画像に設定
+    if self.main_image.blank?
+      self.main_image = self.images.first
+    # メイン画像が設定されていて、メイン画像が削除される場合、
+    # メイン画像を除いた画像で一番最初に登録した画像をメイン画像に設定
+    elsif self.images&.select {|a| a._destroy }&.include?(self.main_image)
+      self.main_image = self.images&.select {|a| !a._destroy }&.first
+    end
+  end
 
   after_commit on: :create do
     # 登録カテゴリをブックマークしているユーザに通知する
