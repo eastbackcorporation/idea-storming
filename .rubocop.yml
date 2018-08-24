@@ -13,6 +13,7 @@ AllCops:
     - 'config/routes.rb'
     - 'Guardfile'
     - 'app/helpers/ancestry_helper.rb'
+    - node_modules/**/*
 
 # Style
 

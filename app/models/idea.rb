@@ -34,4 +34,12 @@ class Idea < ApplicationRecord
   def like_from(user)
     likes.find_by(user_id: user&.id)
   end
+
+  def mind_map_meta
+    @mind_map_meta ||= MindMap::Meta.new
+  end
+
+  def mind_map_root?
+    false
+  end
 end

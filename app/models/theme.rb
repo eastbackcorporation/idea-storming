@@ -4,13 +4,14 @@
 #
 # Table name: themes
 #
-#  id          :bigint(8)        not null, primary key
-#  title       :string(255)      not null
-#  description :text(65535)
-#  owner_id    :bigint(8)        not null
-#  category_id :bigint(8)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id            :bigint(8)        not null, primary key
+#  title         :string(255)      not null
+#  description   :text(65535)
+#  owner_id      :bigint(8)        not null
+#  category_id   :bigint(8)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  main_image_id :bigint(8)
 #
 
 class Theme < ApplicationRecord
@@ -35,14 +36,16 @@ class Theme < ApplicationRecord
   validates :title, presence: true
   validates :category, presence: true
 
+  has_one :mind_map
+
   before_save do
     # メイン画像が設定されていない場合、一番最初に登録した画像をメイン画像に設定
-    if self.main_image.blank?
-      self.main_image = self.images.first
+    if main_image.blank?
+      self.main_image = images.first
     # メイン画像が設定されていて、メイン画像が削除される場合、
     # メイン画像を除いた画像で一番最初に登録した画像をメイン画像に設定
-    elsif self.images&.select {|a| a._destroy }&.include?(self.main_image)
-      self.main_image = self.images&.select {|a| !a._destroy }&.first
+    elsif images&.select { |a| a._destroy }&.include?(main_image)
+      self.main_image = images&.select { |a| !a._destroy }&.first
     end
   end
 
@@ -127,5 +130,9 @@ class Theme < ApplicationRecord
   # @return [nil/ThemeWatch]
   def watch_from(user)
     watches.find_by(user_id: user&.id)
+  end
+
+  def mind_map_root?
+    true
   end
 end

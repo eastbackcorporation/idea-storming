@@ -1,0 +1,30 @@
+<% # 表示形式の選択ボタン %>
+<%= render 'switch_display', theme: @theme %>
+
+<% # マインドマップ %>
+<div id='mind_map_content_form'>
+  <%= render 'mind_map_content_form', theme: @theme %>
+</div>
+
+<div id="mindmap-mount-point">
+  <app id='app'></app>
+</div>
+<%= javascript_pack_tag 'application' %>
+
+<% # アイディア追加のポップアップフォーム %>
+<div class="idea-form-wrapper fixed-bottom">
+  <div class='row'>
+    <div class='col-lg-6 col-md-8 col-12 m-auto'>
+      <div class='col-12'>
+         <div class='idea-form p-3'>
+            <%= render "themes/ideas/form", idea: nil, theme: @theme, parent_idea_id: nil %>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+<% # アイディア追加のポップアップフォームを開くためのフォーム %>
+<%= form_tag new_theme_idea_path(@theme), method: :get, remote: true, id: 'add-idea-form' do %>
+  <% hidden_field_tag :idea_id %>
+<% end %>

@@ -1,0 +1,20 @@
+<% mind_map = @theme.mind_map || @theme.build_mind_map %>
+
+<% if mind_map.new_record? %>
+  <% url = theme_mind_maps_path(@theme) %>
+  <% method = :post %>
+<% else %>
+  <% url = theme_mind_map_path(@theme, @theme.mind_map) %>
+  <% method = :patch %>
+<% end %>
+
+<% if mind_map.content.blank? %>
+  <% json = mind_map.prepare %>
+  <% mind_map.content = json %>
+  <% mind_map.save %>
+<% end %>
+
+<%= form_for mind_map, url: url, html: { id: 'save_mind_map_form', method: method } do |f| %>
+  <%= f.hidden_field :content %>
+  <%= f.hidden_field :theme_id, value: @theme.id %>
+<% end %>

@@ -28,8 +28,8 @@ class ThemesController < ApplicationController
   def show
     @ideas = @theme.ideas
 
-    if true
-      render :mindmap, layout: false
+    if params[:display_format] == 'mind_map'
+      render :mind_map
     else
       render :show
     end
@@ -90,7 +90,10 @@ class ThemesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def theme_params
-    params.require(:theme).permit(:title, :description, :main_image_id, images: [], images_attachments_attributes: %i[id _destroy])
+    params.require(:theme).permit(
+      :title, :description, :main_image_id,
+      images: [], images_attachments_attributes: %i[id _destroy]
+    )
   end
 
   def set_theme_tags

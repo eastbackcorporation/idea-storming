@@ -2,6 +2,7 @@
   <% # バリデーションに失敗した場合はエラーメッセージを表示 %>
   $('.idea-form').html('<%= j(render "themes/ideas/form", idea: @idea, parent_idea_id: @idea&.parent&.id, theme: @theme) %>');
 <% else %>
+  <% # 掲示板形式の表示の場合 %>
   <% # 親になるアイディアがある場合 %>
   <% if @idea.parent.present? %>
     <% # 親にマイナスアイコンをつける。（子パネルを表示している状態） %>
@@ -19,6 +20,15 @@
   <% # 親になるアイディアがない場合（ルート） %>
     $('.themes-ideas-idea-tree').prepend('<%= j(render "themes/ideas/idea", theme: @theme.reload, idea: @idea) %>');
   <% end %>
+
+  <% # マインドマップ形式の表示の場合 %>
+  if ($('#mind_map_content').length > 0) {
+    <% json = @theme.mind_map.rebuild %>
+    <% @theme.mind_map.content = json %>
+    <% @theme.mind_map.save %>
+    $('#mind_map_content_form').html('<%= j(render "themes/mind_map_content_form", theme: @theme) %>')
+    $('#mind_map_content').trigger('change')
+  }
 
   <% #フォームを隠す %>
   $('.idea-form').slideToggle(100);

@@ -12,6 +12,7 @@
 #  category_type_id :bigint(8)        not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  color            :string(255)      default("#d3d3d3")
 #
 
 FactoryBot.define do

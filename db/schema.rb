@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_17_041650) do
+ActiveRecord::Schema.define(version: 2018_08_22_055140) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -113,6 +113,14 @@ ActiveRecord::Schema.define(version: 2018_08_17_041650) do
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_ideas_on_ancestry_128", length: 128
     t.index ["theme_id"], name: "index_ideas_on_theme_id"
+  end
+
+  create_table "mind_maps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "theme_id", null: false
+    t.json "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["theme_id"], name: "index_mind_maps_on_theme_id"
   end
 
   create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
