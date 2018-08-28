@@ -1,6 +1,6 @@
 <template>
-  <div id="mindmap-mount-point">
-    <mindmap
+  <div id="mind-map-mount-point">
+    <mind-map
       :nodes="nodes"
       :connections="connections"
       :editable="true"
@@ -12,13 +12,14 @@
 </template>
 
 <script>
-import Mindmap from '../lib/mind_map'
-var json = JSON.parse(document.getElementById('mind_map_content').value)
+import MindMap from '../lib/mind_map'
+
 export default {
   components: {
-    Mindmap
+    MindMap
   },
   data: function () {
+    var json = JSON.parse(document.getElementById('mind_map_content').value)
     return {
       title: json['title'],
       nodes: json['nodes'],

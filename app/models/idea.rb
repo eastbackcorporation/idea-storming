@@ -39,7 +39,15 @@ class Idea < ApplicationRecord
     @mind_map_meta ||= MindMap::Meta.new
   end
 
+  def white_board_meta
+    @white_board_meta ||= WhiteBoard::Meta.new
+  end
+
   def mind_map_root?
+    false
+  end
+
+  def white_board_root?
     false
   end
 end

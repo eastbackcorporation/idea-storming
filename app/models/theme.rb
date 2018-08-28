@@ -37,6 +37,7 @@ class Theme < ApplicationRecord
   validates :category, presence: true
 
   has_one :mind_map
+  has_one :white_board
 
   before_save do
     # メイン画像が設定されていない場合、一番最初に登録した画像をメイン画像に設定
@@ -133,6 +134,10 @@ class Theme < ApplicationRecord
   end
 
   def mind_map_root?
+    true
+  end
+
+  def white_board_root?
     true
   end
 end

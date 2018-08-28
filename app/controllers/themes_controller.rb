@@ -28,8 +28,11 @@ class ThemesController < ApplicationController
   def show
     @ideas = @theme.ideas
 
-    if params[:display_format] == 'mind_map'
+    case params[:display_format]
+    when 'mind_map'
       render :mind_map
+    when 'white_board'
+      render :white_board
     else
       render :show
     end

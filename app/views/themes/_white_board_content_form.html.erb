@@ -1,0 +1,20 @@
+<% white_board = @theme.white_board || @theme.build_white_board %>
+
+<% if white_board.new_record? %>
+  <% url = theme_white_boards_path(@theme) %>
+  <% method = :post %>
+<% else %>
+  <% url = theme_white_board_path(@theme, @theme.white_board) %>
+  <% method = :patch %>
+<% end %>
+
+<% if white_board.content.blank? %>
+  <% json = white_board.prepare %>
+  <% white_board.content = json %>
+  <% white_board.save %>
+<% end %>
+
+<%= form_for white_board, url: url, html: { id: 'save_white_board_form', method: method } do |f| %>
+  <%= f.hidden_field :content %>
+  <%= f.hidden_field :theme_id, value: @theme.id %>
+<% end %>

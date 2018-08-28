@@ -2,11 +2,11 @@
 <%= render 'switch_display', theme: @theme %>
 
 <% # マインドマップ %>
-<div id='mind_map_content_form'>
-  <%= render 'mind_map_content_form', theme: @theme %>
+<div id='white_board_content_form'>
+  <%= render 'white_board_content_form', theme: @theme %>
 </div>
 
-<div id="mind-map-mount-point">
+<div id="white-board-mount-point">
   <app id='app'></app>
 </div>
 <%= javascript_pack_tag 'application' %>

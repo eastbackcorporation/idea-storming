@@ -1,35 +1,22 @@
-# frozen_string_literal: true
-
-# == Schema Information
-#
-# Table name: mind_maps
-#
-#  id           :bigint(8)        not null, primary key
-#  theme_id     :bigint(8)        not null
-#  content :json
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#
-
-class MindMap < ApplicationRecord
+class WhiteBoard < ApplicationRecord
   belongs_to :theme, optional: true
-  attr_accessor :mind_map
+  attr_accessor :white_board
 
-  MindMap::Meta = Struct.new(:fx, :fy)
+  WhiteBoard::Meta = Struct.new(:fx, :fy)
 
   def prepare
     return content if content.present?
 
-    # @mind_mapを組み立てる
-    build_mind_map
+    # @white_boardを組み立てる
+    build_white_board
 
-    @mind_map.to_json
+    @white_board.to_json
   end
 
   # 新しくノードを追加した時に、json情報を再構築する。
   def rebuild
-    # @mind_mapを組み立てる
-    build_mind_map
+    # @white_boardを組み立てる
+    build_white_board
 
     # マインドマップ上の位置情報を、新しく組み立てたJSONにマージ
     old = JSON.parse content
@@ -43,11 +30,8 @@ class MindMap < ApplicationRecord
     end
 
     parent_map = {}
-    @mind_map[:connections].each do |node|
-      parent_map[node[:target]] = node[:source]
-    end
 
-    @mind_map[:nodes].each do |node|
+    @white_board[:nodes].each do |node|
       if position_map[node[:id]].present?
         node[:fx] = position_map[node[:id]][:fx]
         node[:fy] = position_map[node[:id]][:fy]
@@ -57,7 +41,7 @@ class MindMap < ApplicationRecord
         node[:fy] = parent_pos[:fy] - 150
       end
     end
-    @mind_map.to_json
+    @white_board.to_json
   end
 
   private
@@ -94,12 +78,12 @@ class MindMap < ApplicationRecord
       fy = -y_distance * 2
       fx = (idea.depth + 1) * x_distance
       fy += y_distance * idea.theme.ideas.select { |i| i.depth.zero? }.index(idea)
-      idea.mind_map_meta.fx = fx
-      idea.mind_map_meta.fy = fy
+      idea.white_board_meta.fx = fx
+      idea.white_board_meta.fy = fy
     else
       # binding.pry if idea.depth == 1
       fx = (idea.depth + 1) * x_distance
-      fy = parent.mind_map_meta.fy.to_i
+      fy = parent.white_board_meta.fy.to_i
       fy += y_distance while @node_position_map[idea.depth].include?(fy)
       @node_position_map[idea.depth] << fy
     end
@@ -110,20 +94,18 @@ class MindMap < ApplicationRecord
     }
   end
 
-  def build_mind_map
-    @mind_map = {}
+  def build_white_board
+    @white_board = {}
     # マインドマップのタイトル
-    @mind_map[:title] = theme.title
+    @white_board[:title] = theme.title
     # 各ノード情報を格納する。
-    @mind_map[:nodes] = []
-    # ノード間のリンク情報を格納する。
-    @mind_map[:connections] = []
+    @white_board[:nodes] = []
 
     # root_node: テーマ（Theme）
     # id属性はDBのidカラムの値。ただしroot_nodeに関してはIdeaテーブルと
     # IDがかぶる可能性があるためprefixをつける。
     # fx, fyはマインドマップ上の位置。 fx: -10, fy: -300で代替真ん中くらいの位置となる
-    @mind_map[:nodes] << {
+    @white_board[:nodes] << {
       id: "#{root_node_id_prefix}#{theme.id}",
       text: theme.title,
       is_root: true
@@ -131,36 +113,24 @@ class MindMap < ApplicationRecord
 
     @node_position_map = {}
 
-    # 再帰で@mind_mapを組み立てる
-    _build_mind_map(theme.ideas.arrange, theme)
+    # 再帰で@white_boardを組み立てる
+    _build_white_board(theme.ideas.arrange, theme)
   end
 
-  # @mind_mapを組み立てる
-  def _build_mind_map(ideas, parent)
+  # @white_boardを組み立てる
+  def _build_white_board(ideas, parent)
     ideas.map do |idea, sub_ideas|
       position = node_position(idea, parent)
-      idea.mind_map_meta.fx = position[:fx]
-      idea.mind_map_meta.fy = position[:fy]
+      idea.white_board_meta.fx = position[:fx]
+      idea.white_board_meta.fy = position[:fy]
 
-      @mind_map[:nodes] << {
+      @white_board[:nodes] << {
         id: idea.id.to_s,
         text: idea.title,
         is_root: false
       }.merge(position)
 
-      # source: つながり元のノード
-      # target: つながり先のノード
-      # curve:  ノード間をつなぐ線のカーブの曲線具合
-      @mind_map[:connections] << {
-        source: node_id(parent),
-        target: node_id(idea),
-        curve: {
-          x: 0,
-          y: 0
-        }
-      }
-
-      _build_mind_map(sub_ideas, idea)
+      _build_white_board(sub_ideas, idea)
     end
   end
 end

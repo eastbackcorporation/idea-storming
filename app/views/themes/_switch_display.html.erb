@@ -1,12 +1,5 @@
 <div class='my-3'>
-    <!-- <input type="radio" name="options" id="bbs_option" autocomplete="off"> 掲示板 -->
-    <%= link_to '掲示板', theme_path(theme, display_format: :bbs), class: "btn btn-secondary #{'active' if params[:display_format] == 'bbs' || params[:display_format].blank?}" %>
-    <!-- <input type="radio" name="options" id="mind_map_option" autocomplete="off"> マインドマップ -->
-    <%= link_to 'マインドマップ', theme_path(theme, display_format: :mind_map), class: "btn btn-secondary #{'active' if params[:display_format] == 'mind_map'}" %>
+  <%= link_to '掲示板', theme_path(theme, display_format: :bbs), class: "btn btn-secondary #{'active' if params[:display_format] == 'bbs' || params[:display_format].blank?}" %>
+  <%= link_to 'マインドマップ', theme_path(theme, display_format: :mind_map), class: "btn btn-secondary #{'active' if params[:display_format] == 'mind_map'}" %>
+  <%= link_to 'ホワイトボード', theme_path(theme, display_format: :white_board), class: "btn btn-secondary #{'active' if params[:display_format] == 'white_board'}" %>
 </div>
-  <!-- <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> 時系列
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option4" autocomplete="off"> ホワイトボード
-  </label> -->
