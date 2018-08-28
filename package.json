@@ -5,9 +5,7 @@
     "@rails/webpacker": "3.5",
     "d3": "^5.7.0",
     "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0"
-  },
-  "devDependencies": {
+    "sass-loader": "^7.1.0",
     "webpack-dev-server": "2.11.2",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-plugin-istanbul": "^4.1.6",
@@ -19,5 +17,7 @@
     "vue": "^2.5.17",
     "vue-loader": "14.2.2",
     "vue-template-compiler": "^2.5.17"
+  },
+  "devDependencies": {
   }
 }
